@@ -22,21 +22,56 @@ struct MainView: View {
         NavigationStack {
             VStack {
                 ZStack {
+                    //Установка цвета фона
                     Color.background.ignoresSafeArea(.all)
                     
                     ScrollView(.vertical) {
-                        //Кнопки для перехода к тестам
                         VStack {
+                            ZStack {
+                                HStack {
+                                    Text("0/4")
+                                        .offset(x: -84)
+                                    
+                                    Text("0/10")
+                                        .offset(x: -20)
+                                }
+                                .zIndex(1)
+                                .padding(.top, 133)
+                                
+                                HStack {
+                                    Text("Пройдено")
+                                    
+                                    Text("Ошибки")
+                                        .padding()
+                                    
+                                    Text("Избранное")
+                                        .bold(true)
+                                }
+                                .zIndex(2)
+                                .padding(.top, 180)
+                                
+                                Image("Image 12")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 350)
+                                    .cornerRadius(14)
+                                    .padding(.bottom)
+                                    .shadow(color: .darkPurple, radius: 10)
+                            }
+                            .padding(.horizontal, 1)
+                            .foregroundStyle(.white)
+                            
+                            //Кнопки для перехода к тестам
                             HStack {
                                 NavigationLink {
                                     First(storage: viewModel.storage)
                                 } label: {
                                     VStack {
-                                        Text("bb")
+                                        Text("Теория цвета")
                                     }
+                                    .padding(26)
+                                    .padding(.horizontal, 46)
                                 }
-                                .padding(26)
-                                .padding(.horizontal, 46)
                                 .background(Color.colorPurple)
                                 .cornerRadius(16)
                                 .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
@@ -47,13 +82,14 @@ struct MainView: View {
                                     VStack {
                                         Text("bb")
                                     }
+                                    .padding(26)
+                                    .padding(.horizontal, 46)
                                 }
-                                .padding(26)
-                                .padding(.horizontal, 46)
                                 .background(Color.colorPurple)
                                 .cornerRadius(16)
                                 .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
                             }
+                            .foregroundStyle(.babyYellow)
                             
                             HStack {
                                 NavigationLink {
@@ -62,9 +98,9 @@ struct MainView: View {
                                     VStack {
                                         Text("bb")
                                     }
+                                    .padding(26)
+                                    .padding(.horizontal, 46)
                                 }
-                                .padding(26)
-                                .padding(.horizontal, 46)
                                 .background(Color.colorPurple)
                                 .cornerRadius(16)
                                 .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
@@ -75,13 +111,14 @@ struct MainView: View {
                                     VStack {
                                         Text("bb")
                                     }
+                                    .padding(26)
+                                    .padding(.horizontal, 46)
                                 }
-                                .padding(26)
-                                .padding(.horizontal, 46)
                                 .background(Color.colorPurple)
                                 .cornerRadius(16)
                                 .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
                             }
+                            .foregroundStyle(.babyYellow)
                         }
                     }
                 }
