@@ -9,11 +9,11 @@ import SwiftUI
 import CoreData
 
 struct First: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @StateObject private var viewModel: TestModel
     
     // Состояние кнопки
-    @State private var isSelected1 = false
-    @State private var isSelected2 = false
     @State private var isSelected3 = false
     
     init(storage: Storage) {
@@ -43,42 +43,54 @@ struct First: View {
                                     .padding(.bottom, 10)
                                 
                                 // Группа кнопок
-                                VStack(spacing: 10) { // Вертикальное расположение кнопок
+                                VStack(spacing: 10) {
                                     Button {
-                                        isSelected1 = true
+                                        viewModel.saveTestResult(answer: "Вторичные", testID: viewModel.testID1)
                                     } label: {
                                         Text("Вторичные")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected1 ? .red : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected1 ?
+                                                (viewModel.selectedAnswer1 == "Вторичные" ? .red : .colorPurple) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected1)
+                                    .disabled(viewModel.isSelected1)
                                     
                                     Button {
-                                        isSelected1 = true
+                                        viewModel.saveTestResult(answer: "Первичные", testID: viewModel.testID1)
                                     } label: {
                                         Text("Первичные")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected1 ? .green : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected1 ?
+                                                (viewModel.selectedAnswer1 == "Первичные" ? .green : .colorPurple) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected1)
+                                    .disabled(viewModel.isSelected1)
                                     
                                     Button {
-                                        isSelected1 = true
+                                        viewModel.saveTestResult(answer: "Третичные", testID: viewModel.testID1)
                                     } label: {
                                         Text("Третичные")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected1 ? .red : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected1 ?
+                                                (viewModel.selectedAnswer1 == "Третичные" ? .red : .colorPurple) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected1)
+                                    .disabled(viewModel.isSelected1)
                                 }
                             }
                             .padding()
@@ -99,52 +111,68 @@ struct First: View {
                                 // Группа кнопок
                                 VStack(spacing: 10) {
                                     Button {
-                                        isSelected2 = true
+                                        viewModel.saveTestResult(answer: "Сплит-комплиментарный", testID: viewModel.testID2)
                                     } label: {
                                         Text("Сплит-комплиментарный")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected2 ? .green : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected2 ?
+                                                (viewModel.selectedAnswer2 == "Сплит-комплиментарный" ? .green : .red) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected2)
+                                    .disabled(viewModel.isSelected2)
                                     
                                     Button {
-                                        isSelected2 = true
+                                        viewModel.saveTestResult(answer: "Триадический", testID: viewModel.testID2)
                                     } label: {
                                         Text("Триадический")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected2 ? .red : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected2 ?
+                                                (viewModel.selectedAnswer2 == "Триадический" ? .red : .colorPurple) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected2)
+                                    .disabled(viewModel.isSelected2)
                                     
                                     Button {
-                                        isSelected2 = true
+                                        viewModel.saveTestResult(answer: "Комплиментарный", testID: viewModel.testID2)
                                     } label: {
                                         Text("Комплиментарный")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected2 ? .red : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected2 ?
+                                                (viewModel.selectedAnswer2 == "Комплиментарный" ? .red : .colorPurple) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected2)
+                                    .disabled(viewModel.isSelected2)
                                     
                                     Button {
-                                        isSelected2 = true
+                                        viewModel.saveTestResult(answer: "Треугольный", testID: viewModel.testID2)
                                     } label: {
                                         Text("Треугольный")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected2 ? .red : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected2 ?
+                                                (viewModel.selectedAnswer2 == "Треугольный" ? .red : .colorPurple) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected2)
+                                    .disabled(viewModel.isSelected2)
                                 }
                             }
                             .padding()
@@ -203,6 +231,25 @@ struct First: View {
                             }
                             .padding()
                             .cornerRadius(12)
+                            
+                            // Отображение статистики
+                            VStack {
+                                Text("Правильных ответов: \(viewModel.correctAnswersCount)")
+                                    .foregroundStyle(.green)
+                                Text("Ошибок: \(viewModel.wrongAnswersCount)")
+                                    .foregroundStyle(.red)
+                            }
+                            .padding()
+                            
+                            Button {
+                                // Выход с экрана при нажатии кнопки "Пройти заново"
+                                presentationMode.wrappedValue.dismiss()
+                            } label: {
+                                Label("Пройти заново", systemImage: "arrow.trianglehead.clockwise")
+                                    .foregroundStyle(.babyYellow)
+                                    .padding()
+                            }
+                            
                         }
                         .padding(.horizontal) // Отступы по бокам для ScrollView
                     }

@@ -28,27 +28,27 @@ struct MainView: View {
                     ScrollView(.vertical) {
                         VStack {
                             ZStack {
-                                HStack {
-                                    Text("0/4")
-                                        .offset(x: -84)
-                                    
-                                    Text("0/10")
-                                        .offset(x: -20)
-                                }
-                                .zIndex(1)
-                                .padding(.top, 133)
-                                
-                                HStack {
-                                    Text("Пройдено")
-                                    
-                                    Text("Ошибки")
-                                        .padding()
-                                    
-                                    Text("Избранное")
-                                        .bold(true)
-                                }
-                                .zIndex(2)
-                                .padding(.top, 180)
+//                                HStack {
+//                                    Text("\(viewModel.storage.correctAnswersCount)/4")
+//                                        .offset(x: -84)
+//                                    
+//                                    Text("\(viewModel.storage.wrongAnswersCount)/10")
+//                                        .offset(x: -20)
+//                                }
+//                                .zIndex(1)
+//                                .padding(.top, 133)
+//                                
+//                                HStack {
+//                                    Text("Правильно")
+//                                    
+//                                    Text("Ошибки")
+//                                        .padding()
+//                                    
+//                                    Text("Избранное")
+//                                        .bold(true)
+//                                }
+//                                .zIndex(2)
+//                                .padding(.top, 180)
                                 
                                 Image("Image 12")
                                     .resizable()
@@ -69,21 +69,19 @@ struct MainView: View {
                                     VStack {
                                         Text("Теория цвета")
                                     }
-                                    .padding(26)
-                                    .padding(.horizontal, 46)
+                                    .frame(width: 180, height: 60)
                                 }
                                 .background(Color.colorPurple)
                                 .cornerRadius(16)
                                 .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
                                 
                                 NavigationLink {
-                                    First(storage: viewModel.storage)
+                                    Second(storage: viewModel.storage)
                                 } label: {
                                     VStack {
-                                        Text("bb")
+                                        Text("Вектор и раст")
                                     }
-                                    .padding(26)
-                                    .padding(.horizontal, 46)
+                                    .frame(width: 180, height: 60)
                                 }
                                 .background(Color.colorPurple)
                                 .cornerRadius(16)

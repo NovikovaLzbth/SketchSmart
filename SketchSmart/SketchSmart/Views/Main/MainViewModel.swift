@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 
 final class MainViewModel: ObservableObject {
-    
     let storage: Storage
     
     init(storage: Storage) {
