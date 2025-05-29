@@ -1,5 +1,5 @@
 //
-//  TestModel.swift
+//  FirstModel.swift
 //  SketchSmart
 //
 //  Created by Елизавета on 22.05.2025.
@@ -8,23 +8,29 @@
 import SwiftUI
 import CoreData
 
-final class TestModel: ObservableObject {
+final class FirstModel: ObservableObject {
     
     @Published var isSelected1: Bool = false
     @Published var isSelected2: Bool = false
+    @Published var isSelected3: Bool = false
+    
     @Published var selectedAnswer1: String = ""
     @Published var selectedAnswer2: String = ""
+    @Published var selectedAnswer3: String = ""
+    
     @Published var correctAnswersCount: Int = 0
     @Published var wrongAnswersCount: Int = 0
     
     let correctAnswers = [
         "color_group_test": "Первичные",
-        "color_scheme_test": "Сплит-комплиментарный"
+        "color_scheme_test": "Сплит-комплиментарный",
+        "color_palette_test": "Монохроматический"
     ]
     
     let storage: Storage
     let testID1 = "color_group_test"
     let testID2 = "color_scheme_test"
+    let testID3 = "color_palette_test"
     
     init(storage: Storage) {
         self.storage = storage
@@ -51,6 +57,9 @@ final class TestModel: ObservableObject {
             } else if testID == testID2 {
                 isSelected2 = true
                 selectedAnswer2 = answer
+            } else if testID == testID3 {
+                isSelected3 = true
+                selectedAnswer3 = answer
             }
             
             if let correctAnswer = correctAnswers[testID] {

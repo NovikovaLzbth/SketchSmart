@@ -11,15 +11,10 @@ import CoreData
 struct First: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @StateObject private var viewModel: TestModel
-    
-    // Состояние кнопки
-    @State private var isSelected3 = false
+    @StateObject private var viewModel: FirstModel
     
     init(storage: Storage) {
-        _viewModel = StateObject(wrappedValue: TestModel(storage: storage))
-        
-    }
+        _viewModel = StateObject(wrappedValue: FirstModel(storage: storage))    }
     
     var body: some View {
         NavigationStack {
@@ -194,40 +189,53 @@ struct First: View {
                                 // Группа кнопок
                                 VStack(spacing: 10) {
                                     Button {
-                                        isSelected3 = true
+                                        viewModel.saveTestResult(answer: "Хроматический", testID: viewModel.testID3)
                                     } label: {
                                         Text("Хроматический")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected3 ? .red : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected3 ?
+                                                (viewModel.selectedAnswer3 == "Хроматический" ? .red : .colorPurple) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected3)
+                                    .disabled(viewModel.isSelected3)
                                     
                                     Button {
-                                        isSelected3 = true
+                                        viewModel.saveTestResult(answer: "Единоцветный", testID: viewModel.testID3)
                                     } label: {
                                         Text("Единоцветный")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected3 ? .red : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected3 ?
+                                                (viewModel.selectedAnswer3 == "Единоцветный" ? .red : .colorPurple) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected3)
+                                    .disabled(viewModel.isSelected3)
                                     
                                     Button {
-                                        isSelected3 = true
+                                        viewModel.saveTestResult(answer: "Монохроматический", testID: viewModel.testID3)
                                     } label: {
                                         Text("Монохроматический")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
-                                            .background(isSelected3 ? .green : .colorPurple)
+                                            .background(
+                                                viewModel.isSelected3 ?
+                                                (viewModel.selectedAnswer3 == "Монохроматический" ? .green :
+                                                    (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .colorPurple : .colorPurple)) :
+                                                        .colorPurple
+                                            )
                                             .cornerRadius(16)
                                     }
-                                    .disabled(isSelected3)
+                                    .disabled(viewModel.isSelected3)
                                 }
                             }
                             .padding()

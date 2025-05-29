@@ -28,28 +28,6 @@ struct MainView: View {
                     ScrollView(.vertical) {
                         VStack {
                             ZStack {
-//                                HStack {
-//                                    Text("\(viewModel.storage.correctAnswersCount)/4")
-//                                        .offset(x: -84)
-//                                    
-//                                    Text("\(viewModel.storage.wrongAnswersCount)/10")
-//                                        .offset(x: -20)
-//                                }
-//                                .zIndex(1)
-//                                .padding(.top, 133)
-//                                
-//                                HStack {
-//                                    Text("Правильно")
-//                                    
-//                                    Text("Ошибки")
-//                                        .padding()
-//                                    
-//                                    Text("Избранное")
-//                                        .bold(true)
-//                                }
-//                                .zIndex(2)
-//                                .padding(.top, 180)
-                                
                                 Image("Image 12")
                                     .resizable()
                                     .scaledToFit()
