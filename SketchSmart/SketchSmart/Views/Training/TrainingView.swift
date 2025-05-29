@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 
+// Вью для обучения
 struct TrainingView: View {
     @StateObject var viewModel: TrainingViewModel
     
@@ -25,6 +26,7 @@ struct TrainingView: View {
                     
                     ScrollView(.vertical) {
                         VStack {
+                            // Переход на страницу с конкретным материалом о векторе и расте
                             NavigationLink {
                                 VectorRast()
                             } label: {
@@ -32,6 +34,7 @@ struct TrainingView: View {
                                     Text("Вектор и раст")
                                         .foregroundStyle(.babyYellow)
                                 }
+                                // Формирование отпустов padding
                                 .padding(.vertical, 36)
                                 .padding(.horizontal, 100)
                             }
@@ -40,6 +43,7 @@ struct TrainingView: View {
                             .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
                             .padding(.bottom)
                             
+                            // Переход на страницу с конкретным материалом о прототипировании
                             NavigationLink {
                                 Prototype()
                             } label: {
@@ -55,6 +59,7 @@ struct TrainingView: View {
                             .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
                             .padding(.bottom)
                             
+                            // Переход на страницу с конкретным материалом о психологии в UX/UI
                             NavigationLink {
                                 Psychology()
                             } label: {
@@ -70,6 +75,7 @@ struct TrainingView: View {
                             .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
                             .padding(.bottom)
                             
+                            // Переход на страницу с конкретным материалом о теории цвета
                             NavigationLink {
                                 ColorTeory()
                             } label: {
@@ -87,6 +93,7 @@ struct TrainingView: View {
                         }
                     }
                 }
+                // Заголовок
                 .navigationTitle("Обучение")
             }
         }

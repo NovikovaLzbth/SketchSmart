@@ -1,20 +1,20 @@
 //
-//  Second.swift
+//  Third.swift
 //  SketchSmart
 //
-//  Created by Елизавета on 28.05.2025.
+//  Created by Елизавета on 29.05.2025.
 //
 
 import SwiftUI
 import CoreData
 
-struct Second: View {
+struct Third: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @StateObject private var viewModel: SecondModel
+    @StateObject private var viewModel: ThirdModel
     
     init(storage: Storage) {
-        _viewModel = StateObject(wrappedValue: SecondModel(storage: storage))
+        _viewModel = StateObject(wrappedValue: ThirdModel(storage: storage))
     }
     
     var body: some View {
@@ -28,10 +28,10 @@ struct Second: View {
                         VStack(spacing: 20) { // Увеличение расстояния между вопросами
                             // Вопрос 1
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("1. Растровое изображение создается с использованием ...")
+                                Text("1. Дизайнер усовершенствовал маски встроенными наушниками, чтобы жить во времена пандемии было чуть веселее. Рабочее решение?")
                                     .foregroundStyle(.white)
                                 
-                                Image("Image 16")
+                                Image("Image 20")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 335)
@@ -41,15 +41,15 @@ struct Second: View {
                                 // Группа кнопок
                                 VStack(spacing: 10) {
                                     Button {
-                                        viewModel.saveTestResult(answer: "Пикселей", testID: viewModel.testID1)
+                                        viewModel.saveTestResult(answer: "Да, верю, что такие существуют, — а почему нет?", testID: viewModel.testID1)
                                     } label: {
-                                        Text("Пикселей")
+                                        Text("Да, верю, что такие существуют, — а почему нет?")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Пикселей" ? .green : .colorPurple) :
+                                                (viewModel.selectedAnswer1 == "Да, верю, что такие существуют, — а почему нет?" ? .green : .colorPurple) :
                                                         .colorPurple
                                             )
                                             .cornerRadius(16)
@@ -57,31 +57,15 @@ struct Second: View {
                                     .disabled(viewModel.isSelected1)
                                     
                                     Button {
-                                        viewModel.saveTestResult(answer: "Примитивов (фигур)", testID: viewModel.testID1)
+                                        viewModel.saveTestResult(answer: "Выглядит странно — вряд ли это реальный продукт", testID: viewModel.testID1)
                                     } label: {
-                                        Text("Примитивов (фигур)")
+                                        Text("Выглядит странно — вряд ли это реальный продукт")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Примитивов (фигур)" ? .red : .colorPurple) :
-                                                        .colorPurple
-                                            )
-                                            .cornerRadius(16)
-                                    }
-                                    .disabled(viewModel.isSelected1)
-                                    
-                                    Button {
-                                        viewModel.saveTestResult(answer: "Линий", testID: viewModel.testID1)
-                                    } label: {
-                                        Text("Линий")
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.white)
-                                            .padding(15)
-                                            .background(
-                                                viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Линий" ? .red : .colorPurple) :
+                                                (viewModel.selectedAnswer1 == "Выглядит странно — вряд ли это реальный продукт" ? .red : .colorPurple) :
                                                         .colorPurple
                                             )
                                             .cornerRadius(16)
@@ -94,10 +78,10 @@ struct Second: View {
                             
                             // Вопрос 2
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("2. Качество растрового изображения зависит от")
+                                Text("2. А вот эта штука напоминает крышку от гроба с лампочками. Нашлось ли ей полезное применение?")
                                     .foregroundStyle(.white)
                                 
-                                Image("Image 17")
+                                Image("Image 21")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 335)
@@ -107,15 +91,15 @@ struct Second: View {
                                 // Группа кнопок
                                 VStack(spacing: 10) {
                                     Button {
-                                        viewModel.saveTestResult(answer: "Количества цветов в палитре", testID: viewModel.testID2)
+                                        viewModel.saveTestResult(answer: "Выглядит абсолютно бесполезно", testID: viewModel.testID2)
                                     } label: {
-                                        Text("Количества цветов в палитре")
+                                        Text("Выглядит абсолютно бесполезно")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Количества цветов в палитре" ? .red : .colorPurple) :
+                                                (viewModel.selectedAnswer2 == "Выглядит абсолютно бесполезно" ? .red : .colorPurple) :
                                                         .colorPurple
                                             )
                                             .cornerRadius(16)
@@ -123,48 +107,16 @@ struct Second: View {
                                     .disabled(viewModel.isSelected2)
                                     
                                     Button {
-                                        viewModel.saveTestResult(answer: "Количества используемых объектов в рисунке", testID: viewModel.testID2)
+                                        viewModel.saveTestResult(answer: "Крутая штука, наверняка это кто-нибудь покупает! Хотя бы как арт-объект", testID: viewModel.testID2)
                                     } label: {
-                                        Text("Количества используемых объектов в рисунке")
+                                        Text("Крутая штука, наверняка это кто-нибудь покупает! Хотя бы как арт-объект")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Количества используемых объектов в рисунке" ? .red : .colorPurple) :
-                                                        .colorPurple
-                                            )
-                                            .cornerRadius(16)
-                                    }
-                                    .disabled(viewModel.isSelected2)
-                                    
-                                    Button {
-                                        viewModel.saveTestResult(answer: "Пространственного разрешения", testID: viewModel.testID2)
-                                    } label: {
-                                        Text("Пространственного разрешения")
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.white)
-                                            .padding(15)
-                                            .background(
-                                                viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Пространственного разрешения" ? .green :
+                                                (viewModel.selectedAnswer2 == "Крутая штука, наверняка это кто-нибудь покупает! Хотя бы как арт-объект" ? .green :
                                                     (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
-                                            )
-                                            .cornerRadius(16)
-                                    }
-                                    .disabled(viewModel.isSelected2)
-                                    
-                                    Button {
-                                        viewModel.saveTestResult(answer: "Все вышеперечисленные ответы", testID: viewModel.testID2)
-                                    } label: {
-                                        Text("Все вышеперечисленные ответы")
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.white)
-                                            .padding(15)
-                                            .background(
-                                                viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Все вышеперечисленные ответы" ? .red : .colorPurple) :
                                                         .colorPurple
                                             )
                                             .cornerRadius(16)
@@ -177,10 +129,10 @@ struct Second: View {
                             
                             // Вопрос 3
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("3. Векторные изображения формируются из ...")
+                                Text("3. Этот робот с шестью щупальцами очень похож на осьминога. Он запущен в производство?")
                                     .foregroundStyle(.white)
                                 
-                                Image("Image 18")
+                                Image("Image 22")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 335)
@@ -190,15 +142,15 @@ struct Second: View {
                                 // Группа кнопок
                                 VStack(spacing: 10) {
                                     Button {
-                                        viewModel.saveTestResult(answer: "Пикселей", testID: viewModel.testID3)
+                                        viewModel.saveTestResult(answer: "Да этими щупальцами можно легко вырвать все сорняки! Его однозначно выпустили — дачники к весне раскупят", testID: viewModel.testID3)
                                     } label: {
-                                        Text("Пикселей")
+                                        Text("Да этими щупальцами можно легко вырвать все сорняки! Его однозначно выпустили — дачники к весне раскупят")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected3 ?
-                                                (viewModel.selectedAnswer3 == "Пикселей" ? .red : .colorPurple) :
+                                                (viewModel.selectedAnswer3 == "Да этими щупальцами можно легко вырвать все сорняки! Его однозначно выпустили — дачники к весне раскупят" ? .red : .colorPurple) :
                                                         .colorPurple
                                             )
                                             .cornerRadius(16)
@@ -206,35 +158,19 @@ struct Second: View {
                                     .disabled(viewModel.isSelected3)
                                     
                                     Button {
-                                        viewModel.saveTestResult(answer: "Примитивов (фигур)", testID: viewModel.testID3)
+                                        viewModel.saveTestResult(answer: "Надеюсь, нет, такой и покалечить может!", testID: viewModel.testID3)
                                     } label: {
-                                        Text("Примитивов (фигур)")
+                                        Text("Надеюсь, нет, такой и покалечить может!")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected3 ?
-                                                (viewModel.selectedAnswer3 == "Примитивов (фигур)" ? .green :
+                                                (viewModel.selectedAnswer3 == "Надеюсь, нет, такой и покалечить может!" ? .green :
                                                     (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .colorPurple : .colorPurple)) :
                                                         .colorPurple
                                             )
                                             
-                                            .cornerRadius(16)
-                                    }
-                                    .disabled(viewModel.isSelected3)
-                                    
-                                    Button {
-                                        viewModel.saveTestResult(answer: "Символов", testID: viewModel.testID3)
-                                    } label: {
-                                        Text("Символов")
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.white)
-                                            .padding(15)
-                                            .background(
-                                                viewModel.isSelected3 ?
-                                                (viewModel.selectedAnswer3 == "Символов" ? .red : .colorPurple) :
-                                                        .colorPurple
-                                            )
                                             .cornerRadius(16)
                                     }
                                     .disabled(viewModel.isSelected3)
@@ -245,10 +181,10 @@ struct Second: View {
                             
                             // Вопрос 4
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("4. Программа создания, редактирования и просмотра графических изображений - это ...")
+                                Text("4. Не выбрасывайте апельсиновые корки — из них промдизайнер может сделать отличную лампу! Ну, наверное. Как думаете, это реальный продукт?")
                                     .foregroundStyle(.white)
                                 
-                                Image("Image 19")
+                                Image("Image 23")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 335)
@@ -258,16 +194,15 @@ struct Second: View {
                                 // Группа кнопок
                                 VStack(spacing: 10) {
                                     Button {
-                                        viewModel.saveTestResult(answer: "Графический редактор", testID: viewModel.testID4)
+                                        viewModel.saveTestResult(answer: "Нет, у апельсинового корпуса был бы слишком короткий срок годности!", testID: viewModel.testID4)
                                     } label: {
-                                        Text("Графический редактор")
+                                        Text("Нет, у апельсинового корпуса был бы слишком короткий срок годности!")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected4 ?
-                                                (viewModel.selectedAnswer4 == "Графический редактор" ? .green :
-                                                    (viewModel.selectedAnswer4 != viewModel.correctAnswers[viewModel.testID4] ? .colorPurple : .colorPurple)) :
+                                                (viewModel.selectedAnswer4 == "Нет, у апельсинового корпуса был бы слишком короткий срок годности!" ? .red : .colorPurple) :
                                                         .colorPurple
                                             )
                                             .cornerRadius(16)
@@ -275,32 +210,16 @@ struct Second: View {
                                     .disabled(viewModel.isSelected4)
                                     
                                     Button {
-                                        viewModel.saveTestResult(answer: "Текстовый редактор", testID: viewModel.testID4)
+                                        viewModel.saveTestResult(answer: "Вполне могу представить лампу из апельсинов на полке — какие проблемы?", testID: viewModel.testID4)
                                     } label: {
-                                        Text("Текстовый редактор")
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.white)
-                                            .padding(15)
-                                        
-                                        .background(
-                                            viewModel.isSelected4 ?
-                                            (viewModel.selectedAnswer4 == "Текстовый редактор" ? .red : .colorPurple) :
-                                                    .colorPurple
-                                        )
-                                            .cornerRadius(16)
-                                    }
-                                    .disabled(viewModel.isSelected4)
-                                    
-                                    Button {
-                                        viewModel.saveTestResult(answer: "Нет правильного ответа", testID: viewModel.testID4)
-                                    } label: {
-                                        Text("Нет правильного ответа")
+                                        Text("Вполне могу представить лампу из апельсинов на полке — какие проблемы?")
                                             .frame(maxWidth: .infinity)
                                             .foregroundStyle(.white)
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected4 ?
-                                                (viewModel.selectedAnswer4 == "Нет правильного ответа" ? .red : .colorPurple) :
+                                                (viewModel.selectedAnswer4 == "Вполне могу представить лампу из апельсинов на полке — какие проблемы?" ? .green :
+                                                    (viewModel.selectedAnswer4 != viewModel.correctAnswers[viewModel.testID4] ? .colorPurple : .colorPurple)) :
                                                         .colorPurple
                                             )
                                             .cornerRadius(16)
@@ -328,14 +247,12 @@ struct Second: View {
                                     .foregroundStyle(.babyYellow)
                                     .padding()
                             }
-                            
                         }
                         .padding(.horizontal) // Отступы по бокам для ScrollView
                     }
                 }
-                
             }
-            .navigationTitle("Тест вектор и раст")
+            .navigationTitle("Тест прототипы")
         }
     }
 }
