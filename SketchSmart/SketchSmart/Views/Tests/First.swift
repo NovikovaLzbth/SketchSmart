@@ -119,7 +119,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Сплит-комплиментарный" ? .green : .red) :
+                                                (viewModel.selectedAnswer2 == "Сплит-комплиментарный" ? .green :
+                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .colorPurple : .colorPurple)) :
                                                         .colorPurple
                                             )
                                             .cornerRadius(16)

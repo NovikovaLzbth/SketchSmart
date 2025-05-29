@@ -17,7 +17,7 @@ final class TestModel: ObservableObject {
     @Published var correctAnswersCount: Int = 0
     @Published var wrongAnswersCount: Int = 0
     
-    private let correctAnswers = [
+    let correctAnswers = [
         "color_group_test": "Первичные",
         "color_scheme_test": "Сплит-комплиментарный"
     ]
@@ -48,11 +48,17 @@ final class TestModel: ObservableObject {
             if testID == testID1 {
                 isSelected1 = true
                 selectedAnswer1 = answer
-                updateCounters(testID: testID, answer: answer)
             } else if testID == testID2 {
                 isSelected2 = true
                 selectedAnswer2 = answer
-                updateCounters(testID: testID, answer: answer)
+            }
+            
+            if let correctAnswer = correctAnswers[testID] {
+                if answer == correctAnswer {
+                    correctAnswersCount += 1
+                } else {
+                    wrongAnswersCount += 1
+                }
             }
         } catch {
             print("Error saving test result: \(error)")
@@ -68,24 +74,8 @@ final class TestModel: ObservableObject {
             for object in results {
                 viewContext.delete(object)
             }
-            resetCounters()
         } catch {
             print("Error deleting test result: \(error)")
         }
     }
-    
-    func updateCounters(testID: String, answer: String) {
-        if let correctAnswer = correctAnswers[testID] {
-            if answer == correctAnswer {
-                correctAnswersCount += 1
-            } else {
-                wrongAnswersCount += 1
-            }
-        }
-    }
-    
-    func resetCounters() {
-            correctAnswersCount = 0
-            wrongAnswersCount = 0
-        }
 }
