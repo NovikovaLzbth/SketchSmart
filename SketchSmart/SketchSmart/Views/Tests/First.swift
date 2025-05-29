@@ -7,14 +7,16 @@
 
 import SwiftUI
 import CoreData
+import AVFoundation
 
 struct First: View {
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject private var viewModel: FirstModel
     
-    init(storage: Storage) {
-        _viewModel = StateObject(wrappedValue: FirstModel(storage: storage))    }
+    init() {
+        _viewModel = StateObject(wrappedValue: FirstModel())
+    }
     
     var body: some View {
         NavigationStack {
@@ -41,6 +43,7 @@ struct First: View {
                                 VStack(spacing: 10) {
                                     Button {
                                         viewModel.saveTestResult(answer: "Вторичные", testID: viewModel.testID1)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Вторичные")
                                             .frame(maxWidth: .infinity)
@@ -57,6 +60,7 @@ struct First: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Первичные", testID: viewModel.testID1)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Первичные")
                                             .frame(maxWidth: .infinity)
@@ -73,6 +77,7 @@ struct First: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Третичные", testID: viewModel.testID1)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Третичные")
                                             .frame(maxWidth: .infinity)
@@ -107,6 +112,7 @@ struct First: View {
                                 VStack(spacing: 10) {
                                     Button {
                                         viewModel.saveTestResult(answer: "Сплит-комплиментарный", testID: viewModel.testID2)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Сплит-комплиментарный")
                                             .frame(maxWidth: .infinity)
@@ -124,6 +130,7 @@ struct First: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Триадический", testID: viewModel.testID2)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Триадический")
                                             .frame(maxWidth: .infinity)
@@ -140,6 +147,7 @@ struct First: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Комплиментарный", testID: viewModel.testID2)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Комплиментарный")
                                             .frame(maxWidth: .infinity)
@@ -156,6 +164,7 @@ struct First: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Треугольный", testID: viewModel.testID2)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Треугольный")
                                             .frame(maxWidth: .infinity)
@@ -190,6 +199,7 @@ struct First: View {
                                 VStack(spacing: 10) {
                                     Button {
                                         viewModel.saveTestResult(answer: "Хроматический", testID: viewModel.testID3)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Хроматический")
                                             .frame(maxWidth: .infinity)
@@ -206,6 +216,7 @@ struct First: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Единоцветный", testID: viewModel.testID3)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Единоцветный")
                                             .frame(maxWidth: .infinity)
@@ -222,6 +233,7 @@ struct First: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Монохроматический", testID: viewModel.testID3)
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Монохроматический")
                                             .frame(maxWidth: .infinity)

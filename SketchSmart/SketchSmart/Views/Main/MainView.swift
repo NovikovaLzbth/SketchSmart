@@ -43,11 +43,27 @@ struct MainView: View {
                             .padding(.horizontal, 1)
                             .foregroundStyle(.white)
                             
+                            VStack {
+                                NavigationLink {
+                                    GameView()
+                                } label: {
+                                    VStack {
+                                        Label("Игра для цветовосприятия", systemImage: "gamecontroller.fill")
+                                    }
+                                    .frame(width: 365, height: 60)
+                                }
+                                .background(Color.babyYellow)
+                                .cornerRadius(16)
+                                .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
+                            }
+                            .foregroundStyle(.darkPurple)
+                            .padding(.bottom, 20)
+                            
                             //Кнопки для перехода к тестам
                             HStack {
                                 NavigationLink {
                                     // Переход на тест по теории цвета
-                                    First(storage: viewModel.storage)
+                                    First()
                                 } label: {
                                     VStack {
                                         Text("Теория цвета")
@@ -81,18 +97,6 @@ struct MainView: View {
                                 } label: {
                                     VStack {
                                         Text("Прототипирование")
-                                    }
-                                    .frame(width: 180, height: 60)
-                                }
-                                .background(Color.colorPurple)
-                                .cornerRadius(16)
-                                .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
-                                
-                                NavigationLink {
-                                    Fourth(storage: viewModel.storage)
-                                } label: {
-                                    VStack {
-                                        Text("Психология в UI/UX")
                                     }
                                     .frame(width: 180, height: 60)
                                 }

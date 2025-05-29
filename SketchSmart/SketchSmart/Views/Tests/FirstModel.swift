@@ -27,14 +27,9 @@ final class FirstModel: ObservableObject {
         "color_palette_test": "Монохроматический"
     ]
     
-    let storage: Storage
     let testID1 = "color_group_test"
     let testID2 = "color_scheme_test"
     let testID3 = "color_palette_test"
-    
-    init(storage: Storage) {
-        self.storage = storage
-    }
     
     private var viewContext: NSManagedObjectContext {
         PersistenceController.shared.container.viewContext

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import AVFoundation
 
 struct Fourth: View {
     @Environment(\.presentationMode) var presentationMode
@@ -42,6 +43,8 @@ struct Fourth: View {
                                 VStack(spacing: 10) {
                                     Button {
                                         viewModel.saveTestResult(answer: "Красный", testID: viewModel.testID1)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Красный")
                                             .frame(maxWidth: .infinity)
@@ -58,6 +61,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Синий", testID: viewModel.testID1)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Синий")
                                             .frame(maxWidth: .infinity)
@@ -74,6 +79,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Желтый", testID: viewModel.testID1)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Желтый")
                                             .frame(maxWidth: .infinity)
@@ -108,6 +115,8 @@ struct Fourth: View {
                                 VStack(spacing: 10) {
                                     Button {
                                         viewModel.saveTestResult(answer: "Треугольник", testID: viewModel.testID2)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Треугольник")
                                             .frame(maxWidth: .infinity)
@@ -124,6 +133,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Круг", testID: viewModel.testID2)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Круг")
                                             .frame(maxWidth: .infinity)
@@ -141,6 +152,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Квадрат", testID: viewModel.testID2)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Квадрат")
                                             .frame(maxWidth: .infinity)
@@ -165,7 +178,7 @@ struct Fourth: View {
                                 Text("3. Какой принцип гештальта объясняет, что люди склонны объединять близко расположенные элементы?")
                                     .foregroundStyle(.white)
                                 
-                                Image("Image 22")
+                                Image("Image 26")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 335)
@@ -176,6 +189,8 @@ struct Fourth: View {
                                 VStack(spacing: 10) {
                                     Button {
                                         viewModel.saveTestResult(answer: "Замкнутость", testID: viewModel.testID3)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Замкнутость")
                                             .frame(maxWidth: .infinity)
@@ -192,6 +207,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Близость", testID: viewModel.testID3)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Близость")
                                             .frame(maxWidth: .infinity)
@@ -210,6 +227,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Сходство", testID: viewModel.testID3)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Сходство")
                                             .frame(maxWidth: .infinity)
@@ -233,7 +252,7 @@ struct Fourth: View {
                                 Text("4. Какая композиция создает ощущение динамики?")
                                     .foregroundStyle(.white)
                                 
-                                Image("Image 23")
+                                Image("Image 27")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 335)
@@ -244,6 +263,8 @@ struct Fourth: View {
                                 VStack(spacing: 10) {
                                     Button {
                                         viewModel.saveTestResult(answer: "Симметричная", testID: viewModel.testID4)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Симметричная")
                                             .frame(maxWidth: .infinity)
@@ -260,6 +281,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Диагональная", testID: viewModel.testID4)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Диагональная")
                                             .frame(maxWidth: .infinity)
@@ -277,6 +300,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Центрированная", testID: viewModel.testID4)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Центрированная")
                                             .frame(maxWidth: .infinity)
@@ -300,7 +325,7 @@ struct Fourth: View {
                                 Text("5. Какой эффект вызывает избыток красного в дизайне?")
                                     .foregroundStyle(.white)
                                 
-                                Image("Image 23")
+                                Image("Image 28")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 335)
@@ -311,6 +336,8 @@ struct Fourth: View {
                                 VStack(spacing: 10) {
                                     Button {
                                         viewModel.saveTestResult(answer: "Расслабление", testID: viewModel.testID5)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Расслабление")
                                             .frame(maxWidth: .infinity)
@@ -327,6 +354,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Нейтральность", testID: viewModel.testID5)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Нейтральность")
                                             .frame(maxWidth: .infinity)
@@ -343,6 +372,8 @@ struct Fourth: View {
                                     
                                     Button {
                                         viewModel.saveTestResult(answer: "Агрессию или тревогу", testID: viewModel.testID5)
+                                        
+                                        AudioServicesPlaySystemSound(1519)
                                     } label: {
                                         Text("Агрессию или тревогу")
                                             .frame(maxWidth: .infinity)
