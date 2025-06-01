@@ -20,6 +20,13 @@ struct GameView: View {
             Color.background.ignoresSafeArea(.all)
             
             VStack {
+                Text("Время: \(viewModel.timeRemaining) сек")
+                    .font(.title)
+                    .bold(true)
+                    .foregroundColor(.babyYellow)
+                    .padding(.top, -90)
+                    .padding(.leading, -170)
+                
                 // Отображение счета
                 Text("Счет: \(viewModel.score)")
                     .font(.title)
@@ -40,10 +47,11 @@ struct GameView: View {
                             .aspectRatio(1, contentMode: .fit) // Квадратные плитки
                             .cornerRadius(8)
                             .onTapGesture {
-                                viewModel.checkAnswer(index) // Обработка нажатия
-                                
-                                AudioServicesPlaySystemSound(1113)
-                                AudioServicesPlaySystemSound(1519)
+                                if viewModel.timeRemaining > 0 { // Проверяем, что время не вышло
+                                    viewModel.checkAnswer(index)
+                                    AudioServicesPlaySystemSound(1113)
+                                    AudioServicesPlaySystemSound(1519)
+                                }
                             }
                     }
                 }
@@ -52,8 +60,19 @@ struct GameView: View {
             }
             .onAppear {
                 viewModel.startNewRound() // Первый раунд при появлении экрана
+                viewModel.startTimer()
+            }
+            .alert("Игра окончена!", isPresented: $viewModel.isGameOver) {
+                Button {
+                    viewModel.restartGame()
+                } label: {
+                    Text("Начать заново")
+                }
+                
+            } message: {
+                Text("Ваш счет: \(viewModel.score)\nУровень: \(viewModel.level)")
             }
         }
     }
 }
-    
+

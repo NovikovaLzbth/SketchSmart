@@ -9,11 +9,14 @@ import SwiftUI
 
 final class GameViewModel: ObservableObject {
     // Состояние игры:
-        @Published var colors: [Color] = [] // Массив цветов для плиток
-        @Published var targetIndex = 0 // Индекс плитки, которая отличается
-        @Published var score = 0 // Текущий счет игрока
-        @Published var level = 1 // Текущий уровень сложности
-        @Published var gridSize = 2 // Размер сетки (2x2, 3x3 и т.д.)
+    @Published var colors: [Color] = [] // Массив цветов для плиток
+    @Published var targetIndex = 0 // Индекс плитки, которая отличается
+    @Published var score = 0 // Текущий счет игрока
+    @Published var level = 1 // Текущий уровень сложности
+    @Published var gridSize = 2 // Размер сетки (2x2, 3x3 и т.д.)
+    @Published var timeRemaining = 60 // Начальное время - 60 секунд
+    @Published var timer: Timer?
+    @Published var isGameOver = false
     
     // Начать новый раунд игры
     func startNewRound() {
@@ -55,6 +58,27 @@ final class GameViewModel: ObservableObject {
             score = max(0, score - 1)
         }
         startNewRound() // Новый раунд
+    }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if self.timeRemaining > 0 {
+                self.timeRemaining -= 1
+            } else {
+                self.timer?.invalidate()
+                self.isGameOver = true
+            }
+        }
+    }
+    
+    func restartGame() {
+        timeRemaining = 60
+        score = 0          // Сбрасываем счет
+        level = 1          // Сбрасываем уровень
+        gridSize = 2       // Сбрасываем размер сетки
+        isGameOver = false
+        startNewRound()
+        startTimer()
     }
 }
 
