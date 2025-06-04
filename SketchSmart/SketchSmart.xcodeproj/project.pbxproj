@@ -14,19 +14,11 @@
 			remoteGlobalIDString = 7A813DA62DDD0C790066C776;
 			remoteInfo = SketchSmart;
 		};
-		7A813DC42DDD0C7A0066C776 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A813D9F2DDD0C790066C776 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7A813DA62DDD0C790066C776;
-			remoteInfo = SketchSmart;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7A813DA72DDD0C790066C776 /* SketchSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A813DB92DDD0C7A0066C776 /* SketchSmartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SketchSmartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A813DC32DDD0C7A0066C776 /* SketchSmartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SketchSmartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -62,13 +54,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A813DC02DDD0C7A0066C776 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,7 +72,6 @@
 			children = (
 				7A813DA72DDD0C790066C776 /* SketchSmart.app */,
 				7A813DB92DDD0C7A0066C776 /* SketchSmartTests.xctest */,
-				7A813DC32DDD0C7A0066C776 /* SketchSmartUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,29 +124,6 @@
 			productReference = 7A813DB92DDD0C7A0066C776 /* SketchSmartTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7A813DC22DDD0C7A0066C776 /* SketchSmartUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7A813DD32DDD0C7A0066C776 /* Build configuration list for PBXNativeTarget "SketchSmartUITests" */;
-			buildPhases = (
-				7A813DBF2DDD0C7A0066C776 /* Sources */,
-				7A813DC02DDD0C7A0066C776 /* Frameworks */,
-				7A813DC12DDD0C7A0066C776 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7A813DC52DDD0C7A0066C776 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				7A813DC62DDD0C7A0066C776 /* SketchSmartUITests */,
-			);
-			name = SketchSmartUITests;
-			packageProductDependencies = (
-			);
-			productName = SketchSmartUITests;
-			productReference = 7A813DC32DDD0C7A0066C776 /* SketchSmartUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -177,10 +138,6 @@
 						CreatedOnToolsVersion = 16.3;
 					};
 					7A813DB82DDD0C7A0066C776 = {
-						CreatedOnToolsVersion = 16.3;
-						TestTargetID = 7A813DA62DDD0C790066C776;
-					};
-					7A813DC22DDD0C7A0066C776 = {
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = 7A813DA62DDD0C790066C776;
 					};
@@ -202,7 +159,6 @@
 			targets = (
 				7A813DA62DDD0C790066C776 /* SketchSmart */,
 				7A813DB82DDD0C7A0066C776 /* SketchSmartTests */,
-				7A813DC22DDD0C7A0066C776 /* SketchSmartUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -216,13 +172,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7A813DB72DDD0C7A0066C776 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7A813DC12DDD0C7A0066C776 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,13 +195,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A813DBF2DDD0C7A0066C776 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -260,11 +202,6 @@
 			isa = PBXTargetDependency;
 			target = 7A813DA62DDD0C790066C776 /* SketchSmart */;
 			targetProxy = 7A813DBA2DDD0C7A0066C776 /* PBXContainerItemProxy */;
-		};
-		7A813DC52DDD0C7A0066C776 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7A813DA62DDD0C790066C776 /* SketchSmart */;
-			targetProxy = 7A813DC42DDD0C7A0066C776 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -412,6 +349,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.novikova.SketchSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -440,6 +381,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.novikova.SketchSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -450,14 +395,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HX79XDQCK7;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.novikova.SketchSmartTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.novikova.SketchSmartTests.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -469,52 +417,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HX79XDQCK7;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.novikova.SketchSmartTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.novikova.SketchSmartTests.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SketchSmart.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SketchSmart";
-			};
-			name = Release;
-		};
-		7A813DD42DDD0C7A0066C776 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HX79XDQCK7;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.novikova.SketchSmartUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SketchSmart;
-			};
-			name = Debug;
-		};
-		7A813DD52DDD0C7A0066C776 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HX79XDQCK7;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.novikova.SketchSmartUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SketchSmart;
 			};
 			name = Release;
 		};
@@ -544,15 +461,6 @@
 			buildConfigurations = (
 				7A813DD12DDD0C7A0066C776 /* Debug */,
 				7A813DD22DDD0C7A0066C776 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7A813DD32DDD0C7A0066C776 /* Build configuration list for PBXNativeTarget "SketchSmartUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7A813DD42DDD0C7A0066C776 /* Debug */,
-				7A813DD52DDD0C7A0066C776 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

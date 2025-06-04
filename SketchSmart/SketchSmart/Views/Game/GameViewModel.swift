@@ -73,9 +73,9 @@ final class GameViewModel: ObservableObject {
     
     func restartGame() {
         timeRemaining = 60
-        score = 0          // Сбрасываем счет
-        level = 1          // Сбрасываем уровень
-        gridSize = 2       // Сбрасываем размер сетки
+        score = 0 // Сбрасываем счет
+        level = 1 // Сбрасываем уровень
+        gridSize = 2 // Сбрасываем размер сетки
         isGameOver = false
         startNewRound()
         startTimer()
