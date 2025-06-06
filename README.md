@@ -1,3 +1,3 @@
-<h1 Мобильное IOS приложение "SketchSmart">
+# Мобильное IOS приложение "SketchSmart"
 
-## 
+## c
