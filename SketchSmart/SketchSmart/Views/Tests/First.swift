@@ -29,7 +29,7 @@ struct First: View {
                         VStack(spacing: 20) { // Увеличение расстояния между вопросами
                             // Вопрос 1
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("1. К какой группе относится цвет на картинке?")
+                                Text(String(localized: "colorOnPicture", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 13")
@@ -98,7 +98,7 @@ struct First: View {
                             
                             // Вопрос 2
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("2. Какой способ сочетания цветов на картинке?")
+                                Text(String(localized: "wayOfComb", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 14")
@@ -185,7 +185,7 @@ struct First: View {
                             
                             // Вопрос 3
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("3. Какой способ сочетания цветов на картинке?")
+                                Text(String(localized: "wayOfComb2", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 15")

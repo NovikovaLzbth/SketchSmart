@@ -29,7 +29,7 @@ struct Fourth: View {
                         VStack(spacing: 20) { // Увеличение расстояния между вопросами
                             // Вопрос 1
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("1. Какой цвет чаще всего ассоциируется с доверием и спокойствием?")
+                                Text(String(localized: "messageColor", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 24")
@@ -101,7 +101,7 @@ struct Fourth: View {
                             
                             // Вопрос 2
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("2. Какая форма визуально воспринимается как наиболее стабильная?")
+                                Text(String(localized: "test42", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 25")
@@ -175,7 +175,7 @@ struct Fourth: View {
                             
                             // Вопрос 3
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("3. Какой принцип гештальта объясняет, что люди склонны объединять близко расположенные элементы?")
+                                Text(String(localized: "test43", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 26")
@@ -249,7 +249,7 @@ struct Fourth: View {
                             
                             // Вопрос 4
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("4. Какая композиция создает ощущение динамики?")
+                                Text(String(localized: "test44", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 27")
@@ -322,7 +322,7 @@ struct Fourth: View {
                             
                             // Вопрос 5
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("5. Какой эффект вызывает избыток красного в дизайне?")
+                                Text(String(localized: "test45", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 28")

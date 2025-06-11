@@ -28,7 +28,7 @@ struct Third: View {
                         VStack(spacing: 20) { // Увеличение расстояния между вопросами
                             // Вопрос 1
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("1. Дизайнер усовершенствовал маски встроенными наушниками, чтобы жить во времена пандемии было чуть веселее. Рабочее решение?")
+                                Text(String(localized: "test31", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 20")
@@ -78,7 +78,7 @@ struct Third: View {
                             
                             // Вопрос 2
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("2. А вот эта штука напоминает крышку от гроба с лампочками. Нашлось ли ей полезное применение?")
+                                Text(String(localized: "test32", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 21")
@@ -129,7 +129,7 @@ struct Third: View {
                             
                             // Вопрос 3
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("3. Этот робот с шестью щупальцами очень похож на осьминога. Он запущен в производство?")
+                                Text(String(localized: "test33", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 22")
@@ -181,7 +181,7 @@ struct Third: View {
                             
                             // Вопрос 4
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("4. Не выбрасывайте апельсиновые корки — из них промдизайнер может сделать отличную лампу! Ну, наверное. Как думаете, это реальный продукт?")
+                                Text(String(localized: "test34", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 23")

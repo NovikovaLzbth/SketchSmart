@@ -28,7 +28,7 @@ struct Second: View {
                         VStack(spacing: 20) { // Увеличение расстояния между вопросами
                             // Вопрос 1
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("1. Растровое изображение создается с использованием ...")
+                                Text(String(localized: "rast", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 16")
@@ -94,7 +94,7 @@ struct Second: View {
                             
                             // Вопрос 2
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("2. Качество растрового изображения зависит от")
+                                Text(String(localized: "test22", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 17")
@@ -177,7 +177,7 @@ struct Second: View {
                             
                             // Вопрос 3
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("3. Векторные изображения формируются из ...")
+                                Text(String(localized: "test23", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 18")
@@ -245,7 +245,7 @@ struct Second: View {
                             
                             // Вопрос 4
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("4. Программа создания, редактирования и просмотра графических изображений - это ...")
+                                Text(String(localized: "test24", table: "Localizable"))
                                     .foregroundStyle(.white)
                                 
                                 Image("Image 19")
