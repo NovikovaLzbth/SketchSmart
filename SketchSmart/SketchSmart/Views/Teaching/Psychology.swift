@@ -17,22 +17,22 @@ struct Psychology: View {
                 
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
-                        Text("Что такое принципы гештальта в UX/UI?")
+                        Text("psy1")
                             .font(.title)
                             .bold(true)
                             .foregroundStyle(.babyYellow)
                             .padding(.bottom)
                         
-                        Text("Die Gestalt с немецкого — конструкция, конфигурация, структура, телосложение, фигура, вид, роль, оформление, габитус, целостность, форма, образ, облик.")
+                        Text("psy2")
                             .foregroundStyle(.white)
                             .bold(true)
                             .padding(.bottom)
                         
-                        Text("Принципы гештальта — это набор законов, описывающих, как люди считывают образы и упорядочивают их в целостную картину. В UX/UI эти принципы описывают то, как люди воспринимают и понимают элементы на цифровых экранах.")
+                        Text("psy3")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
-                        Text("Человеческий мозг быстро распознаёт знакомое. Знакомое — значит, предсказуемое и безопасное.")
+                        Text("psy4")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
@@ -44,7 +44,7 @@ struct Psychology: View {
                             .padding(.leading, 9)
                             .padding(.bottom)
                         
-                        Text("Взгляд всегда цепляется за элемент, который выделяется среди группы других, схожих.")
+                        Text("psy5")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
@@ -56,7 +56,7 @@ struct Psychology: View {
                             .padding(.leading, 9)
                             .padding(.bottom)
                         
-                        Text("Пользователи воспринимают симметричные объекты как принадлежащие к одной группе.")
+                        Text("psy6")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
@@ -68,7 +68,7 @@ struct Psychology: View {
                             .padding(.leading, 9)
                             .padding(.bottom)
                         
-                        Text("Параллельные элементы мы воспринимаем как связанные.")
+                        Text("psy7")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
@@ -80,7 +80,7 @@ struct Psychology: View {
                             .padding(.leading, 9)
                             .padding(.bottom)
                         
-                        Text("Понимание и применение психологических принципов в UX/UI-дизайне помогает создавать продукты, которые не только удовлетворяют потребности пользователей, но и вызывают положительные эмоции.")
+                        Text("psy8")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                     }
