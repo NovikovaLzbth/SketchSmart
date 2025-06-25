@@ -8,31 +8,25 @@
 import SwiftUI
 import CoreData
 
-// Вью для прохождения тестов
 struct MainView: View {
     @StateObject private var viewModel: MainViewModel
     
-    // Инициализатор
     init(storage: Storage) {
         _viewModel = StateObject(wrappedValue: MainViewModel(storage: storage))
         //Смена цвета заголовка
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.babyYellow]
     }
     
-    // Тело вью
     var body: some View {
         NavigationStack {
             VStack {
                 ZStack {
-                    // Установка цвета фона
                     Color.background.ignoresSafeArea(.all)
                     
-                    // Прокручивание страницы
                     ScrollView(.vertical) {
                         VStack {
                             ZStack {
                                 Image("Image 12")
-                                // Модификаторы для изображения
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 350)
@@ -59,10 +53,8 @@ struct MainView: View {
                             .foregroundStyle(.darkPurple)
                             .padding(.bottom, 20)
                             
-                            //Кнопки для перехода к тестам
                             HStack {
                                 NavigationLink {
-                                    // Переход на тест по теории цвета
                                     First()
                                 } label: {
                                     VStack {

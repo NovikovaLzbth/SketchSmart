@@ -7,8 +7,12 @@
 
 import SwiftUI
 import CoreData
+import AVKit
+import AVFoundation
 
 struct Psychology: View {
+    
+    private let videoURL = URL(string: "https://raw.githubusercontent.com/NovikovaLzbth/VideoColor/main/0623t.mp4")!
     
     var body: some View {
         NavigationStack {
@@ -17,22 +21,22 @@ struct Psychology: View {
                 
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
-                        Text("Что такое принципы гештальта в UX/UI?")
+                        Text("psy1")
                             .font(.title)
                             .bold(true)
                             .foregroundStyle(.babyYellow)
                             .padding(.bottom)
                         
-                        Text("Die Gestalt с немецкого — конструкция, конфигурация, структура, телосложение, фигура, вид, роль, оформление, габитус, целостность, форма, образ, облик.")
+                        Text("psy2")
                             .foregroundStyle(.white)
                             .bold(true)
                             .padding(.bottom)
                         
-                        Text("Принципы гештальта — это набор законов, описывающих, как люди считывают образы и упорядочивают их в целостную картину. В UX/UI эти принципы описывают то, как люди воспринимают и понимают элементы на цифровых экранах.")
+                        Text("psy3")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
-                        Text("Человеческий мозг быстро распознаёт знакомое. Знакомое — значит, предсказуемое и безопасное.")
+                        Text("psy4")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
@@ -41,10 +45,9 @@ struct Psychology: View {
                             .scaledToFit()
                             .frame(width: 350)
                             .cornerRadius(14)
-                            .padding(.leading, 9)
                             .padding(.bottom)
                         
-                        Text("Взгляд всегда цепляется за элемент, который выделяется среди группы других, схожих.")
+                        Text("psy5")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
@@ -53,10 +56,9 @@ struct Psychology: View {
                             .scaledToFit()
                             .frame(width: 350)
                             .cornerRadius(14)
-                            .padding(.leading, 9)
                             .padding(.bottom)
                         
-                        Text("Пользователи воспринимают симметричные объекты как принадлежащие к одной группе.")
+                        Text("psy6")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
@@ -65,10 +67,9 @@ struct Psychology: View {
                             .scaledToFit()
                             .frame(width: 350)
                             .cornerRadius(14)
-                            .padding(.leading, 9)
                             .padding(.bottom)
                         
-                        Text("Параллельные элементы мы воспринимаем как связанные.")
+                        Text("psy7")
                             .foregroundStyle(.white)
                             .padding(.bottom)
                         
@@ -77,12 +78,27 @@ struct Psychology: View {
                             .scaledToFit()
                             .frame(width: 350)
                             .cornerRadius(14)
-                            .padding(.leading, 9)
                             .padding(.bottom)
                         
-                        Text("Понимание и применение психологических принципов в UX/UI-дизайне помогает создавать продукты, которые не только удовлетворяют потребности пользователей, но и вызывают положительные эмоции.")
+                        Text("psy8")
                             .foregroundStyle(.white)
-                            .padding(.bottom)
+                            .padding(.bottom, 50)
+                        
+                        VStack {
+                            Text("Видеоурок №3")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.title.bold())
+                                .foregroundStyle(.babyYellow)
+                            
+                            VideoPlayer(player: AVPlayer(url: videoURL))
+                                .frame(height: 200)
+                                .frame(maxWidth: .infinity)
+                                .cornerRadius(14)
+                                .onAppear {
+                                    AVPlayer(url: videoURL).play()
+                                }
+                        }
+                        .padding(.bottom)
                     }
                     // Растягивает VStack и выравнивает контент
                     .frame(maxWidth: .infinity, alignment: .leading)
