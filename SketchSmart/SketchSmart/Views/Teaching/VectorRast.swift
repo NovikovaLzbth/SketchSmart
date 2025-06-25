@@ -7,8 +7,12 @@
 
 import SwiftUI
 import CoreData
+import AVKit
+import AVFoundation
 
 struct VectorRast: View {
+    
+    private let videoURL = URL(string: "https://raw.githubusercontent.com/NovikovaLzbth/VideoColor/main/0625.mp4")!
     
     var body: some View {
         NavigationStack {
@@ -16,14 +20,14 @@ struct VectorRast: View {
                 Color.background.ignoresSafeArea(.all)
                 
                 ScrollView(.vertical) {
-                    VStack {
-                        Text("Чем векторные изображения отличаются от растровых?")
+                    VStack(alignment: .leading) {
+                        Text("vect1")
                             .font(.title)
                             .bold(true)
                             .foregroundStyle(.babyYellow)
                             .padding(.bottom)
                         
-                        Text("В компьютерной графике принято различать два вида изображений: векторные и растровые. Разберёмся, в чём их различия.")
+                        Text("vect2")
                             .foregroundStyle(.white)
                         
                         HStack {
@@ -40,7 +44,7 @@ struct VectorRast: View {
                                 .cornerRadius(10)
                         }
                         
-                        Text("На первый взгляд, два абсолютно одинаковых изображения. Увеличим масштаб изображения и сравним ещё раз.")
+                        Text("vect3")
                             .foregroundStyle(.white)
                         
                         HStack {
@@ -58,22 +62,40 @@ struct VectorRast: View {
                         }
                         
                         VStack {
-                            Text("Одно изображение распалось на отдельные точки, а качество другого не изменилось. С чем это связано? Дело в том, что первое изображение — растровое, а второе — векторное. ")
+                            Text("vect4")
                                 .padding(.bottom)
                             
-                            Text("Растровые изображения состоят из отдельных точек — пикселей, каждая из которых кодируется отдельно. Человеческий глаз одиночные пиксели обычно не различает. ")
-                                .padding(.horizontal, -1.8)
-                            
-                            Text("Растровая графика позволяет воспроизвести с фотографической точностью практически любой рисунок, вне зависимости от сложности, в отличие от векторной, где невозможно точно передать переход от одного цвета к другому без потерь в размере файла.")
+                            Text("vect5")
                                 .padding(.bottom)
                             
-                            Text("Векторные изображения состоят из геометрических фигур (с указанием их параметров): точек, прямых, прямоугольников, окружностей. Такие изображения не отличаются фотографической точностью, но при масштабировании они не теряют качества. Когда размер изображения увеличивают, все геометрические объекты пересчитываются и качество остаётся прежним.")
+                            Text("vect6")
+                                .padding(.bottom)
                             
-                            Text("Размер, который занимает описательная часть, не зависит от реальной величины объекта. Это позволяет использовать минимальное количество информации и описывать любой большой объект файлом минимального размера.")
+                            Text("vect7")
+                            
+                            Text("vect8")
                         }
                         .foregroundStyle(.white)
+                        .padding(.bottom, 50)
+                        
+                        VStack {
+                            Text("Видеоурок №1")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.title.bold())
+                                .foregroundStyle(.babyYellow)
+                            
+                            VideoPlayer(player: AVPlayer(url: videoURL))
+                                .frame(height: 200)
+                                .frame(maxWidth: .infinity)
+                                .cornerRadius(14)
+                                .onAppear {
+                                    AVPlayer(url: videoURL).play()
+                                }
+                        }
+                        .padding(.bottom)
                     }
-                    .padding(.horizontal, 16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
                 }
             }
         }
