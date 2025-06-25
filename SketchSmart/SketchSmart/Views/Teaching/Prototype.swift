@@ -7,8 +7,12 @@
 
 import SwiftUI
 import CoreData
+import AVKit
+import AVFoundation
 
 struct Prototype: View {
+    
+    private let videoURL = URL(string: "https://raw.githubusercontent.com/NovikovaLzbth/VideoColor/main/0623(1).mp4")!
     
     var body: some View {
         NavigationStack {
@@ -59,6 +63,23 @@ struct Prototype: View {
                         
                         Text("prototype10")
                             .foregroundStyle(.white)
+                            .padding(.bottom, 50)
+                        
+                        VStack {
+                            Text("Видеоурок №2")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.title.bold())
+                                .foregroundStyle(.babyYellow)
+                            
+                            VideoPlayer(player: AVPlayer(url: videoURL))
+                                .frame(height: 200)
+                                .frame(maxWidth: .infinity)
+                                .cornerRadius(14)
+                                .onAppear {
+                                    AVPlayer(url: videoURL).play()
+                                }
+                        }
+                        .padding(.bottom)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)

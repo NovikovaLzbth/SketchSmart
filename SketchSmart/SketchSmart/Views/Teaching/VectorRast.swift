@@ -7,8 +7,12 @@
 
 import SwiftUI
 import CoreData
+import AVKit
+import AVFoundation
 
 struct VectorRast: View {
+    
+    private let videoURL = URL(string: "https://raw.githubusercontent.com/NovikovaLzbth/VideoColor/main/0625.mp4")!
     
     var body: some View {
         NavigationStack {
@@ -72,6 +76,23 @@ struct VectorRast: View {
                             Text("vect8")
                         }
                         .foregroundStyle(.white)
+                        .padding(.bottom, 50)
+                        
+                        VStack {
+                            Text("Видеоурок №1")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.title.bold())
+                                .foregroundStyle(.babyYellow)
+                            
+                            VideoPlayer(player: AVPlayer(url: videoURL))
+                                .frame(height: 200)
+                                .frame(maxWidth: .infinity)
+                                .cornerRadius(14)
+                                .onAppear {
+                                    AVPlayer(url: videoURL).play()
+                                }
+                        }
+                        .padding(.bottom)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
