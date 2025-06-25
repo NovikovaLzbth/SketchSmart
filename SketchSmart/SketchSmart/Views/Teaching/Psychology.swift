@@ -7,8 +7,12 @@
 
 import SwiftUI
 import CoreData
+import AVKit
+import AVFoundation
 
 struct Psychology: View {
+    
+    private let videoURL = URL(string: "https://raw.githubusercontent.com/NovikovaLzbth/VideoColor/main/0623t.mp4")!
     
     var body: some View {
         NavigationStack {
@@ -41,7 +45,6 @@ struct Psychology: View {
                             .scaledToFit()
                             .frame(width: 350)
                             .cornerRadius(14)
-                            .padding(.leading, 9)
                             .padding(.bottom)
                         
                         Text("psy5")
@@ -53,7 +56,6 @@ struct Psychology: View {
                             .scaledToFit()
                             .frame(width: 350)
                             .cornerRadius(14)
-                            .padding(.leading, 9)
                             .padding(.bottom)
                         
                         Text("psy6")
@@ -65,7 +67,6 @@ struct Psychology: View {
                             .scaledToFit()
                             .frame(width: 350)
                             .cornerRadius(14)
-                            .padding(.leading, 9)
                             .padding(.bottom)
                         
                         Text("psy7")
@@ -77,12 +78,27 @@ struct Psychology: View {
                             .scaledToFit()
                             .frame(width: 350)
                             .cornerRadius(14)
-                            .padding(.leading, 9)
                             .padding(.bottom)
                         
                         Text("psy8")
                             .foregroundStyle(.white)
-                            .padding(.bottom)
+                            .padding(.bottom, 50)
+                        
+                        VStack {
+                            Text("Видеоурок №3")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.title.bold())
+                                .foregroundStyle(.babyYellow)
+                            
+                            VideoPlayer(player: AVPlayer(url: videoURL))
+                                .frame(height: 200)
+                                .frame(maxWidth: .infinity)
+                                .cornerRadius(14)
+                                .onAppear {
+                                    AVPlayer(url: videoURL).play()
+                                }
+                        }
+                        .padding(.bottom)
                     }
                     // Растягивает VStack и выравнивает контент
                     .frame(maxWidth: .infinity, alignment: .leading)
