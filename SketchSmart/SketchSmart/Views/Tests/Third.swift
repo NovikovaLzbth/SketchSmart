@@ -49,8 +49,8 @@ struct Third: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Да, верю, что такие существуют, — а почему нет?" ? .green : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer1 == "Да, верю, что такие существуют, — а почему нет?" ? .green : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -65,8 +65,8 @@ struct Third: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Выглядит странно — вряд ли это реальный продукт" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer1 == "Выглядит странно — вряд ли это реальный продукт" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -99,8 +99,8 @@ struct Third: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Выглядит абсолютно бесполезно" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer2 == "Выглядит абсолютно бесполезно" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -116,8 +116,8 @@ struct Third: View {
                                             .background(
                                                 viewModel.isSelected2 ?
                                                 (viewModel.selectedAnswer2 == "Крутая штука, наверняка это кто-нибудь покупает! Хотя бы как арт-объект" ? .green :
-                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -150,8 +150,8 @@ struct Third: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected3 ?
-                                                (viewModel.selectedAnswer3 == "Да этими щупальцами можно легко вырвать все сорняки! Его однозначно выпустили — дачники к весне раскупят" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer3 == "Да этими щупальцами можно легко вырвать все сорняки! Его однозначно выпустили — дачники к весне раскупят" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -167,8 +167,8 @@ struct Third: View {
                                             .background(
                                                 viewModel.isSelected3 ?
                                                 (viewModel.selectedAnswer3 == "Надеюсь, нет, такой и покалечить может!" ? .green :
-                                                    (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             
                                             .cornerRadius(16)
@@ -202,8 +202,8 @@ struct Third: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected4 ?
-                                                (viewModel.selectedAnswer4 == "Нет, у апельсинового корпуса был бы слишком короткий срок годности!" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer4 == "Нет, у апельсинового корпуса был бы слишком короткий срок годности!" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -219,8 +219,8 @@ struct Third: View {
                                             .background(
                                                 viewModel.isSelected4 ?
                                                 (viewModel.selectedAnswer4 == "Вполне могу представить лампу из апельсинов на полке — какие проблемы?" ? .green :
-                                                    (viewModel.selectedAnswer4 != viewModel.correctAnswers[viewModel.testID4] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer4 != viewModel.correctAnswers[viewModel.testID4] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }

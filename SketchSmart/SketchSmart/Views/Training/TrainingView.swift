@@ -13,7 +13,7 @@ struct TrainingView: View {
     
     init(storage: Storage) {
         _viewModel = StateObject(wrappedValue: TrainingViewModel(storage: storage))
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.babyYellow]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.darkBlue]
     }
     
     var body: some View {
@@ -24,6 +24,21 @@ struct TrainingView: View {
                     
                     ScrollView(.vertical) {
                         VStack(spacing: 15) {
+                            // Введение
+                            NavigationLink {
+                                Introduction()
+                            } label: {
+                                VStack {
+                                    Text("Введение")
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundStyle(.babyYellow)
+                                        .padding(30)
+                                }
+                            }
+                            .background(Color.lightBlue)
+                            .cornerRadius(16)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
+                            
                             // Переход на страницу с конкретным материалом о векторе и расте
                             NavigationLink {
                                 VectorRast()
@@ -35,9 +50,9 @@ struct TrainingView: View {
                                         .padding(30)
                                 }
                             }
-                            .background(Color.colorPurple)
+                            .background(Color.lightBlue)
                             .cornerRadius(16)
-                            .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             // Переход на страницу с конкретным материалом о прототипировании
                             NavigationLink {
@@ -50,9 +65,9 @@ struct TrainingView: View {
                                         .padding(30)
                                 }
                             }
-                            .background(Color.colorPurple)
+                            .background(Color.lightBlue)
                             .cornerRadius(16)
-                            .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             // Переход на страницу с конкретным материалом о психологии в UX/UI
                             NavigationLink {
@@ -65,9 +80,9 @@ struct TrainingView: View {
                                         .padding(30)
                                 }
                             }
-                            .background(Color.colorPurple)
+                            .background(Color.lightBlue)
                             .cornerRadius(16)
-                            .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             // Переход на страницу с конкретным материалом о теории цвета
                             NavigationLink {
@@ -80,9 +95,9 @@ struct TrainingView: View {
                                         .padding(30)
                                 }
                             }
-                            .background(Color.colorPurple)
+                            .background(Color.lightBlue)
                             .cornerRadius(16)
-                            .shadow(color: .darkPurple, radius: 5, x: 5, y: 4)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
                         .padding()
                     }
