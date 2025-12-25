@@ -52,8 +52,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Красный" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer1 == "Красный" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -70,8 +70,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Синий" ? .green : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer1 == "Синий" ? .green : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -88,8 +88,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Желтый" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer1 == "Желтый" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -124,8 +124,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Треугольник" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer2 == "Треугольник" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -143,8 +143,8 @@ struct Fourth: View {
                                             .background(
                                                 viewModel.isSelected2 ?
                                                 (viewModel.selectedAnswer2 == "Круг" ? .green :
-                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -162,8 +162,8 @@ struct Fourth: View {
                                             .background(
                                                 viewModel.isSelected2 ?
                                                 (viewModel.selectedAnswer2 == "Квадрат" ? .green :
-                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -198,8 +198,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected3 ?
-                                                (viewModel.selectedAnswer3 == "Замкнутость" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer3 == "Замкнутость" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -217,8 +217,8 @@ struct Fourth: View {
                                             .background(
                                                 viewModel.isSelected3 ?
                                                 (viewModel.selectedAnswer3 == "Близость" ? .green :
-                                                    (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             
                                             .cornerRadius(16)
@@ -236,8 +236,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected3 ?
-                                                (viewModel.selectedAnswer3 == "Сходство" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer3 == "Сходство" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -272,8 +272,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected4 ?
-                                                (viewModel.selectedAnswer4 == "Симметричная" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer4 == "Симметричная" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -291,8 +291,8 @@ struct Fourth: View {
                                             .background(
                                                 viewModel.isSelected4 ?
                                                 (viewModel.selectedAnswer4 == "Диагональная" ? .green :
-                                                    (viewModel.selectedAnswer4 != viewModel.correctAnswers[viewModel.testID4] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer4 != viewModel.correctAnswers[viewModel.testID4] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -309,8 +309,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected4 ?
-                                                (viewModel.selectedAnswer4 == "Центрированная" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer4 == "Центрированная" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -345,8 +345,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected5 ?
-                                                (viewModel.selectedAnswer5 == "Расслабление" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer5 == "Расслабление" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -363,8 +363,8 @@ struct Fourth: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected5 ?
-                                                (viewModel.selectedAnswer5 == "Нейтральность" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer5 == "Нейтральность" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -382,8 +382,8 @@ struct Fourth: View {
                                             .background(
                                                 viewModel.isSelected5 ?
                                                 (viewModel.selectedAnswer5 == "Агрессию или тревогу" ? .green :
-                                                    (viewModel.selectedAnswer5 != viewModel.correctAnswers[viewModel.testID5] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer5 != viewModel.correctAnswers[viewModel.testID5] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }

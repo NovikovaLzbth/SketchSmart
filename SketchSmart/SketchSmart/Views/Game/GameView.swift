@@ -23,19 +23,19 @@ struct GameView: View {
                 Text("Время: \(viewModel.timeRemaining) сек")
                     .font(.title)
                     .bold(true)
-                    .foregroundColor(.babyYellow)
+                    .foregroundColor(.darkBlue)
                     .padding(.top, -90)
                     .padding(.leading, -170)
                 
                 // Отображение счета
                 Text("Счет: \(viewModel.score)")
                     .font(.title)
-                    .foregroundColor(.white)
+                    .foregroundColor(.lightBlue)
                 
                 // Отображение уровня
                 Text("Уровень: \(viewModel.level)")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.lightBlue)
                     .padding(.bottom, 10)
                 
                 // Игровое поле с плитками
@@ -49,14 +49,12 @@ struct GameView: View {
                             .onTapGesture {
                                 if viewModel.timeRemaining > 0 { // Проверяем, что время не вышло
                                     viewModel.checkAnswer(index)
-                                    AudioServicesPlaySystemSound(1113)
                                     AudioServicesPlaySystemSound(1519)
                                 }
                             }
                     }
                 }
                 .padding()
-                .background(Color.white).cornerRadius(10)
             }
             .onAppear {
                 viewModel.startNewRound() // Первый раунд при появлении экрана

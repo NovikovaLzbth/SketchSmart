@@ -51,8 +51,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Вторичные" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer1 == "Вторичные" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -68,8 +68,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Первичные" ? .green : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer1 == "Первичные" ? .green : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -85,8 +85,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected1 ?
-                                                (viewModel.selectedAnswer1 == "Третичные" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer1 == "Третичные" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -121,8 +121,8 @@ struct First: View {
                                             .background(
                                                 viewModel.isSelected2 ?
                                                 (viewModel.selectedAnswer2 == "Сплит-комплиментарный" ? .green :
-                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -138,8 +138,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Триадический" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer2 == "Триадический" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -155,8 +155,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Комплиментарный" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer2 == "Комплиментарный" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -172,8 +172,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected2 ?
-                                                (viewModel.selectedAnswer2 == "Треугольный" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer2 == "Треугольный" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -207,8 +207,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected3 ?
-                                                (viewModel.selectedAnswer3 == "Хроматический" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer3 == "Хроматический" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -224,8 +224,8 @@ struct First: View {
                                             .padding(15)
                                             .background(
                                                 viewModel.isSelected3 ?
-                                                (viewModel.selectedAnswer3 == "Единоцветный" ? .red : .colorPurple) :
-                                                        .colorPurple
+                                                (viewModel.selectedAnswer3 == "Единоцветный" ? .red : .lightBlue) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
@@ -242,8 +242,8 @@ struct First: View {
                                             .background(
                                                 viewModel.isSelected3 ?
                                                 (viewModel.selectedAnswer3 == "Монохроматический" ? .green :
-                                                    (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .colorPurple : .colorPurple)) :
-                                                        .colorPurple
+                                                    (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .lightBlue : .lightBlue)) :
+                                                        .lightBlue
                                             )
                                             .cornerRadius(16)
                                     }
