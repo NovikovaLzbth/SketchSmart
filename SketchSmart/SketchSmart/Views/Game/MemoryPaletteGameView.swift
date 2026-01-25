@@ -10,6 +10,9 @@ import SwiftUI
 import AVFoundation
 
 struct MemoryPaletteGameView: View {
+    @State private var showHintOvelay: Bool = true
+    @State private var isHintVisible: Bool = true
+    
     // Конфигурация игры
     private let columns = [GridItem(.adaptive(minimum: 70))]
     private let colorPairsCount = 6 // Количество пар цветов
@@ -22,70 +25,79 @@ struct MemoryPaletteGameView: View {
     @State private var isProcessing = false
     
     var body: some View {
-        VStack {
-            // Статистика
-            HStack {
-                VStack {
-                    Text("ХОДЫ")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Text("\(moves)")
-                        .font(.title2.bold())
-                        .foregroundColor(.darkBlue)
-                }
-                
-                Spacer()
-                
-                VStack {
-                    Text("ПАРЫ")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Text("\(matchedPairs)/\(colorPairsCount)")
-                        .font(.title2.bold())
-                        .foregroundColor(.darkBlue)
+        ZStack {
+            VStack {
+                if showHintOvelay {
+                    HintOverlayView(isVisible: $isHintVisible, showOverlay: $showHintOvelay, hintText: "TEXT")
                 }
             }
-            .padding(.horizontal)
-            .padding(.top)
+            .zIndex(1)
             
-            // Игровое поле
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(cards) { card in
-                        CardView(card: card)
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .onTapGesture {
-                                if !isProcessing && !card.isMatched && !card.isFaceUp {
-                                    selectCard(card)
-                                }
-                            }
+            VStack {
+                // Статистика
+                HStack {
+                    VStack {
+                        Text("ХОДЫ")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Text("\(moves)")
+                            .font(.title2.bold())
+                            .foregroundColor(.darkBlue)
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Text("ПАРЫ")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Text("\(matchedPairs)/\(colorPairsCount)")
+                            .font(.title2.bold())
+                            .foregroundColor(.darkBlue)
                     }
                 }
-                .padding()
-            }
-            
-            // Кнопка перезапуска
-            Button(action: startNewGame) {
-                HStack {
-                    Image(systemName: "arrow.clockwise")
-                    Text("Новая игра")
+                .padding(.horizontal)
+                .padding(.top)
+                
+                // Игровое поле
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(cards) { card in
+                            CardView(card: card)
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .onTapGesture {
+                                    if !isProcessing && !card.isMatched && !card.isFaceUp {
+                                        selectCard(card)
+                                    }
+                                }
+                        }
+                    }
+                    .padding()
                 }
-                .font(.headline)
-                .foregroundColor(.white)
+                
+                // Кнопка перезапуска
+                Button(action: startNewGame) {
+                    HStack {
+                        Image(systemName: "arrow.clockwise")
+                        Text("Новая игра")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.darkBlue)
+                    .cornerRadius(15)
+                }
                 .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.darkBlue)
-                .cornerRadius(15)
             }
-            .padding()
-        }
-        .alert("Поздравляем!", isPresented: $showingWinAlert) {
-            Button("Новая игра", action: startNewGame)
-        } message: {
-            Text("Вы нашли все \(colorPairsCount) пар за \(moves) ходов!")
-        }
-        .onAppear {
-            startNewGame()
+            .alert("Поздравляем!", isPresented: $showingWinAlert) {
+                Button("Новая игра", action: startNewGame)
+            } message: {
+                Text("Вы нашли все \(colorPairsCount) пар за \(moves) ходов!")
+            }
+            .onAppear {
+                startNewGame()
+            }
         }
     }
     
@@ -205,3 +217,50 @@ struct MemoryPaletteGameView: View {
         return difference < 0.3
     }
 }
+
+struct HintOverlayView: View {
+    @Binding var isVisible: Bool
+    @Binding var showOverlay: Bool
+    let hintText: String
+    
+    var body: some View {
+        ZStack {
+            Color.darkBlue
+                .opacity(0.7)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    disnissHint()
+                }
+            
+            if isVisible {
+                VStack {
+                    Text(hintText)
+                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .padding()
+                        .background(Color.black.opacity(0.7))
+                        .cornerRadius(10)
+                        .padding()
+                    
+                    Button("Понятно!") {
+                        disnissHint()
+                    }
+                    .padding()
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .foregroundColor(.darkBlue)
+                    .background(Color.background)
+                    .cornerRadius(15)
+                }
+            }
+            
+        
+        }
+    }
+    private func disnissHint() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.isVisible.toggle()
+            self.showOverlay.toggle()
+        }
+    }
+}
+
+

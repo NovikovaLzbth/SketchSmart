@@ -12,6 +12,8 @@ import AVKit
 import AVFoundation
 
 struct Introduction: View {
+    @State private var currentPage = 0
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -20,7 +22,7 @@ struct Introduction: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         Text("introduction1")
-                            .font(.title)
+                            .font(.title3)
                             .fontWeight(.bold)
                             .foregroundStyle(.white)
                             .padding()
@@ -28,57 +30,73 @@ struct Introduction: View {
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             .padding(.bottom)
                         
-                        Text("introduction2")
-                            .font(.title3)
-                            .foregroundStyle(.babyYellow)
-                            .fontWeight(.bold)
+                        // Прокуртка изображений с индикатором
+                        TabView(selection: $currentPage) {
+                            Image("Image 29")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 230)
+                                .cornerRadius(13)
+                                .tag(0)
+                            
+                            Image("Image 30")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 230)
+                                .cornerRadius(13)
+                                .tag(1)
+                            
+                            Image("Image 31")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 230)
+                                .cornerRadius(13)
+                                .tag(2)
+                        }
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                        .frame(height: 230)
                         
-                        Image("ImgIntroduction1")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity)
-                            .cornerRadius(9)
-                            .padding(.bottom)
+                        // Индикатор
+                        HStack(alignment: .center, spacing: 8) {
+                            ForEach(0..<3, id: \.self) { index in
+                                Capsule()
+                                    .fill(currentPage == index ? Color.white : Color.lightGray.opacity(0.5))
+                                    .frame(
+                                        width: currentPage == index ? 26 : 10,
+                                        height: 10
+                                    )
+                                    .animation(.easeInOut(duration: 0.2), value: currentPage)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 8)
+                        .padding(.bottom, 16)
+                        
+                        Text("introduction2")
+                            .font(.title)
+                            .foregroundStyle(.white)
+                            .fontWeight(.bold)
+                            .padding(.bottom, 16)
                         
                         Text("introduction3")
                             .font(.title3)
-                            .foregroundStyle(.babyYellow)
-                            .fontWeight(.bold)
-                            .padding(.bottom, 3)
+                            .foregroundStyle(.white)
+                            .padding(.bottom, 5)
                         
                         Text("introduction4")
                             .foregroundStyle(.white)
-                            .fontWeight(.bold)
+                            .padding()
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .padding(.bottom, 5)
                         
                         Text("introduction5")
                             .foregroundStyle(.white)
-                            .padding(.bottom, 3)
-                        
-                        Text("introduction6")
-                            .foregroundStyle(.white)
-                            .fontWeight(.bold)
-                        
-                        Text("introduction7")
-                            .foregroundStyle(.white)
-                            .padding(.bottom, 3)
-                        
-                        Text("introduction8")
-                            .foregroundStyle(.white)
-                            .fontWeight(.bold)
-                        
-                        Text("introduction9")
-                            .foregroundStyle(.white)
-                            .padding(.bottom, 3)
-                        
-                        Text("introduction10")
-                            .font(.title3)
-                            .foregroundStyle(.babyYellow)
-                            .fontWeight(.bold)
-                            .padding(.bottom)
+                            .padding(.bottom, 5)
                     }
                     // Растягивает VStack и выравнивает контент
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
+                    .padding()
                 }
             }
         }
