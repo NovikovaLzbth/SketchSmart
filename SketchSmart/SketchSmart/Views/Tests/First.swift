@@ -54,7 +54,7 @@ struct First: View {
                                                 (viewModel.selectedAnswer1 == "Вторичные" ? .red : .lightBlue) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected1)
                                     
@@ -71,7 +71,7 @@ struct First: View {
                                                 (viewModel.selectedAnswer1 == "Первичные" ? .green : .lightBlue) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected1)
                                     
@@ -88,7 +88,7 @@ struct First: View {
                                                 (viewModel.selectedAnswer1 == "Третичные" ? .red : .lightBlue) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected1)
                                 }
@@ -124,7 +124,7 @@ struct First: View {
                                                     (viewModel.selectedAnswer2 != viewModel.correctAnswers[viewModel.testID2] ? .lightBlue : .lightBlue)) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected2)
                                     
@@ -141,7 +141,7 @@ struct First: View {
                                                 (viewModel.selectedAnswer2 == "Триадический" ? .red : .lightBlue) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected2)
                                     
@@ -158,7 +158,7 @@ struct First: View {
                                                 (viewModel.selectedAnswer2 == "Комплиментарный" ? .red : .lightBlue) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected2)
                                     
@@ -175,7 +175,7 @@ struct First: View {
                                                 (viewModel.selectedAnswer2 == "Треугольный" ? .red : .lightBlue) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected2)
                                 }
@@ -210,7 +210,7 @@ struct First: View {
                                                 (viewModel.selectedAnswer3 == "Хроматический" ? .red : .lightBlue) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected3)
                                     
@@ -227,7 +227,7 @@ struct First: View {
                                                 (viewModel.selectedAnswer3 == "Единоцветный" ? .red : .lightBlue) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected3)
                                     
@@ -245,7 +245,7 @@ struct First: View {
                                                     (viewModel.selectedAnswer3 != viewModel.correctAnswers[viewModel.testID3] ? .lightBlue : .lightBlue)) :
                                                         .lightBlue
                                             )
-                                            .cornerRadius(16)
+                                            .cornerRadius(23)
                                     }
                                     .disabled(viewModel.isSelected3)
                                 }

@@ -31,12 +31,13 @@ struct TrainingView: View {
                                 VStack {
                                     Text("Введение")
                                         .frame(maxWidth: .infinity)
-                                        .foregroundStyle(.babyYellow)
+                                        .font(.title2.bold())
+                                        .foregroundStyle(Color.background)
                                         .padding(30)
                                 }
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(23)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             // Переход на страницу с конкретным материалом о векторе и расте
