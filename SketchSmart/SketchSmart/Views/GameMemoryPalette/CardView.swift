@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import AVFoundation
-import SwiftUI
 
 struct CardView: View {
     let card: Card
@@ -18,14 +17,17 @@ struct CardView: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(card.isFaceUp || card.isMatched ? card.color : Color.lightGray)
             
-            if card.isFaceUp || card.isMatched {
-
+            if card.isMatched {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(card.color)
                     .padding(4)
                 Image(systemName: "checkmark.circle.fill")
                     .font(.largeTitle)
                     .foregroundColor(.white)
+            } else if card.isFaceUp {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(card.color)
+                    .padding(4)
             } else {
                 Image(systemName: "questionmark")
                     .font(.largeTitle)

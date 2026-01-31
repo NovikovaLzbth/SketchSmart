@@ -32,10 +32,10 @@ struct MainView: View {
                                     Label("Игра для цветовосприятия", systemImage: "gamecontroller.fill")
                                         .foregroundColor(.background)
                                 }
-                                .frame(width: 365, height: 60)
+                                .frame(width: 360, height: 70)
                             }
                             .background(Color.babyYellow)
-                            .cornerRadius(16)
+                            .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
                         .foregroundStyle(.darkBlue)
@@ -48,10 +48,10 @@ struct MainView: View {
                                     Label("Палитра памяти", systemImage: "gamecontroller.fill")
                                         .foregroundColor(.background)
                                 }
-                                .frame(width: 365, height: 60)
+                                .frame(width: 360, height: 70)
                             }
                             .background(Color.babyYellow)
-                            .cornerRadius(16)
+                            .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
                         .foregroundStyle(.darkBlue)
@@ -65,10 +65,10 @@ struct MainView: View {
                                     Text("Теория цвета")
                                         .foregroundColor(.background)
                                 }
-                                .frame(width: 180, height: 60)
+                                .frame(width: 175, height: 60)
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             NavigationLink {
@@ -78,10 +78,10 @@ struct MainView: View {
                                     Text("Вектор и раст")
                                         .foregroundColor(.background)
                                 }
-                                .frame(width: 180, height: 60)
+                                .frame(width: 175, height: 60)
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
                         .foregroundStyle(.babyYellow)
@@ -94,10 +94,10 @@ struct MainView: View {
                                     Text("Прототипирование")
                                         .foregroundColor(.background)
                                 }
-                                .frame(width: 180, height: 60)
+                                .frame(width: 175, height: 60)
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             NavigationLink {
@@ -107,10 +107,10 @@ struct MainView: View {
                                     Text("Психология в UI/UX")
                                         .foregroundColor(.background)
                                 }
-                                .frame(width: 180, height: 60)
+                                .frame(width: 175, height: 60)
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
                         .foregroundStyle(.babyYellow)
