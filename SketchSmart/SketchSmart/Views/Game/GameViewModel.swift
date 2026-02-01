@@ -1,63 +1,59 @@
-//
-//  GameViewModel.swift
-//  SketchSmart
-//
-//  Created by Елизавета on 29.05.2025.
-//
-
 import SwiftUI
+import Combine
 
 final class GameViewModel: ObservableObject {
-    // Состояние игры:
-    @Published var colors: [Color] = [] // Массив цветов для плиток
-    @Published var targetIndex = 0 // Индекс плитки, которая отличается
-    @Published var score = 0 // Текущий счет игрока
-    @Published var level = 1 // Текущий уровень сложности
-    @Published var gridSize = 2 // Размер сетки (2x2, 3x3 и т.д.)
-    @Published var timeRemaining = 60 // Начальное время - 60 секунд
+    @Published var colors: [Color] = []
+    @Published var targetIndex = 0
+    @Published var score = 0
+    @Published var level = 1
+    @Published var gridSize = 2
+    @Published var timeRemaining = 60
     @Published var timer: Timer?
     @Published var isGameOver = false
     
-    // Начать новый раунд игры
+    @Published var wrongTileIndex: Int? = nil
+    
     func startNewRound() {
-        // Увеличиваем сложность каждые 5 очков
+        wrongTileIndex = nil
+        
         if score > 0 && score % 5 == 0 {
             level += 1
-            gridSize = min(5, gridSize + 1) // Максимум 5x5
+            gridSize = min(5, gridSize + 1)
         }
         
-        // Базовый случайный цвет
         let baseColor = Color(
             red: .random(in: 0...1),
             green: .random(in: 0...1),
             blue: .random(in: 0...1)
         )
         
-        // Получаем компоненты цвета
         let components = baseColor.components
-        
-        // Целевой цвет (немного отличается)
         let difference = max(0.1, 0.5 - Double(level) * 0.02)
-        let targetRed = min(1, max(0, components.red + .random(in: -difference...difference)))
-        let targetGreen = min(1, max(0, components.green + .random(in: -difference...difference)))
-        let targetBlue = min(1, max(0, components.blue + .random(in: -difference...difference)))
         
-        let targetColor = Color(red: targetRed, green: targetGreen, blue: targetBlue)
+        let targetColor = Color(
+            red: min(1, max(0, components.red + .random(in: -difference...difference))),
+            green: min(1, max(0, components.green + .random(in: -difference...difference))),
+            blue: min(1, max(0, components.blue + .random(in: -difference...difference)))
+        )
         
-        // Заполняем массив цветов
         colors = Array(repeating: baseColor, count: gridSize * gridSize)
         targetIndex = Int.random(in: 0..<colors.count)
         colors[targetIndex] = targetColor
     }
     
-    // Проверить ответ игрока
     func checkAnswer(_ index: Int) {
         if index == targetIndex {
-            score += 1 // Правильный ответ - увеличение счета
+            score += 1
+            startNewRound()
         } else {
             score = max(0, score - 1)
+            wrongTileIndex = index
+            
+            // Сбрасываем через 0.4 секунды (быстрее)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self.wrongTileIndex = nil
+            }
         }
-        startNewRound() // Новый раунд
     }
     
     func startTimer() {
@@ -73,26 +69,25 @@ final class GameViewModel: ObservableObject {
     
     func restartGame() {
         timeRemaining = 60
-        score = 0 // Сбрасываем счет
-        level = 1 // Сбрасываем уровень
-        gridSize = 2 // Сбрасываем размер сетки
+        score = 0
+        level = 1
+        gridSize = 2
         isGameOver = false
+        wrongTileIndex = nil
         startNewRound()
         startTimer()
     }
 }
 
 extension Color {
-    var components: (red: Double, green: Double, blue: Double) {
-        let uiColor = UIColor(self)
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
+    var components: (red: Double, green: Double, blue: Double, opacity: Double) {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var o: CGFloat = 0
         
-        uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        return (Double(red), Double(green), Double(blue))
+        UIColor(self).getRed(&r, green: &g, blue: &b, alpha: &o)
+        
+        return (Double(r), Double(g), Double(b), Double(o))
     }
 }
-
-
