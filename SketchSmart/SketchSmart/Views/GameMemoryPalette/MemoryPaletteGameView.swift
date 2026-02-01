@@ -10,12 +10,17 @@ import SwiftUI
 import AVFoundation
 
 struct MemoryPaletteGameView: View {
+    // dismiss для закрытия экрана
+    @Environment(\.dismiss) private var dismiss
+    
     @StateObject private var viewModel = GameViewMemoryModel()
+    
     @State private var showHintOverlay = false
     @State private var isHintVisible = false
+    
     @AppStorage("hasLaunchedBefore") private var hasLaunchedBefore = false
     
-    private let columns = [GridItem(.adaptive(minimum: 70))]
+    private let columns = [GridItem(.adaptive(minimum: 60))]
     
     var body: some View {
         ZStack {
@@ -106,6 +111,11 @@ struct MemoryPaletteGameView: View {
                 .padding()
             }
             .alert("Поздравляем!", isPresented: $viewModel.showingWinAlert) {
+                Button("Выйти", role: .cancel) {
+                    DispatchQueue.main.async {
+                        dismiss()
+                    }
+                }
                 Button("Новая игра", action: viewModel.startNewGame)
             } message: {
                 Text("Вы нашли все \(viewModel.colorPairsCount) пар за \(viewModel.moves) ходов!")
