@@ -42,12 +42,13 @@ struct TrainingView: View {
                             
                             // Переход на страницу с конкретным материалом о векторе и расте
                             NavigationLink {
-                                VectorRast()
+                                PointLineStain()
                             } label: {
                                 VStack {
-                                    Text("Вектор и раст")
+                                    Text("Точка, линия, пятно")
                                         .frame(maxWidth: .infinity)
-                                        .foregroundStyle(.babyYellow)
+                                        .font(.title2.bold())
+                                        .foregroundStyle(Color.background)
                                         .padding(30)
                                 }
                             }
