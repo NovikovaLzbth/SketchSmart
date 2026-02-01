@@ -11,7 +11,7 @@ import AVFoundation
 
 class GameViewMemoryModel: ObservableObject {
     // Конфигурация игры
-    let colorPairsCount = 6 // Количество пар цветов
+    let colorPairsCount = 10 // Количество пар цветов
     
     @Published var cards: [Card] = []
     @Published var selectedCards: [Card] = []
