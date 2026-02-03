@@ -10,19 +10,51 @@ import AVFoundation
 
 struct GameView: View {
     @StateObject private var viewModel = GameViewModel()
+    
     @Environment(\.dismiss) private var dismiss
+    
+    @State private var showHintOverlay = false
+    @State private var isHintVisible = false
+    
+    @AppStorage("hasLaunchedBefore") private var hasLaunchedBefore = false
     
     var body: some View {
         ZStack {
+            
+            VStack {
+                if showHintOverlay {
+                    OverlayView(isVisible: $isHintVisible, showOverlay: $showHintOverlay, viewModel: viewModel)
+                }
+            }
+            .zIndex(1)
+            .onAppear {
+                // Автоматический показ только при первом запуске
+                if !hasLaunchedBefore {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                        hintAutomatically()
+                        hasLaunchedBefore = true
+                    }
+                }
+            }
+            
             Color.background.ignoresSafeArea()
             
             VStack {
                 VStack(alignment: .leading) {
-                    Text("Время: \(viewModel.timeRemaining) сек")
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(.darkBlue)
-                        .padding(.bottom)
+                    HStack {
+                        Text("Время: \(viewModel.timeRemaining) сек")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(.darkBlue)
+                            .padding(.bottom)
+                        
+                        Button {
+                            hintAgain()
+                        } label: {
+                            Text("pause")
+                        }
+
+                    }
                     
                     HStack {
                         Text("Счет: \(viewModel.score)")
@@ -93,6 +125,33 @@ struct GameView: View {
             }
         } message: {
             Text("Ваш счет: \(viewModel.score)\nУровень: \(viewModel.level)")
+        }
+    }
+    private func hintAutomatically() {
+        viewModel.pauseTimer()
+        
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+            showHintOverlay = true
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            withAnimation {
+                isHintVisible = true
+            }
+        }
+    }
+    
+    private func hintAgain() {
+        viewModel.pauseTimer()
+        
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+            showHintOverlay = true
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation {
+                isHintVisible = true
+            }
         }
     }
 }
