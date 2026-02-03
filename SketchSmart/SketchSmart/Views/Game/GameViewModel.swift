@@ -13,6 +13,9 @@ final class GameViewModel: ObservableObject {
     
     @Published var wrongTileIndex: Int? = nil
     
+    @Published var isPaused = false
+    @Published var savedTimeRemaining = 0
+    
     func startNewRound() {
         wrongTileIndex = nil
         
@@ -58,12 +61,37 @@ final class GameViewModel: ObservableObject {
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if self.timeRemaining > 0 {
+            if self.timeRemaining > 0 && !self.isPaused {
                 self.timeRemaining -= 1
-            } else {
+            } else if self.timeRemaining <= 0 && !self.isPaused {
                 self.timer?.invalidate()
                 self.isGameOver = true
             }
+        }
+    }
+    
+    func pauseTimer() {
+        guard !isPaused, timer != nil else { return }
+        
+        isPaused = true
+        savedTimeRemaining = timeRemaining
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    func resumeTimer() {
+        guard isPaused else { return }
+        
+        isPaused = false
+        startTimer() // Запускаем таймер заново
+    }
+    
+    // Функция для переключения состояния паузы
+    func togglePause() {
+        if isPaused {
+            resumeTimer()
+        } else {
+            pauseTimer()
         }
     }
     
@@ -74,6 +102,10 @@ final class GameViewModel: ObservableObject {
         gridSize = 2
         isGameOver = false
         wrongTileIndex = nil
+        isPaused = false // Сбрасываем состояние паузы
+        savedTimeRemaining = 0
+        timer?.invalidate()
+        timer = nil
         startNewRound()
         startTimer()
     }
