@@ -110,7 +110,7 @@ struct MemoryPaletteGameView: View {
                 }
                 .padding()
             }
-            .alert("Поздравляем!", isPresented: $viewModel.showingWinAlert) {
+            .alert("Так держать!", isPresented: $viewModel.showingWinAlert) {
                 Button("Выйти", role: .cancel) {
                     DispatchQueue.main.async {
                         dismiss()
@@ -118,7 +118,7 @@ struct MemoryPaletteGameView: View {
                 }
                 Button("Новая игра", action: viewModel.startNewGame)
             } message: {
-                Text("Вы нашли все \(viewModel.colorPairsCount) пар за \(viewModel.moves) ходов!")
+                Text("Ты нашел все \(viewModel.colorPairsCount) пар за \(viewModel.moves) ходов!")
             }
             .onAppear {
                 viewModel.startNewGame()

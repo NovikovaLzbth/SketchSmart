@@ -59,10 +59,10 @@ struct MainView: View {
                         
                         HStack {
                             NavigationLink {
-                                First()
+                                Pls()
                             } label: {
                                 VStack {
-                                    Text("Теория цвета")
+                                    Text("Точка, линия, пятно")
                                         .foregroundColor(.background)
                                 }
                                 .frame(width: 175, height: 60)
