@@ -48,13 +48,18 @@ struct GameView: View {
                             .foregroundColor(.darkBlue)
                             .padding(.bottom)
                         
+                        Spacer()
+                        
                         Button {
                             hintAgain()
                         } label: {
-                            Text("pause")
+                            Image("Image 33")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50)
                         }
-
                     }
+                    .padding(.bottom)
                     
                     HStack {
                         Text("Счет: \(viewModel.score)")
@@ -124,7 +129,7 @@ struct GameView: View {
                 dismiss()
             }
         } message: {
-            Text("Ваш счет: \(viewModel.score)\nУровень: \(viewModel.level)")
+            Text("Твой счет: \(viewModel.score)\nУровень: \(viewModel.level)")
         }
     }
     private func hintAutomatically() {

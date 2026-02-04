@@ -26,7 +26,7 @@ struct OverlayView: View {
             
             if isVisible {
                 VStack {
-                    Image("Image 32")
+                    Image("Image 34")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 350)
