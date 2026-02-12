@@ -72,10 +72,10 @@ struct MainView: View {
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             NavigationLink {
-                                Second(storage: viewModel.storage)
+                                Rnbw()
                             } label: {
                                 VStack {
-                                    Text("Вектор и раст")
+                                    Text("Радуга-помощница")
                                         .foregroundColor(.background)
                                 }
                                 .frame(width: 175, height: 60)

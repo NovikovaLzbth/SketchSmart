@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Pls: View {
+struct Rnbw: View {
     @State private var currentQuestion = 0
     @State private var score = 0
     @State private var showResults = false
@@ -10,92 +10,81 @@ struct Pls: View {
     
     let questions = [
         Question(
-            text: "Что такое ТОЧКА в рисунке?",
+            text: "Какие цвета называют «Волшебной троицей»?",
             options: [
-                "Это начало всего, как след от карандаша",
-                "Это всегда маленький кружок",
-                "Это только начало букв",
-                "Это ошибка в рисунке"
-            ],
-            correctAnswer: 0,
-            image: "circle.fill"
-        ),
-        Question(
-            text: "Что можно создать из множества точек?",
-            options: [
-                "Только цифры и буквы",
-                "Текстуру",
-                "Только контуры предметов",
-                "Только прямые линии"
+                "Оранжевый, Зеленый, Фиолетовый",
+                "Красный, Желтый, Синий",
+                "Белый, Черный, Серый",
+                "Розовый, Голубой, Коричневый"
             ],
             correctAnswer: 1,
-            image: "circle.grid.3x3.fill"
+            image: "paintpalette.fill"
         ),
         Question(
-            text: "Линия — это...",
+            text: "Почему эти три цвета главные?",
             options: [
-                "Всегда прямая черта",
-                "Бегущая точка",
-                "Только граница предмета",
-                "Всегда невидимая"
-            ],
-            correctAnswer: 1,
-            image: "line.diagonal"
-        ),
-        Question(
-            text: "Что показывает линия кроме контура?",
-            options: [
-                "Только размер",
-                "Только цвет",
-                "Движение предмета",
-                "Только форму"
+                "Они самые яркие",
+                "Их любят короли и королевы",
+                "Их нельзя получить путем смешивания других красок",
+                "Они есть в каждом рисунке"
             ],
             correctAnswer: 2,
-            image: "arrow.right.circle.fill"
+            image: "flask.fill"
         ),
         Question(
-            text: "Как получается фигура (пятно)?",
+            text: "Синий + красный = ... ?",
             options: [
-                "Когда соединяются разные цвета",
-                "Когда линия встречается сама с собой",
-                "Когда рисуешь без отрыва руки",
-                "Когда смешиваются краски"
+                "Бордовый",
+                "Фиолетовый",
+                "Оранжевый",
+                "Зеленый"
             ],
             correctAnswer: 1,
-            image: "square.fill"
+            image: "circle.dashed.rectangle"
         ),
         Question(
-            text: "Из чего можно собрать домик?",
+            text: "Цвета, смешанные из основных - ...",
             options: [
-                "Из кругов и овалов",
-                "Из квадрата и треугольника",
-                "Только из прямых линий",
-                "Только из точек"
+                "Второстепенные",
+                "Составные",
+                "Простые",
+                "Холодные"
             ],
             correctAnswer: 1,
-            image: "house.fill"
+            image: "puzzlepiece.extension.fill"
         ),
         Question(
-            text: "Солнце можно нарисовать из:",
+            text: "Какая палитра относится к «Теплой»?",
             options: [
-                "Квадрата и линий",
-                "Треугольников",
-                "Круга и лучей-линий",
-                "Только из точек"
+                "Синий, голубой, фиолетовый",
+                "Красный, оранжевый, желтый",
+                "Зеленый, коричневый, черный",
+                "Серый, белый, бежевый"
             ],
-            correctAnswer: 2,
+            correctAnswer: 1,
             image: "sun.max.fill"
         ),
         Question(
-            text: "Что такое КОНТУР?",
+            text: "С чем сравнивают холодные цвета в тексте?",
             options: [
-                "Центр рисунка",
-                "Линия, которая обводит предмет",
-                "Тень от предмета",
-                "Фон рисунка"
+                "Костер и Солнце",
+                "Осень и Урожай",
+                "Море и Лед",
+                "Песок и Глина"
+            ],
+            correctAnswer: 2,
+            image: "snowflake"
+        ),
+        Question(
+            text: "Что такое ГАРМОНИЯ в мире цвета?",
+            options: [
+                "Драка и конкуренция",
+                "Дружба и родство",
+                "Смешивание до грязного цвета",
+                "Отсутствие цвета"
             ],
             correctAnswer: 1,
-            image: "scribble"
+            image: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left"
         )
     ]
     
@@ -152,13 +141,14 @@ struct Pls: View {
                             Button(action: {
                                 checkAnswer(index)
                             }) {
-                                HStack {
+                                HStack(alignment: .top) { // Добавлено выравнивание по верхнему краю
                                     Text(questions[currentQuestion].options[index])
                                         .font(.body)
                                         .multilineTextAlignment(.leading)
                                         .foregroundColor(.darkBlue)
+                                        .fixedSize(horizontal: false, vertical: true) // Разрешаем многострочность
                                     
-                                    Spacer()
+                                    Spacer(minLength: 8) // Минимальный отступ для иконки
                                     
                                     if showFeedback && selectedAnswer == index {
                                         Image(systemName: isAnswerCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
@@ -166,15 +156,16 @@ struct Pls: View {
                                     }
                                 }
                                 .padding()
+                                .frame(maxWidth: .infinity, alignment: .leading) // Растягиваем на всю ширину
                                 .background(
-                                    RoundedRectangle(cornerRadius: 15)
+                                    RoundedRectangle(cornerRadius: 20)
                                         .fill(
                                             selectedAnswer == index ?
                                             (isAnswerCorrect ? Color.green.opacity(0.2) : Color.red.opacity(0.2)) :
                                             Color.gray.opacity(0.1)
                                         )
                                         .overlay(
-                                            RoundedRectangle(cornerRadius: 15)
+                                            RoundedRectangle(cornerRadius: 20)
                                                 .stroke(
                                                     selectedAnswer == index ?
                                                     (isAnswerCorrect ? Color.green : Color.red) :
@@ -252,7 +243,10 @@ struct Pls: View {
                     Button(action: {
                         resetTest()
                     }) {
-                        Text("Пройти ещё раз")
+                        HStack{
+                            Image(systemName: "arrow.clockwise")
+                            Text("Пройти ещё раз")
+                        }
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -265,8 +259,8 @@ struct Pls: View {
                 .padding()
             }
         }
-        .animation(.spring(response: 0.3), value: showFeedback)
-        .animation(.spring(response: 0.5), value: showResults)
+        .animation(.spring(response: 0.2), value: showFeedback)
+        .animation(.spring(response: 0.2), value: showResults)
     }
     
     func checkAnswer(_ index: Int) {
@@ -297,4 +291,8 @@ struct Pls: View {
         showResults = false
         showFeedback = false
     }
+}
+
+#Preview {
+    Pls()
 }
