@@ -58,12 +58,13 @@ struct TrainingView: View {
                             
                             // Переход на страницу с конкретным материалом о прототипировании
                             NavigationLink {
-                                Prototype()
+                                Rainbow()
                             } label: {
                                 VStack {
-                                    Text("Прототипирование")
+                                    Text("Радуга-помощница")
                                         .frame(maxWidth: .infinity)
-                                        .foregroundStyle(.babyYellow)
+                                        .font(.title2.bold())
+                                        .foregroundStyle(Color.background)
                                         .padding(30)
                                 }
                             }
