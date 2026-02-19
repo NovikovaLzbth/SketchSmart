@@ -53,7 +53,7 @@ struct TrainingView: View {
                                 }
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(23)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             // Переход на страницу с конкретным материалом о прототипировании
@@ -69,37 +69,39 @@ struct TrainingView: View {
                                 }
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(23)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             // Переход на страницу с конкретным материалом о психологии в UX/UI
                             NavigationLink {
-                                Psychology()
+                                Typography()
                             } label: {
                                 VStack {
-                                    Text("Психология в UX/UI")
+                                    Text("Типографика")
                                         .frame(maxWidth: .infinity)
-                                        .foregroundStyle(.babyYellow)
+                                        .font(.title2.bold())
+                                        .foregroundStyle(Color.background)
                                         .padding(30)
                                 }
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(23)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             // Переход на страницу с конкретным материалом о теории цвета
                             NavigationLink {
-                                ColorTeory()
+                                Composition()
                             } label: {
                                 VStack {
-                                    Text("Теория цвета как основа для дизайна")
+                                    Text("Композиция")
                                         .frame(maxWidth: .infinity)
-                                        .foregroundStyle(.babyYellow)
+                                        .font(.title2.bold())
+                                        .foregroundStyle(Color.background)
                                         .padding(30)
                                 }
                             }
                             .background(Color.lightBlue)
-                            .cornerRadius(16)
+                            .cornerRadius(23)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
                         .padding()
