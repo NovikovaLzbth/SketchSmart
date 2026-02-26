@@ -9,10 +9,8 @@ import SwiftUI
 import CoreData
 
 struct MainView: View {
-    @StateObject private var viewModel: MainViewModel
     
-    init(storage: Storage) {
-        _viewModel = StateObject(wrappedValue: MainViewModel(storage: storage))
+    init() {
         //Смена цвета заголовка
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.darkBlue]
     }
@@ -34,7 +32,7 @@ struct MainView: View {
                                 }
                                 .frame(width: 360, height: 70)
                             }
-                            .background(Color.babyYellow)
+                            .background(Color.turquoise)
                             .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
@@ -50,7 +48,7 @@ struct MainView: View {
                                 }
                                 .frame(width: 360, height: 70)
                             }
-                            .background(Color.babyYellow)
+                            .background(Color.turquoise)
                             .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
@@ -84,11 +82,11 @@ struct MainView: View {
                             .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
-                        .foregroundStyle(.babyYellow)
+                        .foregroundStyle(.turquoise)
                         
                         HStack {
                             NavigationLink {
-                                Third(storage: viewModel.storage)
+                                Pls()
                             } label: {
                                 VStack {
                                     Text("Прототипирование")
@@ -101,7 +99,7 @@ struct MainView: View {
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             NavigationLink {
-                                Fourth(storage: viewModel.storage)
+                                Pls()
                             } label: {
                                 VStack {
                                     Text("Психология в UI/UX")
@@ -113,7 +111,7 @@ struct MainView: View {
                             .cornerRadius(20)
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                         }
-                        .foregroundStyle(.babyYellow)
+                        .foregroundStyle(.turquoise)
                     }
                     .frame(maxWidth: .infinity) // Занимает всю ширину
                     .padding() // Добавляет отступы только для контента

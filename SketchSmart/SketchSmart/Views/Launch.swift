@@ -22,14 +22,13 @@ struct Launch: View {
     var body: some View {
         Group {
             if isActive {
-                ContentView()
+                AuthView()
                     .transition(.identity)
             } else {
                 ZStack {
                     Color(.background)
                         .ignoresSafeArea()
                     
-                    // Код для изображений (не изменен)
                     ForEach(0..<images.count, id: \.self) { index in
                         Image(images[index])
                             .resizable()
@@ -61,7 +60,6 @@ struct Launch: View {
                                 .padding(.leading, 10)
                                 .animation(.easeInOut(duration: 0.2), value: loadingProgress)
                             
-                            // Движущийся элемент на конце (без вращения)
                             Circle()
                                 .fill(
                                     RadialGradient(
