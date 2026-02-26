@@ -9,10 +9,8 @@ import SwiftUI
 import CoreData
 
 struct TrainingView: View {
-    @StateObject var viewModel: TrainingViewModel
     
-    init(storage: Storage) {
-        _viewModel = StateObject(wrappedValue: TrainingViewModel(storage: storage))
+    init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.darkBlue]
     }
     

@@ -122,7 +122,7 @@ struct Pls: View {
                         
                         Text("Очки: \(score)")
                             .font(.headline)
-                            .foregroundColor(.babyYellow)
+                            .foregroundColor(.turquoise)
                     }
                     .padding(.horizontal)
                     
@@ -135,7 +135,7 @@ struct Pls: View {
                     VStack(spacing: 15) {
                         Image(systemName: questions[currentQuestion].image)
                             .font(.system(size: 50))
-                            .foregroundColor(.babyYellow)
+                            .foregroundColor(.turquoise)
                         
                         Text(questions[currentQuestion].text)
                             .font(.title2)
@@ -227,7 +227,7 @@ struct Pls: View {
                         HStack {
                             ForEach(0..<questions.count, id: \.self) { index in
                                 Rectangle()
-                                    .fill(index < score ? Color.babyYellow : Color.gray.opacity(0.3))
+                                    .fill(index < score ? Color.turquoise : Color.gray.opacity(0.3))
                                     .frame(height: 20)
                                     .cornerRadius(5)
                             }

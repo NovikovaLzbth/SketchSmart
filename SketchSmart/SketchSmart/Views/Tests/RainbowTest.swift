@@ -111,7 +111,7 @@ struct Rnbw: View {
                         
                         Text("Очки: \(score)")
                             .font(.headline)
-                            .foregroundColor(.babyYellow)
+                            .foregroundColor(.turquoise)
                     }
                     .padding(.horizontal)
                     
@@ -124,7 +124,7 @@ struct Rnbw: View {
                     VStack(spacing: 15) {
                         Image(systemName: questions[currentQuestion].image)
                             .font(.system(size: 50))
-                            .foregroundColor(.babyYellow)
+                            .foregroundColor(.turquoise)
                         
                         Text(questions[currentQuestion].text)
                             .font(.title2)
@@ -141,12 +141,12 @@ struct Rnbw: View {
                             Button(action: {
                                 checkAnswer(index)
                             }) {
-                                HStack(alignment: .top) { // Добавлено выравнивание по верхнему краю
+                                HStack(alignment: .top) { // Выравнивание по верхнему краю
                                     Text(questions[currentQuestion].options[index])
                                         .font(.body)
                                         .multilineTextAlignment(.leading)
                                         .foregroundColor(.darkBlue)
-                                        .fixedSize(horizontal: false, vertical: true) // Разрешаем многострочность
+                                        .fixedSize(horizontal: false, vertical: true) // Многострочность
                                     
                                     Spacer(minLength: 8) // Минимальный отступ для иконки
                                     
@@ -156,7 +156,7 @@ struct Rnbw: View {
                                     }
                                 }
                                 .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading) // Растягиваем на всю ширину
+                                .frame(maxWidth: .infinity, alignment: .leading)
                                 .background(
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(
@@ -218,7 +218,7 @@ struct Rnbw: View {
                         HStack {
                             ForEach(0..<questions.count, id: \.self) { index in
                                 Rectangle()
-                                    .fill(index < score ? Color.babyYellow : Color.gray.opacity(0.3))
+                                    .fill(index < score ? Color.turquoise : Color.gray.opacity(0.3))
                                     .frame(height: 20)
                                     .cornerRadius(5)
                             }

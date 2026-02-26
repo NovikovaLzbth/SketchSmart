@@ -6,17 +6,25 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
 
 @main
 struct SketchSmartApp: App {
-    let persistenceController = PersistenceController.shared
-    private let storage = Storage(persistenceController: PersistenceController.shared)
+    
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     var body: some Scene {
         WindowGroup {
             Launch()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(storage)
+        }
+    }
+    
+    class AppDelegate: NSObject, UIApplicationDelegate {
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+            FirebaseApp.configure()
+            print("ok")
+            return true
         }
     }
 }
