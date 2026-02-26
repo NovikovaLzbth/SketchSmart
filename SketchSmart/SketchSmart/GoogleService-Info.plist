@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>37919610085-dgr08ep3b4e1n1mg0q2per5kmt7r3ke7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.37919610085-dgr08ep3b4e1n1mg0q2per5kmt7r3ke7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyApZ019iUB4VkN8gBeJD1wPfxVnUHQx49k</string>
+	<key>GCM_SENDER_ID</key>
+	<string>37919610085</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.novikova.SketchSmart</string>
+	<key>PROJECT_ID</key>
+	<string>sketchsmart</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sketchsmart.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:37919610085:ios:a131e9d565bbab864eb00c</string>
+</dict>
+</plist>

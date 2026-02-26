@@ -9,20 +9,25 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @EnvironmentObject private var storage: Storage
     
     var body: some View {
         TabView {
-            MainView(storage: storage)
+            MainView()
                 .tabItem {
                     Image(systemName: "brain.head.profile")
                     Text("Тренажер")
                 }
             
-            TrainingView(storage: storage)
+            TrainingView()
                 .tabItem {
                     Image(systemName: "book.fill")
                     Text("Обучение")
+                }
+            
+            Profile()
+                .tabItem {
+                    Image(systemName: "person.crop.circle")
+                    Text("Профиль")
                 }
         }
         .tint(.lightBlue) // Цвет акцента TabBar
@@ -44,4 +49,8 @@ struct ContentView: View {
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
     }
+}
+
+#Preview {
+    ContentView()
 }
