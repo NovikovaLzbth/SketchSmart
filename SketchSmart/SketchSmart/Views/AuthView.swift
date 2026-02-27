@@ -1,14 +1,18 @@
 import SwiftUI
+import FirebaseAuth
+import Firebase
 
 struct AuthView: View {
     @State private var email = ""
     @State private var password = ""
-    @State private var confirmPassword = ""
     
     // Состояние зарагистрирован / нет
     @State private var isAuth: Bool = true
     
     @State private var isContentViewShow = false
+    
+    @State private var isShowAlert = false
+    @State private var alertMessage = ""
     
     var body: some View {
         ZStack {
@@ -17,8 +21,8 @@ struct AuthView: View {
             
             VStack {
                 Image("Image 36")
+                    .resizable()
                     .scaledToFit()
-                    .frame(maxHeight: 25)
                 
                 Spacer()
             }
@@ -55,14 +59,53 @@ struct AuthView: View {
                 VStack {
                     Button {
                         if isAuth {
-                            print("auth")
                             self.isContentViewShow.toggle()
                         } else {
-                            print("reg")
-                            self.email = ""
-                            self.password = ""
-                            self.confirmPassword = ""
-                            self.isAuth.toggle()
+                            guard !email.isEmpty else {
+                                alertMessage = "Заполни поле Email"
+                                self.isShowAlert = true
+                                return
+                            }
+                            
+                            guard !password.isEmpty else {
+                                alertMessage = "Заполни поле Пароль"
+                                self.isShowAlert = true
+                                return
+                            }
+                            
+                            guard password.count >= 6 else {
+                                alertMessage = "Пароль должен содержать минимум 6 символов"
+                                self.isShowAlert = true
+                                return
+                            }
+                            
+                            guard email.contains("@") && email.contains(".") else {
+                                alertMessage = "Введи корректный Email"
+                                self.isShowAlert = true
+                                return
+                            }
+                            
+                            AuthService.shared.signUp(email: self.email,
+                                                      password: self.password) { result in
+                                DispatchQueue.main.async {
+                                    switch result {
+                                    case .success(let user):
+                                        alertMessage = "Ты зарегистрировался с Email \(user.email!)"
+                                        
+                                        self.email = ""
+                                        self.password = ""
+                                        self.isAuth.toggle()
+                                        self.isShowAlert = true
+                                        
+                                    case .failure(let error):
+                                        print("Ошибка регистрации: \(error)")
+                                        
+                                        alertMessage = "Ошибка регистрации"
+                                        
+                                        self.isShowAlert = true
+                                    }
+                                }
+                            }
                         }
                     } label: {
                         Text(isAuth ? "Войти" : "Создать аккаунт")
@@ -79,7 +122,14 @@ struct AuthView: View {
                             .font(.title3.bold())
                     }
                     .shadow(color: .black.opacity(0.5), radius: 5, x: 3, y: 5)
-
+                    .alert(isPresented: $isShowAlert) {
+                        Alert(
+                            title: Text("Регистрация"),
+                            message: Text(alertMessage),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
+                    
                     if isAuth {
                         Button {
                             isAuth.toggle()
@@ -118,6 +168,13 @@ struct AuthView: View {
                 ContentView()
             }
             .zIndex(2)
+            .padding(.top, 100)
+            .alert(alertMessage, isPresented: $isShowAlert) {
+                Button { } label: {
+                    Text("ОК")
+                }
+                
+            }
         }
         .animation(.easeInOut(duration: 0.3), value: isAuth)
     }
