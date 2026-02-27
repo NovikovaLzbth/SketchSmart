@@ -3,7 +3,7 @@ import FirebaseAuth
 
 class AuthService {
     
-    static let shares = AuthService()
+    static let shared = AuthService()
     
     private init() {}
     
