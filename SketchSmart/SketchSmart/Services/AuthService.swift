@@ -19,7 +19,19 @@ class AuthService {
                 completion: @escaping (Result<User, Error>) -> ()) {
         auth.createUser(withEmail: email, password: password) { result, error in
             if let result = result {
-                completion(.success(result.user))
+                let userModel = userModel(id: result.user.uid,
+                                          name: "",
+                                          phone: 0,
+                                          email: "")
+                
+                DatabaseService.shared.setUser(user: userModel) { resultDB in
+                    switch resultDB {
+                    case .success(_):
+                        completion(.success(result.user))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             } else if let error = error {
                 completion(.failure(error))
             }

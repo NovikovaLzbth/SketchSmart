@@ -25,6 +25,8 @@ struct Profile: View {
                 VStack {
                     Text("Имя")
                     
+                    Text("Телефон")
+                    
                     Text("Почта")
                 }
                 

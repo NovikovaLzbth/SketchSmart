@@ -5,12 +5,8 @@ import Firebase
 struct AuthView: View {
     @State private var email = ""
     @State private var password = ""
-    
-    // Состояние зарагистрирован / нет
-    @State private var isAuth: Bool = true
-    
+    @State private var isAuth: Bool = true // Состояние зарагистрирован / нет
     @State private var isContentViewShow = false
-    
     @State private var isShowAlert = false
     @State private var alertMessage = ""
     
@@ -61,20 +57,20 @@ struct AuthView: View {
                 }
                 
                 VStack {
-                    // Авторизация и регистрация 
+                    // Авторизация и регистрация
                     Button {
-                        if isAuth {
+                        if isAuth { // Авторизация
                             AuthService.shared.signIn(email: self.email,
                                                       password: self.password) { result in
                                 switch result {
                                 case .success(_):
                                     isContentViewShow.toggle()
-                                case .failure(let error):
-                                    alertMessage = "Ошибка авторизации"
+                                case .failure(_):
+                                    alertMessage = "Что-то пошло не так..."
                                     isShowAlert.toggle()
                                 }
                             }
-                        } else {
+                        } else { // Регистрация
                             guard !email.isEmpty else {
                                 alertMessage = "Заполни поле Email"
                                 self.isShowAlert = true
@@ -114,7 +110,7 @@ struct AuthView: View {
                                     case .failure(let error):
                                         print("Ошибка регистрации: \(error)")
                                         
-                                        alertMessage = "Ошибка регистрации"
+                                        alertMessage = "Ошибка"
                                         
                                         self.isShowAlert = true
                                     }
@@ -166,7 +162,7 @@ struct AuthView: View {
                         .padding()
                         .foregroundStyle(Color.lightBlue)
                     
-                    Image("Image 37")
+                    Image("Image 37") // Значок гугла
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 60)
