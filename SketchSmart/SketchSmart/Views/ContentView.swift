@@ -10,6 +10,8 @@ import CoreData
 
 struct ContentView: View {
     
+    var viewModel: ContentViewModel
+    
     var body: some View {
         TabView {
             MainView()
@@ -49,8 +51,4 @@ struct ContentView: View {
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

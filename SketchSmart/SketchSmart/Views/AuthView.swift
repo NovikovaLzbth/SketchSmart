@@ -14,6 +14,8 @@ struct AuthView: View {
     @State private var isShowAlert = false
     @State private var alertMessage = ""
     
+    @FocusState private var isFocused: Bool
+    
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
@@ -44,12 +46,14 @@ struct AuthView: View {
                 
                 VStack {
                     TextField("Введи email", text: $email)
+                        .focused($isFocused)
                         .frame(maxWidth: 300, maxHeight: 40)
                         .padding()
                         .background(Color("lightGray").opacity(0.5))
                         .cornerRadius(20)
                     
                     SecureField("Введи пароль", text: $password)
+                        .focused($isFocused)
                         .frame(maxWidth: 300, maxHeight: 40)
                         .padding()
                         .background(Color("lightGray").opacity(0.5))
@@ -57,9 +61,19 @@ struct AuthView: View {
                 }
                 
                 VStack {
+                    // Авторизация и регистрация 
                     Button {
                         if isAuth {
-                            self.isContentViewShow.toggle()
+                            AuthService.shared.signIn(email: self.email,
+                                                      password: self.password) { result in
+                                switch result {
+                                case .success(_):
+                                    isContentViewShow.toggle()
+                                case .failure(let error):
+                                    alertMessage = "Ошибка авторизации"
+                                    isShowAlert.toggle()
+                                }
+                            }
                         } else {
                             guard !email.isEmpty else {
                                 alertMessage = "Заполни поле Email"
@@ -165,7 +179,9 @@ struct AuthView: View {
             .cornerRadius(30)
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .fullScreenCover(isPresented: $isContentViewShow) {
-                ContentView()
+                let contentViewModel = ContentViewModel(user: AuthService.shared.currentUser!)
+                
+                ContentView(viewModel: contentViewModel)
             }
             .zIndex(2)
             .padding(.top, 100)
@@ -175,6 +191,10 @@ struct AuthView: View {
                 }
                 
             }
+        }
+        // Закрытие клавиатуры нажатием в любом месте на View
+        .onTapGesture {
+            isFocused = false
         }
         .animation(.easeInOut(duration: 0.3), value: isAuth)
     }
