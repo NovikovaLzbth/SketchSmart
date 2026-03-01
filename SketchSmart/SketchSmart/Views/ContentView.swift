@@ -26,7 +26,10 @@ struct ContentView: View {
                     Text("Обучение")
                 }
             
-            Profile()
+            Profile(viewModel: ProfileViewModel(profile: UserModel(id: "",
+                                                                     name: "",
+                                                                     phone: "",
+                                                                     email: "")))
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Профиль")

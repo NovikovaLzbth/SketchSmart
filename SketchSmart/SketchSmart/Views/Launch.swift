@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
 
 struct Launch: View {
     @State private var isActive = false
@@ -22,8 +24,13 @@ struct Launch: View {
     var body: some View {
         Group {
             if isActive {
-                AuthView()
-                    .transition(.identity)
+                if let user = AuthService.shared.currentUser {
+                    let viewModel = ContentViewModel(user: user)
+                    ContentView(viewModel: viewModel)
+                } else {
+                    AuthView()
+                        .transition(.identity)
+                }
             } else {
                 ZStack {
                     Color(.background)
