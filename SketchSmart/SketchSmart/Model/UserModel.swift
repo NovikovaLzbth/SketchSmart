@@ -1,10 +1,10 @@
 import Foundation
 
-struct userModel: Identifiable {
+struct UserModel: Identifiable {
     
     var id: String 
     var name: String
-    var phone: Int
+    var phone: String
     var email: String
     
     var representation: [String: Any] {
@@ -17,5 +17,4 @@ struct userModel: Identifiable {
         
         return repres
     }
-    
 }
