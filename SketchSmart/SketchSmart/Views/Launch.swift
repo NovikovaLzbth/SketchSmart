@@ -24,12 +24,11 @@ struct Launch: View {
     var body: some View {
         Group {
             if isActive {
-                if let user = AuthService.shared.currentUser {
-                    let viewModel = ContentViewModel(user: user)
-                    ContentView(viewModel: viewModel)
+                if let user = Auth.auth().currentUser {
+                    let contentViewModel = ContentViewModel(user: user)
+                    ContentView(viewModel: contentViewModel)
                 } else {
                     AuthView()
-                        .transition(.identity)
                 }
             } else {
                 ZStack {

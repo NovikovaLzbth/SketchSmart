@@ -49,4 +49,12 @@ class AuthService {
             }
         }
     }
+    
+    func signOut() {
+            do {
+                try auth.signOut()
+            } catch {
+                print("Ошибка при выходе: \(error.localizedDescription)")
+            }
+        }
 }

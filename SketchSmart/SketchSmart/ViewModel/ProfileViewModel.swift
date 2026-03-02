@@ -31,5 +31,24 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
+    
+    // Шаблон для ввода номера телефона
+    func formatPhoneNumber(_ number: String) -> String {
+        let digits = number.filter { $0.isNumber }
+        
+        var result = ""
+        let mask = "(XXX) XXX-XX-XX"
+        var index = digits.startIndex
+        
+        for ch in mask where index < digits.endIndex {
+            if ch == "X" {
+                result.append(digits[index])
+                index = digits.index(after: index)
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
+    }
 }
 
