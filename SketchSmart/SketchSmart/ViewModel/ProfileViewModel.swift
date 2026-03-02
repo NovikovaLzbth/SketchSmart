@@ -2,6 +2,8 @@ import Foundation
 
 class ProfileViewModel: ObservableObject {
     @Published var profile: UserModel
+    @Published var completedTests = 0
+    @Published var errorMessage: String?
     
     init(profile: UserModel) {
         self.profile = profile
@@ -9,12 +11,15 @@ class ProfileViewModel: ObservableObject {
     
     func setProfile() {
         DatabaseService.shared.setProfile(user: self.profile) { result in
-            switch result {
-            case .success(let user):
-                print(user.name)
-            case .failure(let error):
-                print(error.localizedDescription)
-                
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    print(user.name)
+                    self.profile = user
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    self.errorMessage = error.localizedDescription
+                }
             }
         }
     }
@@ -25,14 +30,15 @@ class ProfileViewModel: ObservableObject {
                 switch result {
                 case .success(let user):
                     self.profile = user
+                    self.completedTests = user.completedTests
                 case .failure(let error):
                     print(error.localizedDescription)
+                    self.errorMessage = error.localizedDescription
                 }
             }
         }
     }
     
-    // Шаблон для ввода номера телефона
     func formatPhoneNumber(_ number: String) -> String {
         let digits = number.filter { $0.isNumber }
         
@@ -50,5 +56,19 @@ class ProfileViewModel: ObservableObject {
         }
         return result
     }
+    
+    func loadData() {
+        DatabaseService.shared.getProfile { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    self.completedTests = user.completedTests
+                    self.profile = user
+                case .failure(let error):
+                    print("Error loading completed tests: \(error.localizedDescription)")
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
 }
-

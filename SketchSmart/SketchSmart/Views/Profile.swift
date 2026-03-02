@@ -11,6 +11,8 @@ struct Profile: View {
     @FocusState private var isFieldNameFocused: Bool
     @FocusState private var isFieldPhoneFocused: Bool
     
+    
+    
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
@@ -54,7 +56,7 @@ struct Profile: View {
                     HStack {
                         // Уровень пользователя (счетчик в лампочке)
                         ZStack {
-                            Text("1")
+                            Text("\(viewModel.completedTests)")
                                 .foregroundStyle(.darkBlue)
                                 .font(.title2.bold())
                                 .zIndex(2)
@@ -190,10 +192,10 @@ struct Profile: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Уровень 1")
+                        Text("Уровень \(viewModel.completedTests)")
                             .foregroundStyle(.darkBlue)
                         
-                        ProgressView(value: Double(0 + 1), total: Double(3))
+                        ProgressView(value: Double(viewModel.completedTests), total: Double(4))
                             .progressViewStyle(LinearProgressViewStyle(tint: .turquoise))
                             .frame(width: 100)
                             .scaleEffect(y: 2.0, anchor: .center)
@@ -225,6 +227,7 @@ struct Profile: View {
             }
             .onAppear {
                 self.viewModel.getProfile()
+                viewModel.loadData()
             }
         }
     }
