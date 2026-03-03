@@ -71,4 +71,44 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
+    
+    var currentLevel: Int {
+        var level = 1
+        var testsNeeded = 2
+        var remainingTests = completedTests
+        
+        while remainingTests >= testsNeeded {
+            remainingTests -= testsNeeded
+            level += 1
+            testsNeeded *= 2
+        }
+        
+        return level
+    }
+    
+    // Прогресс внутри текущего уровня
+    var levelProgress: Double {
+        var testsPassed = completedTests
+        var testsForCurrentLevel = 2
+        
+        for level in 1..<currentLevel {
+            testsPassed -= testsForCurrentLevel
+            testsForCurrentLevel *= 2
+        }
+        
+        return Double(testsPassed)
+    }
+    
+    // Общее количество тестов для текущего уровня
+    var testsForCurrentLevel: Int {
+        if currentLevel == 1 {
+            return 2
+        }
+        
+        var testsForLevel = 2
+        for _ in 1..<currentLevel {
+            testsForLevel *= 2
+        }
+        return testsForLevel
+    }
 }

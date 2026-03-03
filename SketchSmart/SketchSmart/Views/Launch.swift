@@ -125,10 +125,10 @@ struct Launch: View {
     }
     
     private func checkAuthenticationStatus() {
-        // Проверяем текущего пользователя
+        // Проверка текущего пользователя
         if let user = Auth.auth().currentUser {
             print("Найден пользователь: \(user.uid)")
-            // Дополнительная проверка, что пользователь действительно авторизован
+            // Дополнительная проверка, что пользователь авторизован
             user.getIDTokenResult(forcingRefresh: false) { result, error in
                 if let error = error {
                     print("Ошибка проверки токена: \(error.localizedDescription)")

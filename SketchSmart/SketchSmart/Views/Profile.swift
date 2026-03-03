@@ -56,7 +56,7 @@ struct Profile: View {
                     HStack {
                         // Уровень пользователя (счетчик в лампочке)
                         ZStack {
-                            Text("\(viewModel.completedTests)")
+                            Text("\(viewModel.currentLevel)")
                                 .foregroundStyle(.darkBlue)
                                 .font(.title2.bold())
                                 .zIndex(2)
@@ -192,10 +192,10 @@ struct Profile: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Уровень \(viewModel.completedTests)")
+                        Text("Уровень \(viewModel.currentLevel)")
                             .foregroundStyle(.darkBlue)
                         
-                        ProgressView(value: Double(viewModel.completedTests), total: Double(4))
+                        ProgressView(value: Double(viewModel.levelProgress), total: Double(viewModel.testsForCurrentLevel))
                             .progressViewStyle(LinearProgressViewStyle(tint: .turquoise))
                             .frame(width: 100)
                             .scaleEffect(y: 2.0, anchor: .center)
