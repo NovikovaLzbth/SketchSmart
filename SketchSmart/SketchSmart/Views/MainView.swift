@@ -86,10 +86,10 @@ struct MainView: View {
                         
                         HStack {
                             NavigationLink {
-                                Pls()
+                                Tpgrph()
                             } label: {
                                 VStack {
-                                    Text("Прототипирование")
+                                    Text("Типографика")
                                         .foregroundColor(.background)
                                 }
                                 .frame(width: 175, height: 60)

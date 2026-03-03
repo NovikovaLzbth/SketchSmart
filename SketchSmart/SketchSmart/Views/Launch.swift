@@ -1,10 +1,3 @@
-//
-//  Launch.swift
-//  SketchSmart
-//
-//  Created by Елизавета on 22.05.2025.
-//
-
 import SwiftUI
 import Firebase
 import FirebaseAuth
@@ -13,6 +6,8 @@ struct Launch: View {
     @State private var isActive = false
     @State private var currentImage = 0
     @State private var loadingProgress: CGFloat = 0
+    @State private var isAuthenticated = false
+    @State private var isLoading = true
     
     private let images = ["LaunchScreen1", "LaunchScreen2", "LaunchScreen3", "LaunchScreen2", "LaunchScreen1"]
     
@@ -24,9 +19,13 @@ struct Launch: View {
     var body: some View {
         Group {
             if isActive {
-                if let user = Auth.auth().currentUser {
-                    let contentViewModel = ContentViewModel(user: user)
-                    ContentView(viewModel: contentViewModel)
+                if isAuthenticated {
+                    if let user = Auth.auth().currentUser {
+                        let contentViewModel = ContentViewModel(user: user)
+                        ContentView(viewModel: contentViewModel)
+                    } else {
+                        AuthView()
+                    }
                 } else {
                     AuthView()
                 }
@@ -95,6 +94,7 @@ struct Launch: View {
                 }
                 .onAppear {
                     startSequence()
+                                        checkAuthenticationStatus()
                     
                     // Прогресс бар
                     for i in 1...10 {
@@ -115,11 +115,33 @@ struct Launch: View {
                 currentImage = index + 1
             }
         }
-    
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             withAnimation(.easeInOut(duration: 0.5)) {
                 isActive = true
+                isLoading = false
             }
+        }
+    }
+    
+    private func checkAuthenticationStatus() {
+        // Проверяем текущего пользователя
+        if let user = Auth.auth().currentUser {
+            print("Найден пользователь: \(user.uid)")
+            // Дополнительная проверка, что пользователь действительно авторизован
+            user.getIDTokenResult(forcingRefresh: false) { result, error in
+                if let error = error {
+                    print("Ошибка проверки токена: \(error.localizedDescription)")
+                    isAuthenticated = false
+                    try? Auth.auth().signOut()
+                } else {
+                    print("Токен валидный, пользователь авторизован")
+                    isAuthenticated = true
+                }
+            }
+        } else {
+            print("Пользователь не найден")
+            isAuthenticated = false
         }
     }
 }
