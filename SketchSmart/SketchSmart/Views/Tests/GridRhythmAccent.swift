@@ -1,103 +1,92 @@
 import SwiftUI
 
-struct Pls: View {
-    let testId = "pls_test"
+struct GridRhythmAccentView: View {
+    let testId = "gra_test"
     
     @StateObject private var viewModel: TestViewModel
     
     static let questions = [
         Question(
-            text: "Что такое ТОЧКА в рисунке?",
+            text: "Кем ты становишься для элементов на листе?",
             options: [
-                "Это начало всего, как след от карандаша",
-                "Это всегда маленький кружок",
-                "Это только начало букв",
-                "Это ошибка в рисунке"
+                "Художником",
+                "Зрителем",
+                "Режиссером",
+                "Критиком"
+            ],
+            correctAnswer: 2,
+            image: "wand.and.stars"
+        ),
+        Question(
+            text: "Что такое выравнивание простыми словами?",
+            options: [
+                "Прилипание элементов к невидимым линиям",
+                "Расположение всего по центру",
+                "Случайное размещение",
+                "Только левый край"
             ],
             correctAnswer: 0,
-            image: "circle.fill"
+            image: "grid"
         ),
         Question(
-            text: "Что можно создать из множества точек?",
+            text: "Что дает выравнивание в дизайне?",
             options: [
-                "Только цифры и буквы",
-                "Текстуру",
-                "Только контуры предметов",
-                "Только прямые линии"
+                "Разнообразие",
+                "Аккуратность и порядок",
+                "Яркость",
+                "Глубину"
             ],
             correctAnswer: 1,
-            image: "circle.grid.3x3.fill"
+            image: "align.horizontal.left"
         ),
         Question(
-            text: "Линия — это...",
+            text: "Как работает ритм?",
             options: [
-                "Всегда прямая черта",
-                "Бегущая точка",
-                "Только граница предмета",
-                "Всегда невидимая"
+                "Повторяющиеся элементы создают единство",
+                "Все элементы должны быть разными",
+                "Ритм нужен только в музыке",
+                "Нужно повторять только картинки"
+            ],
+            correctAnswer: 0,
+            image: "rhythm"
+        ),
+        Question(
+            text: "Что будет, если в списке использовать одинаковые маркеры?",
+            options: [
+                "Станет скучно",
+                "Появится ритм и целостность",
+                "Сломается верстка",
+                "Упадет читаемость"
             ],
             correctAnswer: 1,
-            image: "line.diagonal"
+            image: "list.bullet"
         ),
         Question(
-            text: "Что показывает линия кроме контура?",
+            text: "Какой инструмент лучше всего указывает на самое главное?",
             options: [
-                "Только размер",
-                "Только цвет",
-                "Движение предмета",
-                "Только форму"
+                "Выравнивание",
+                "Повтор",
+                "Контраст",
+                "Воздух"
             ],
             correctAnswer: 2,
-            image: "arrow.right.circle.fill"
+            image: "bolt.fill"
         ),
         Question(
-            text: "Как получается фигура (пятно)?",
+            text: "Как размером создать контраст?",
             options: [
-                "Когда соединяются разные цвета",
-                "Когда линия встречается сама с собой",
-                "Когда рисуешь без отрыва руки",
-                "Когда смешиваются краски"
+                "Сделать все буквы одинаковыми",
+                "Сделать одну ОГРОМНУЮ букву рядом с мелкими",
+                "Уменьшить все буквы",
+                "Увеличить расстояние"
             ],
             correctAnswer: 1,
-            image: "square.fill"
-        ),
-        Question(
-            text: "Из чего можно собрать домик?",
-            options: [
-                "Из кругов и овалов",
-                "Из квадрата и треугольника",
-                "Только из прямых линий",
-                "Только из точек"
-            ],
-            correctAnswer: 1,
-            image: "house.fill"
-        ),
-        Question(
-            text: "Солнце можно нарисовать из:",
-            options: [
-                "Квадрата и линий",
-                "Треугольников",
-                "Круга и лучей-линий",
-                "Только из точек"
-            ],
-            correctAnswer: 2,
-            image: "sun.max.fill"
-        ),
-        Question(
-            text: "Что такое КОНТУР?",
-            options: [
-                "Центр рисунка",
-                "Линия, которая обводит предмет",
-                "Тень от предмета",
-                "Фон рисунка"
-            ],
-            correctAnswer: 1,
-            image: "scribble"
+            image: "textformat.size"
         )
     ]
     
     init() {
-        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "pls_test", questions: Self.questions))
+        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "gra_test", questions: Self.questions))
     }
     
     var body: some View {
@@ -233,13 +222,13 @@ struct Pls: View {
                     .padding()
                     
                     if viewModel.isPassingScore {
-                        Text("Ты отлично понял основы рисунка!")
+                        Text("Ты разобрался с сеткой, ритмом и акцентом!")
                             .font(.headline)
                             .foregroundStyle(Color.lightBlue)
                             .multilineTextAlignment(.center)
                             .padding()
                     } else {
-                        Text("Попробуй ещё раз! Помни: все рисунки собираются из точек, линий и фигур!")
+                        Text("Попробуй ещё раз! Помни: ты — режиссер, который расставляет актеров (элементы) на сцене (листе)!")
                             .font(.headline)
                             .foregroundColor(.lightBlue)
                             .multilineTextAlignment(.center)

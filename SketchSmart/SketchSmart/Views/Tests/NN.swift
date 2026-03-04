@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct Pls: View {
-    let testId = "pls_test"
+struct NN: View {
+    let testId = "nn_test"
     
     @StateObject private var viewModel: TestViewModel
     
@@ -18,39 +18,6 @@ struct Pls: View {
             image: "circle.fill"
         ),
         Question(
-            text: "Что можно создать из множества точек?",
-            options: [
-                "Только цифры и буквы",
-                "Текстуру",
-                "Только контуры предметов",
-                "Только прямые линии"
-            ],
-            correctAnswer: 1,
-            image: "circle.grid.3x3.fill"
-        ),
-        Question(
-            text: "Линия — это...",
-            options: [
-                "Всегда прямая черта",
-                "Бегущая точка",
-                "Только граница предмета",
-                "Всегда невидимая"
-            ],
-            correctAnswer: 1,
-            image: "line.diagonal"
-        ),
-        Question(
-            text: "Что показывает линия кроме контура?",
-            options: [
-                "Только размер",
-                "Только цвет",
-                "Движение предмета",
-                "Только форму"
-            ],
-            correctAnswer: 2,
-            image: "arrow.right.circle.fill"
-        ),
-        Question(
             text: "Как получается фигура (пятно)?",
             options: [
                 "Когда соединяются разные цвета",
@@ -60,44 +27,11 @@ struct Pls: View {
             ],
             correctAnswer: 1,
             image: "square.fill"
-        ),
-        Question(
-            text: "Из чего можно собрать домик?",
-            options: [
-                "Из кругов и овалов",
-                "Из квадрата и треугольника",
-                "Только из прямых линий",
-                "Только из точек"
-            ],
-            correctAnswer: 1,
-            image: "house.fill"
-        ),
-        Question(
-            text: "Солнце можно нарисовать из:",
-            options: [
-                "Квадрата и линий",
-                "Треугольников",
-                "Круга и лучей-линий",
-                "Только из точек"
-            ],
-            correctAnswer: 2,
-            image: "sun.max.fill"
-        ),
-        Question(
-            text: "Что такое КОНТУР?",
-            options: [
-                "Центр рисунка",
-                "Линия, которая обводит предмет",
-                "Тень от предмета",
-                "Фон рисунка"
-            ],
-            correctAnswer: 1,
-            image: "scribble"
         )
     ]
     
     init() {
-        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "pls_test", questions: Self.questions))
+        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "nn_test", questions: Self.questions))
     }
     
     var body: some View {

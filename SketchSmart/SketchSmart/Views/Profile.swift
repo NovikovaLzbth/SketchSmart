@@ -11,8 +11,6 @@ struct Profile: View {
     @FocusState private var isFieldNameFocused: Bool
     @FocusState private var isFieldPhoneFocused: Bool
     
-    
-    
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
@@ -200,10 +198,14 @@ struct Profile: View {
                             .frame(width: 100)
                             .scaleEffect(y: 2.0, anchor: .center)
                         
+                        Text("\(Int(viewModel.levelProgress))/\(viewModel.testsForCurrentLevel)")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                        
                         Text("Новый облик")
                             .foregroundStyle(.darkBlue)
                         
-                        ProgressView(value: Double(0 + 1), total: Double(3))
+                        ProgressView(value: Double(viewModel.characterProgress), total: Double(viewModel.levelsForCurrentCharacter))
                             .progressViewStyle(LinearProgressViewStyle(tint: .turquoise))
                             .frame(width: 100)
                             .scaleEffect(y: 2.0, anchor: .center)
@@ -211,7 +213,7 @@ struct Profile: View {
                     
                     Spacer()
                     
-                    Image("Image 39")
+                    Image(viewModel.characterImageName)
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 300)
