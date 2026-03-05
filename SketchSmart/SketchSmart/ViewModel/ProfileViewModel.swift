@@ -116,13 +116,13 @@ class ProfileViewModel: ObservableObject {
     // Текущий облик
     var currentCharacter: Int {
         var character = 1
-        var charactersNeeded = 3
+        var charactersNeeded = 2
         var remainingCharacter = currentLevel
         
         while remainingCharacter >= charactersNeeded {
             remainingCharacter -= charactersNeeded
             character += 1
-            charactersNeeded *= 3
+            charactersNeeded *= 2
         }
         
         return character
@@ -131,11 +131,11 @@ class ProfileViewModel: ObservableObject {
     // Прогресс внутри текущего облика
     var characterProgress: Double {
         var characterPassed = currentLevel
-        var levelsForCurrentCharacter = 3
+        var levelsForCurrentCharacter = 2
         
         for level in 1..<currentCharacter {
             characterPassed -= levelsForCurrentCharacter
-            levelsForCurrentCharacter *= 3
+            levelsForCurrentCharacter *= 2
         }
         
         return Double(characterPassed)
@@ -144,12 +144,12 @@ class ProfileViewModel: ObservableObject {
     // Общее количество уровней для текущего облика
     var levelsForCurrentCharacter: Int {
         if currentCharacter == 1 {
-            return 3
+            return 2
         }
         
-        var levelsForCharacter = 3
+        var levelsForCharacter = 2
         for _ in 1..<currentCharacter {
-            levelsForCharacter *= 3
+            levelsForCharacter *= 2
         }
         return levelsForCharacter
     }
@@ -162,10 +162,8 @@ class ProfileViewModel: ObservableObject {
                 return "Image 40" // 2-й облик
             case 3:
                 return "Image 41" // 3-й облик
-            case 4:
-                return "Image 42" // 4-й облик
             default:
-                return "Image 43" // Для следующих обликов
+                return "Image 41"
             }
         }
 }

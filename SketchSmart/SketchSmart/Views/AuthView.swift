@@ -157,15 +157,6 @@ struct AuthView: View {
                                 .padding()
                         }
                     }
-                    
-                    Text("ИЛИ")
-                        .padding()
-                        .foregroundStyle(Color.lightBlue)
-                    
-                    Image("Image 37") // Значок гугла
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 60)
                 }
             }
             .padding()

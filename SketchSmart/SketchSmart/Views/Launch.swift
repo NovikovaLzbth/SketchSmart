@@ -94,7 +94,7 @@ struct Launch: View {
                 }
                 .onAppear {
                     startSequence()
-                                        checkAuthenticationStatus()
+                    checkAuthenticationStatus()
                     
                     // Прогресс бар
                     for i in 1...10 {
