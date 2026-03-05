@@ -1,19 +1,13 @@
-//
-//  HintOverlayView.swift
-//  SketchSmart
-//
-//  Created by Елизавета on 30.01.2026.
-//
-
+import Foundation
 import SwiftUI
 
-struct HintOverlayView: View {
-    @Binding var isVisible: Bool
+struct ProfileOverlayView: View {
     @Binding var showOverlay: Bool
     @State private var showContent = false
     
     var body: some View {
         ZStack {
+            // Затемненный фон
             Color.darkBlue
                 .opacity(0.7)
                 .ignoresSafeArea()
@@ -21,9 +15,10 @@ struct HintOverlayView: View {
                     dismissHint()
                 }
             
-            if isVisible {
+            // Контент появляется с анимацией
+            if showContent {
                 VStack {
-                    Image("Image 32")
+                    Image("Image 34")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 350)
@@ -36,8 +31,9 @@ struct HintOverlayView: View {
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .foregroundColor(.darkBlue)
                     .background(Color.background)
-                    .cornerRadius(15)
+                    .cornerRadius(20)
                 }
+                .transition(.scale.combined(with: .opacity))
             }
         }
         .onAppear {
@@ -54,11 +50,10 @@ struct HintOverlayView: View {
             showContent = false
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            withAnimation {
-                self.isVisible = false
-                self.showOverlay = false
-            }
+        // Закрываем оверлей после анимации
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            showOverlay = false
         }
     }
 }
+
