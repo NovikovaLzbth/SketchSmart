@@ -10,6 +10,8 @@ import CoreData
 
 struct ContentView: View {
     
+    var viewModel: ContentViewModel
+    
     var body: some View {
         TabView {
             MainView()
@@ -24,7 +26,10 @@ struct ContentView: View {
                     Text("Обучение")
                 }
             
-            Profile()
+            Profile(viewModel: ProfileViewModel(profile: UserModel(id: "",
+                                                                     name: "",
+                                                                     phone: "",
+                                                                     email: "")))
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Профиль")
@@ -49,8 +54,4 @@ struct ContentView: View {
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

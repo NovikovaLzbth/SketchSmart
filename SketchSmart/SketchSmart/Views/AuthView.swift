@@ -5,14 +5,12 @@ import Firebase
 struct AuthView: View {
     @State private var email = ""
     @State private var password = ""
-    
-    // Состояние зарагистрирован / нет
-    @State private var isAuth: Bool = true
-    
+    @State private var isAuth: Bool = true // Состояние зарагистрирован / нет
     @State private var isContentViewShow = false
-    
     @State private var isShowAlert = false
     @State private var alertMessage = ""
+    
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         ZStack {
@@ -44,12 +42,14 @@ struct AuthView: View {
                 
                 VStack {
                     TextField("Введи email", text: $email)
+                        .focused($isFocused)
                         .frame(maxWidth: 300, maxHeight: 40)
                         .padding()
                         .background(Color("lightGray").opacity(0.5))
                         .cornerRadius(20)
                     
                     SecureField("Введи пароль", text: $password)
+                        .focused($isFocused)
                         .frame(maxWidth: 300, maxHeight: 40)
                         .padding()
                         .background(Color("lightGray").opacity(0.5))
@@ -57,10 +57,20 @@ struct AuthView: View {
                 }
                 
                 VStack {
+                    // Авторизация и регистрация
                     Button {
-                        if isAuth {
-                            self.isContentViewShow.toggle()
-                        } else {
+                        if isAuth { // Авторизация
+                            AuthService.shared.signIn(email: self.email,
+                                                      password: self.password) { result in
+                                switch result {
+                                case .success(_):
+                                    isContentViewShow.toggle()
+                                case .failure(_):
+                                    alertMessage = "Что-то пошло не так..."
+                                    isShowAlert.toggle()
+                                }
+                            }
+                        } else { // Регистрация
                             guard !email.isEmpty else {
                                 alertMessage = "Заполни поле Email"
                                 self.isShowAlert = true
@@ -100,7 +110,7 @@ struct AuthView: View {
                                     case .failure(let error):
                                         print("Ошибка регистрации: \(error)")
                                         
-                                        alertMessage = "Ошибка регистрации"
+                                        alertMessage = "Ошибка"
                                         
                                         self.isShowAlert = true
                                     }
@@ -152,7 +162,7 @@ struct AuthView: View {
                         .padding()
                         .foregroundStyle(Color.lightBlue)
                     
-                    Image("Image 37")
+                    Image("Image 37") // Значок гугла
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 60)
@@ -165,7 +175,9 @@ struct AuthView: View {
             .cornerRadius(30)
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .fullScreenCover(isPresented: $isContentViewShow) {
-                ContentView()
+                let contentViewModel = ContentViewModel(user: AuthService.shared.currentUser!)
+                
+                ContentView(viewModel: contentViewModel)
             }
             .zIndex(2)
             .padding(.top, 100)
@@ -175,6 +187,10 @@ struct AuthView: View {
                 }
                 
             }
+        }
+        // Закрытие клавиатуры нажатием в любом месте на View
+        .onTapGesture {
+            isFocused = false
         }
         .animation(.easeInOut(duration: 0.3), value: isAuth)
     }

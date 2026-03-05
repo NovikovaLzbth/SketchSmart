@@ -1,14 +1,11 @@
 import SwiftUI
 
 struct Rnbw: View {
-    @State private var currentQuestion = 0
-    @State private var score = 0
-    @State private var showResults = false
-    @State private var selectedAnswer: Int?
-    @State private var isAnswerCorrect = false
-    @State private var showFeedback = false
+    let testId = "rnbw_test"
     
-    let questions = [
+    @StateObject private var viewModel: TestViewModel
+    
+    static let questions = [
         Question(
             text: "Какие цвета называют «Волшебной троицей»?",
             options: [
@@ -88,45 +85,42 @@ struct Rnbw: View {
         )
     ]
     
-    struct Question {
-        let text: String
-        let options: [String]
-        let correctAnswer: Int
-        let image: String
-    }
+    init() {
+            _viewModel = StateObject(wrappedValue: TestViewModel(testId: "rnbw_test", questions: Self.questions))
+        }
     
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
             
-            if !showResults {
+            if !viewModel.showResults {
                 VStack(spacing: 20) {
                     // Прогресс
                     HStack {
-                        Text("Вопрос \(currentQuestion + 1)/\(questions.count)")
+                        Text("Вопрос \(viewModel.currentQuestion + 1)/\(viewModel.totalQuestions)")
                             .font(.headline)
                             .foregroundColor(.lightBlue)
                         
                         Spacer()
                         
-                        Text("Очки: \(score)")
+                        Text("Очки: \(viewModel.score)")
                             .font(.headline)
                             .foregroundColor(.turquoise)
                     }
                     .padding(.horizontal)
                     
                     // Индикатор прогресса
-                    ProgressView(value: Double(currentQuestion + 1), total: Double(questions.count))
+                    ProgressView(value: Double(viewModel.currentQuestion + 1), total: Double(viewModel.totalQuestions))
                         .progressViewStyle(LinearProgressViewStyle(tint: .lightBlue))
                         .padding(.horizontal)
                     
                     // Вопрос с иконкой
                     VStack(spacing: 15) {
-                        Image(systemName: questions[currentQuestion].image)
+                        Image(systemName: viewModel.currentQuestionData.image)
                             .font(.system(size: 50))
                             .foregroundColor(.turquoise)
                         
-                        Text(questions[currentQuestion].text)
+                        Text(viewModel.currentQuestionData.text)
                             .font(.title2)
                             .foregroundStyle(.darkBlue)
                             .fontWeight(.semibold)
@@ -137,22 +131,22 @@ struct Rnbw: View {
                     
                     // Варианты ответов
                     VStack(spacing: 12) {
-                        ForEach(0..<questions[currentQuestion].options.count, id: \.self) { index in
+                        ForEach(0..<viewModel.currentQuestionData.options.count, id: \.self) { index in
                             Button(action: {
-                                checkAnswer(index)
+                                viewModel.checkAnswer(index)
                             }) {
-                                HStack(alignment: .top) { // Выравнивание по верхнему краю
-                                    Text(questions[currentQuestion].options[index])
+                                HStack(alignment: .top) {
+                                    Text(viewModel.currentQuestionData.options[index])
                                         .font(.body)
                                         .multilineTextAlignment(.leading)
                                         .foregroundColor(.darkBlue)
-                                        .fixedSize(horizontal: false, vertical: true) // Многострочность
+                                        .fixedSize(horizontal: false, vertical: true)
                                     
-                                    Spacer(minLength: 8) // Минимальный отступ для иконки
+                                    Spacer(minLength: 8)
                                     
-                                    if showFeedback && selectedAnswer == index {
-                                        Image(systemName: isAnswerCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
-                                            .foregroundColor(isAnswerCorrect ? .green : .red)
+                                    if viewModel.showFeedback && viewModel.selectedAnswer == index {
+                                        Image(systemName: viewModel.isAnswerCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
+                                            .foregroundColor(viewModel.isAnswerCorrect ? .green : .red)
                                     }
                                 }
                                 .padding()
@@ -160,22 +154,22 @@ struct Rnbw: View {
                                 .background(
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(
-                                            selectedAnswer == index ?
-                                            (isAnswerCorrect ? Color.green.opacity(0.2) : Color.red.opacity(0.2)) :
-                                            Color.gray.opacity(0.1)
+                                            viewModel.selectedAnswer == index ?
+                                            (viewModel.isAnswerCorrect ? Color.green.opacity(0.2) : Color.red.opacity(0.2)) :
+                                                Color.gray.opacity(0.1)
                                         )
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 20)
                                                 .stroke(
-                                                    selectedAnswer == index ?
-                                                    (isAnswerCorrect ? Color.green : Color.red) :
+                                                    viewModel.selectedAnswer == index ?
+                                                    (viewModel.isAnswerCorrect ? Color.green : Color.red) :
                                                         Color.lightGray,
                                                     lineWidth: 2
                                                 )
                                         )
                                 )
                             }
-                            .disabled(showFeedback)
+                            .disabled(viewModel.showFeedback)
                         }
                     }
                     .padding(.horizontal)
@@ -183,9 +177,9 @@ struct Rnbw: View {
                     Spacer()
                     
                     // Кнопка продолжения
-                    if showFeedback {
-                        Button(action: nextQuestion) {
-                            Text(currentQuestion < questions.count - 1 ? "Следующий вопрос" : "Узнать результат")
+                    if viewModel.showFeedback {
+                        Button(action: viewModel.nextQuestion) {
+                            Text(viewModel.isLastQuestion ? "Узнать результат" : "Следующий вопрос")
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
@@ -200,11 +194,12 @@ struct Rnbw: View {
             } else {
                 // Экран результатов
                 VStack(spacing: 30) {
-                    Image(systemName: score >= questions.count / 2 ? "trophy.fill" : "lightbulb.fill")
-                        .font(.system(size: 70))
-                        .foregroundColor(score >= questions.count / 2 ? .yellow : .orange)
+                    Image(systemName: viewModel.isPerfectScore ? "trophy.fill" :
+                            (viewModel.isPassingScore ? "star.fill" : "lightbulb.fill"))
+                    .font(.system(size: 70))
+                    .foregroundColor(viewModel.isPassingScore ? .yellow : .orange)
                     
-                    Text(score >= questions.count / 2 ? "Отлично!" : "Не время сдаваться!")
+                    Text(viewModel.isPassingScore ? "Отлично!" : "Не время сдаваться!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundStyle(Color.darkBlue)
@@ -216,9 +211,9 @@ struct Rnbw: View {
                             .foregroundStyle(Color.darkBlue)
                         
                         HStack {
-                            ForEach(0..<questions.count, id: \.self) { index in
+                            ForEach(0..<viewModel.totalQuestions, id: \.self) { index in
                                 Rectangle()
-                                    .fill(index < score ? Color.turquoise : Color.gray.opacity(0.3))
+                                    .fill(index < viewModel.score ? Color.turquoise : Color.gray.opacity(0.3))
                                     .frame(height: 20)
                                     .cornerRadius(5)
                             }
@@ -226,14 +221,14 @@ struct Rnbw: View {
                     }
                     .padding()
                     
-                    if score >= questions.count / 2 {
-                        Text("Ты отлично понял основы рисунка!")
+                    if viewModel.isPassingScore {
+                        Text("Ты отлично разбираешься в цветах!")
                             .font(.headline)
                             .foregroundStyle(Color.lightBlue)
                             .multilineTextAlignment(.center)
                             .padding()
                     } else {
-                        Text("Попробуй ещё раз! Помни: все рисунки собираются из точек, линий и фигур!")
+                        Text("Попробуй ещё раз! Помни: цвета - настроение и эмоции!")
                             .font(.headline)
                             .foregroundColor(.lightBlue)
                             .multilineTextAlignment(.center)
@@ -241,58 +236,28 @@ struct Rnbw: View {
                     }
                     
                     Button(action: {
-                        resetTest()
+                        viewModel.resetTest()
                     }) {
                         HStack{
                             Image(systemName: "arrow.clockwise")
                             Text("Пройти ещё раз")
                         }
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.darkBlue)
-                            .cornerRadius(20)
-                            .padding(.horizontal, 40)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.darkBlue)
+                        .cornerRadius(20)
+                        .padding(.horizontal, 40)
                     }
                 }
                 .padding()
             }
         }
-        .animation(.spring(response: 0.2), value: showFeedback)
-        .animation(.spring(response: 0.2), value: showResults)
-    }
-    
-    func checkAnswer(_ index: Int) {
-        selectedAnswer = index
-        isAnswerCorrect = index == questions[currentQuestion].correctAnswer
-        
-        if isAnswerCorrect {
-            score += 1
-        }
-        
-        showFeedback = true
-    }
-    
-    func nextQuestion() {
-        if currentQuestion < questions.count - 1 {
-            currentQuestion += 1
-            selectedAnswer = nil
-            showFeedback = false
-        } else {
-            showResults = true
+        .animation(.spring(response: 0.2), value: viewModel.showFeedback)
+        .animation(.spring(response: 0.2), value: viewModel.showResults)
+        .onAppear {
+            viewModel.loadUserData()
         }
     }
-    
-    func resetTest() {
-        currentQuestion = 0
-        score = 0
-        selectedAnswer = nil
-        showResults = false
-        showFeedback = false
-    }
-}
-
-#Preview {
-    Pls()
 }

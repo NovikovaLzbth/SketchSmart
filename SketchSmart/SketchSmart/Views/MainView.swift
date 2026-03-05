@@ -86,10 +86,10 @@ struct MainView: View {
                         
                         HStack {
                             NavigationLink {
-                                Pls()
+                                Tpgrph()
                             } label: {
                                 VStack {
-                                    Text("Прототипирование")
+                                    Text("Типографика")
                                         .foregroundColor(.background)
                                 }
                                 .frame(width: 175, height: 60)
@@ -99,10 +99,39 @@ struct MainView: View {
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             NavigationLink {
-                                Pls()
+                                CompositionView()
                             } label: {
                                 VStack {
-                                    Text("Психология в UI/UX")
+                                    Text("Композиция")
+                                        .foregroundColor(.background)
+                                }
+                                .frame(width: 175, height: 60)
+                            }
+                            .background(Color.lightBlue)
+                            .cornerRadius(20)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
+                        }
+                        .foregroundStyle(.turquoise)
+                        
+                        HStack {
+                            NavigationLink {
+                                GridRhythmAccentView()
+                            } label: {
+                                VStack {
+                                    Text("Сетка, Ритм, Акцент")
+                                        .foregroundColor(.background)
+                                }
+                                .frame(width: 175, height: 60)
+                            }
+                            .background(Color.lightBlue)
+                            .cornerRadius(20)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
+                            
+                            NavigationLink {
+                                NN()
+                            } label: {
+                                VStack {
+                                    Text("Композиция")
                                         .foregroundColor(.background)
                                 }
                                 .frame(width: 175, height: 60)

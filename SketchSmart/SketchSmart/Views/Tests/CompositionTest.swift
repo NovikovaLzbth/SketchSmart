@@ -1,103 +1,83 @@
 import SwiftUI
+import CoreData
+import AVFoundation
 
-struct Pls: View {
-    let testId = "pls_test"
+struct CompositionView: View {
+    let testId = "cmpstn_test"
     
     @StateObject private var viewModel: TestViewModel
     
     static let questions = [
         Question(
-            text: "Что такое ТОЧКА в рисунке?",
+            text: "Кем ты становишься для глаз зрителя в композиции?",
             options: [
-                "Это начало всего, как след от карандаша",
-                "Это всегда маленький кружок",
-                "Это только начало букв",
-                "Это ошибка в рисунке"
+                "Художником",
+                "Экскурсоводом",
+                "Фотографом",
+                "Программистом"
+            ],
+            correctAnswer: 1,
+            image: "figure.wave"
+        ),
+        Question(
+            text: "Сколько главных героев должно быть в одной работе?",
+            options: [
+                "Чем больше, тем лучше",
+                "Два, для симметрии",
+                "Один самый главный",
+                "Минимум пять"
+            ],
+            correctAnswer: 2,
+            image: "star.fill"
+        ),
+        Question(
+            text: "Почему главный герой лучше смотрится не в центре?",
+            options: [
+                "В центре слишком статично",
+                "Центр всегда пустой",
+                "Так его не увидят",
+                "Центр только для текста"
             ],
             correctAnswer: 0,
-            image: "circle.fill"
+            image: "move.3d"
         ),
         Question(
-            text: "Что можно создать из множества точек?",
+            text: "Что в композиции называют «воздухом»?",
             options: [
-                "Только цифры и буквы",
-                "Текстуру",
-                "Только контуры предметов",
-                "Только прямые линии"
+                "Облака на фоне",
+                "Пустое пространство вокруг элементов",
+                "Синий цвет",
+                "Размытые края"
             ],
             correctAnswer: 1,
-            image: "circle.grid.3x3.fill"
+            image: "wind"
         ),
         Question(
-            text: "Линия — это...",
+            text: "Как работает визуальный баланс?",
             options: [
-                "Всегда прямая черта",
-                "Бегущая точка",
-                "Только граница предмета",
-                "Всегда невидимая"
+                "Как качели: тяжелое слева надо уравновесить справа",
+                "Все элементы должны быть одинаковыми",
+                "Баланс не важен",
+                "Всегда нужна идеальная симметрия"
             ],
-            correctAnswer: 1,
-            image: "line.diagonal"
+            correctAnswer: 0,
+            image: "scalemass"
         ),
         Question(
-            text: "Что показывает линия кроме контура?",
+            text: "Чем можно незаметно направить взгляд зрителя?",
             options: [
-                "Только размер",
-                "Только цвет",
-                "Движение предмета",
-                "Только форму"
+                "Рамками",
+                "Только стрелками",
+                "Подписями",
+                "Направляющими линиями"
             ],
-            correctAnswer: 2,
-            image: "arrow.right.circle.fill"
-        ),
-        Question(
-            text: "Как получается фигура (пятно)?",
-            options: [
-                "Когда соединяются разные цвета",
-                "Когда линия встречается сама с собой",
-                "Когда рисуешь без отрыва руки",
-                "Когда смешиваются краски"
-            ],
-            correctAnswer: 1,
-            image: "square.fill"
-        ),
-        Question(
-            text: "Из чего можно собрать домик?",
-            options: [
-                "Из кругов и овалов",
-                "Из квадрата и треугольника",
-                "Только из прямых линий",
-                "Только из точек"
-            ],
-            correctAnswer: 1,
-            image: "house.fill"
-        ),
-        Question(
-            text: "Солнце можно нарисовать из:",
-            options: [
-                "Квадрата и линий",
-                "Треугольников",
-                "Круга и лучей-линий",
-                "Только из точек"
-            ],
-            correctAnswer: 2,
-            image: "sun.max.fill"
-        ),
-        Question(
-            text: "Что такое КОНТУР?",
-            options: [
-                "Центр рисунка",
-                "Линия, которая обводит предмет",
-                "Тень от предмета",
-                "Фон рисунка"
-            ],
-            correctAnswer: 1,
-            image: "scribble"
+            correctAnswer: 3,
+            image: "arrow.triangle.turn.up.right.diamond"
         )
     ]
     
     init() {
-        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "pls_test", questions: Self.questions))
+        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "cmpstn_test", questions: Self.questions))
     }
     
     var body: some View {
@@ -233,13 +213,13 @@ struct Pls: View {
                     .padding()
                     
                     if viewModel.isPassingScore {
-                        Text("Ты отлично понял основы рисунка!")
+                        Text("Ты отлично понял основы композиции!")
                             .font(.headline)
                             .foregroundStyle(Color.lightBlue)
                             .multilineTextAlignment(.center)
                             .padding()
                     } else {
-                        Text("Попробуй ещё раз! Помни: все рисунки собираются из точек, линий и фигур!")
+                        Text("Попробуй ещё раз! Помни: твоя задача — провести взгляд зрителя по твоей работе по нужному маршруту!")
                             .font(.headline)
                             .foregroundColor(.lightBlue)
                             .multilineTextAlignment(.center)

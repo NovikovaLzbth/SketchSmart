@@ -1,103 +1,105 @@
 import SwiftUI
+import CoreData
 
-struct Pls: View {
-    let testId = "pls_test"
+struct Tpgrph: View {
+    
+    let testId = "tpgrph_test"
     
     @StateObject private var viewModel: TestViewModel
     
     static let questions = [
         Question(
-            text: "Что такое ТОЧКА в рисунке?",
+            text: "Какие шрифты выглядят как «деловой костюм»?",
             options: [
-                "Это начало всего, как след от карандаша",
-                "Это всегда маленький кружок",
-                "Это только начало букв",
-                "Это ошибка в рисунке"
+                "С гротесками",
+                "С засечками",
+                "Моноширинные",
+                "Рубленые"
+            ],
+            correctAnswer: 1,
+            image: "textformat"
+        ),
+        Question(
+            text: "Почему шрифты без засечек называют «спортивным костюмом»?",
+            options: [
+                "Носят только кроссовки",
+                "Чистые, простые, легко читаются",
+                "Всегда наклонены вперед",
+                "Слишком узкие"
+            ],
+            correctAnswer: 1,
+            image: "figure.run"
+        ),
+        Question(
+            text: "Когда уместно использовать декоративные шрифты?",
+            options: [
+                "Для романа в 500 страниц",
+                "Для короткого заголовка или вывески",
+                "Для школьного учебника",
+                "Для научной статьи"
+            ],
+            correctAnswer: 1,
+            image: "balloon"
+        ),
+        Question(
+            text: "Какое правило в типографике САМОЕ главное?",
+            options: [
+                "Красота",
+                "Уникальность",
+                "Удобочитаемость",
+                "Яркость"
+            ],
+            correctAnswer: 2,
+            image: "eye"
+        ),
+        Question(
+            text: "Чем леттеринг отличается от обычного шрифта?",
+            options: [
+                "Это компьютерная программа",
+                "Это только рукописные буквы",
+                "Это старые советские шрифты",
+                "Буквы рисуют, обыгрывая смысл слова"
+            ],
+            correctAnswer: 3,
+            image: "paintbrush"
+        ),
+        Question(
+            text: "Как лучше обыграть слово «СОЛНЦЕ» в леттеринге?",
+            options: [
+                "Написать очень мелко",
+                "Сделать все буквы квадратными",
+                "В букве «О» нарисовать солнце",
+                "Написать желтым цветом"
+            ],
+            correctAnswer: 2,
+            image: "sun.max"
+        ),
+        Question(
+            text: "Какой текст бабушка в очках НЕ сможет прочитать?",
+            options: [
+                "Светло-серый на белом",
+                "Черный на белом",
+                "Синий на белом",
+                "Белый на черном"
             ],
             correctAnswer: 0,
-            image: "circle.fill"
+            image: "exclamationmark.triangle"
         ),
         Question(
-            text: "Что можно создать из множества точек?",
+            text: "Что такое «характер шрифта»?",
             options: [
-                "Только цифры и буквы",
-                "Текстуру",
-                "Только контуры предметов",
-                "Только прямые линии"
+                "Это только размер букв",
+                "Это настроение, которое создают буквы",
+                "Это цвет текста",
+                "Это расстояние между буквами"
             ],
             correctAnswer: 1,
-            image: "circle.grid.3x3.fill"
-        ),
-        Question(
-            text: "Линия — это...",
-            options: [
-                "Всегда прямая черта",
-                "Бегущая точка",
-                "Только граница предмета",
-                "Всегда невидимая"
-            ],
-            correctAnswer: 1,
-            image: "line.diagonal"
-        ),
-        Question(
-            text: "Что показывает линия кроме контура?",
-            options: [
-                "Только размер",
-                "Только цвет",
-                "Движение предмета",
-                "Только форму"
-            ],
-            correctAnswer: 2,
-            image: "arrow.right.circle.fill"
-        ),
-        Question(
-            text: "Как получается фигура (пятно)?",
-            options: [
-                "Когда соединяются разные цвета",
-                "Когда линия встречается сама с собой",
-                "Когда рисуешь без отрыва руки",
-                "Когда смешиваются краски"
-            ],
-            correctAnswer: 1,
-            image: "square.fill"
-        ),
-        Question(
-            text: "Из чего можно собрать домик?",
-            options: [
-                "Из кругов и овалов",
-                "Из квадрата и треугольника",
-                "Только из прямых линий",
-                "Только из точек"
-            ],
-            correctAnswer: 1,
-            image: "house.fill"
-        ),
-        Question(
-            text: "Солнце можно нарисовать из:",
-            options: [
-                "Квадрата и линий",
-                "Треугольников",
-                "Круга и лучей-линий",
-                "Только из точек"
-            ],
-            correctAnswer: 2,
-            image: "sun.max.fill"
-        ),
-        Question(
-            text: "Что такое КОНТУР?",
-            options: [
-                "Центр рисунка",
-                "Линия, которая обводит предмет",
-                "Тень от предмета",
-                "Фон рисунка"
-            ],
-            correctAnswer: 1,
-            image: "scribble"
+            image: "brain"
         )
     ]
     
     init() {
-        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "pls_test", questions: Self.questions))
+        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "tpgrph_test", questions: Self.questions))
     }
     
     var body: some View {
@@ -233,13 +235,13 @@ struct Pls: View {
                     .padding()
                     
                     if viewModel.isPassingScore {
-                        Text("Ты отлично понял основы рисунка!")
+                        Text("Ты отлично понял типографику!")
                             .font(.headline)
                             .foregroundStyle(Color.lightBlue)
                             .multilineTextAlignment(.center)
                             .padding()
                     } else {
-                        Text("Попробуй ещё раз! Помни: все рисунки собираются из точек, линий и фигур!")
+                        Text("Попробуй ещё раз! Помни: каждая буква — это актер. А шрифт — это его костюм, грим и голос!")
                             .font(.headline)
                             .foregroundColor(.lightBlue)
                             .multilineTextAlignment(.center)
