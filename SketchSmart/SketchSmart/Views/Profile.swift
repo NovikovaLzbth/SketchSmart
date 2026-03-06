@@ -6,6 +6,7 @@ struct Profile: View {
     @State private var isEditingName = false
     @State private var isEditingPhone = false
     @State private var showHintOverlay = false
+    @State private var chamOverlay = false
     
     @StateObject var viewModel: ProfileViewModel
     
@@ -218,10 +219,14 @@ struct Profile: View {
                     
                     Spacer()
                     
-                    Image(viewModel.characterImageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: 250)
+                    Button {
+                        chamOverlay = true
+                    } label: {
+                        Image(viewModel.characterImageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: 250)
+                    }
                 }
                 
                 Spacer()
@@ -240,6 +245,16 @@ struct Profile: View {
                 Group {
                     if showHintOverlay {
                         ProfileOverlayView(showOverlay: $showHintOverlay)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(Color.clear)
+                            .transition(.opacity)
+                    }
+                }
+            )
+            .overlay(
+                Group {
+                    if chamOverlay {
+                        ChamTextView(showOverlay: $chamOverlay, imageName: viewModel.characterImageName)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .background(Color.clear)
                             .transition(.opacity)

@@ -1,40 +1,39 @@
 import Foundation
 import SwiftUI
 
-struct ProfileOverlayView: View {
+struct ChamTextView: View {
     @Binding var showOverlay: Bool
     @State private var showContent = false
+    
+    let imageName: String
     
     var body: some View {
         ZStack {
             // Затемненный фон
             Color.darkBlue
-                .opacity(0.7)
+                .opacity(0.8)
                 .ignoresSafeArea()
-                .onTapGesture {
-                    dismissHint()
-                }
             
             // Контент появляется с анимацией
             if showContent {
-                VStack {
-                    Image("Image 42")
+                VStack(spacing: 0) {
+                    Image("Image 43")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 350)
                         .padding()
                     
-                    Button("Понятно!") {
-                        dismissHint()
-                    }
-                    .padding()
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .foregroundColor(.darkBlue)
-                    .background(Color.background)
-                    .cornerRadius(20)
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300)
+                        .padding()
                 }
                 .transition(.scale.combined(with: .opacity))
             }
+        }
+        .onTapGesture {
+            dismissHint()
         }
         .onAppear {
             // Анимация появления контента
