@@ -11,9 +11,6 @@ struct ProfileOverlayView: View {
             Color.darkBlue
                 .opacity(0.7)
                 .ignoresSafeArea()
-                .onTapGesture {
-                    dismissHint()
-                }
             
             // Контент появляется с анимацией
             if showContent {
@@ -35,6 +32,9 @@ struct ProfileOverlayView: View {
                 }
                 .transition(.scale.combined(with: .opacity))
             }
+        }
+        .onTapGesture {
+            dismissHint()
         }
         .onAppear {
             // Анимация появления контента

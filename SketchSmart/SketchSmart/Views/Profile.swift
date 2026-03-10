@@ -225,8 +225,10 @@ struct Profile: View {
                         Image(viewModel.characterImageName)
                             .resizable()
                             .scaledToFit()
-                            .frame(maxHeight: 250)
+                            .frame(maxHeight: 170)
                     }
+                    
+                    Spacer()
                 }
                 
                 Spacer()

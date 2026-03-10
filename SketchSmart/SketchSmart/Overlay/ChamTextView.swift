@@ -11,7 +11,7 @@ struct ChamTextView: View {
         ZStack {
             // Затемненный фон
             Color.darkBlue
-                .opacity(0.8)
+                .opacity(0.6)
                 .ignoresSafeArea()
             
             // Контент появляется с анимацией
@@ -21,13 +21,18 @@ struct ChamTextView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 350)
-                        .padding()
+                        .padding(.top)
                     
                     Image(imageName)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 300)
+                        .frame(width: 200)
+                    
+                    Text("Нажми в любом месте, чтобы продолжить")
+                        .foregroundStyle(.darkBlue)
+                        .padding(.top, 40)
                         .padding()
+                    
                 }
                 .transition(.scale.combined(with: .opacity))
             }
