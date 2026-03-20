@@ -157,10 +157,10 @@ struct MainView: View {
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             NavigationLink {
-                                IdeaTest()
+                                DesignThinkingTest()
                             } label: {
                                 VStack {
-                                    Text("Композиция")
+                                    Text("Дизайн-мышление")
                                         .foregroundColor(.background)
                                 }
                                 .frame(width: 175, height: 60)
