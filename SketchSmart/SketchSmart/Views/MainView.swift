@@ -128,10 +128,39 @@ struct MainView: View {
                             .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
                             
                             NavigationLink {
-                                NN()
+                                IdeaTest()
                             } label: {
                                 VStack {
-                                    Text("Композиция")
+                                    Text("Идея и Эмоция")
+                                        .foregroundColor(.background)
+                                }
+                                .frame(width: 175, height: 60)
+                            }
+                            .background(Color.lightBlue)
+                            .cornerRadius(20)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
+                        }
+                        .foregroundStyle(.turquoise)
+                        
+                        HStack {
+                            NavigationLink {
+                                FormFunctionTest()
+                            } label: {
+                                VStack {
+                                    Text("Форма и Функция")
+                                        .foregroundColor(.background)
+                                }
+                                .frame(width: 175, height: 60)
+                            }
+                            .background(Color.lightBlue)
+                            .cornerRadius(20)
+                            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
+                            
+                            NavigationLink {
+                                DesignThinkingTest()
+                            } label: {
+                                VStack {
+                                    Text("Дизайн-мышление")
                                         .foregroundColor(.background)
                                 }
                                 .frame(width: 175, height: 60)
@@ -142,8 +171,8 @@ struct MainView: View {
                         }
                         .foregroundStyle(.turquoise)
                     }
-                    .frame(maxWidth: .infinity) // Занимает всю ширину
-                    .padding() // Добавляет отступы только для контента
+                    .frame(maxWidth: .infinity)
+                    .padding()
                 }
             }
             .navigationTitle("Проверь себя!")

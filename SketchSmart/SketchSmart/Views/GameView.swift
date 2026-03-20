@@ -14,7 +14,6 @@ struct GameView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var showHintOverlay = false
-    @State private var isHintVisible = false
     
     @AppStorage("hasLaunchedBefore") private var hasLaunchedBefore = false
     
@@ -23,7 +22,7 @@ struct GameView: View {
             
             VStack {
                 if showHintOverlay {
-                    OverlayView(isVisible: $isHintVisible, showOverlay: $showHintOverlay, viewModel: viewModel)
+                    OverlayView(showOverlay: $showHintOverlay, viewModel: viewModel)
                 }
             }
             .zIndex(1)
@@ -141,7 +140,7 @@ struct GameView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             withAnimation {
-                isHintVisible = true
+                showHintOverlay = true
             }
         }
     }
@@ -155,7 +154,7 @@ struct GameView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             withAnimation {
-                isHintVisible = true
+                showHintOverlay = true
             }
         }
     }

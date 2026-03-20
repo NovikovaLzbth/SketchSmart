@@ -5,6 +5,8 @@ struct Profile: View {
     @State var iaAuthViewPresented = false
     @State private var isEditingName = false
     @State private var isEditingPhone = false
+    @State private var showHintOverlay = false
+    @State private var chamOverlay = false
     
     @StateObject var viewModel: ProfileViewModel
     
@@ -53,18 +55,22 @@ struct Profile: View {
                 VStack {
                     HStack {
                         // Уровень пользователя (счетчик в лампочке)
-                        ZStack {
-                            Text("\(viewModel.currentLevel)")
-                                .foregroundStyle(.darkBlue)
-                                .font(.title2.bold())
-                                .zIndex(2)
-                                .padding(.bottom)
-                            
-                            Image("Image 38")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(maxWidth: 65)
-                                .zIndex(1)
+                        Button {
+                            showHintOverlay = true
+                        } label: {
+                            ZStack {
+                                Text("\(viewModel.currentLevel)")
+                                    .foregroundStyle(.darkBlue)
+                                    .font(.title2.bold())
+                                    .zIndex(2)
+                                    .padding(.bottom)
+                                
+                                Image("Image 38")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(maxWidth: 65)
+                                    .zIndex(1)
+                            }
                         }
                         
                         // Имя пользователя
@@ -213,10 +219,16 @@ struct Profile: View {
                     
                     Spacer()
                     
-                    Image(viewModel.characterImageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 300)
+                    Button {
+                        chamOverlay = true
+                    } label: {
+                        Image(viewModel.characterImageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: 170)
+                    }
+                    
+                    Spacer()
                 }
                 
                 Spacer()
@@ -231,6 +243,26 @@ struct Profile: View {
                 self.viewModel.getProfile()
                 viewModel.loadData()
             }
+            .overlay(
+                Group {
+                    if showHintOverlay {
+                        ProfileOverlayView(showOverlay: $showHintOverlay)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(Color.clear)
+                            .transition(.opacity)
+                    }
+                }
+            )
+            .overlay(
+                Group {
+                    if chamOverlay {
+                        ChamTextView(showOverlay: $chamOverlay, imageName: viewModel.characterImageName)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(Color.clear)
+                            .transition(.opacity)
+                    }
+                }
+            )
         }
     }
 }

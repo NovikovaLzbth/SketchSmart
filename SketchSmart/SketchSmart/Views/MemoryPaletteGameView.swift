@@ -16,7 +16,6 @@ struct MemoryPaletteGameView: View {
     @StateObject private var viewModel = GameViewMemoryModel()
     
     @State private var showHintOverlay = false
-    @State private var isHintVisible = false
     
     @AppStorage("hasLaunchedBefore") private var hasLaunchedBefore = false
     
@@ -26,7 +25,7 @@ struct MemoryPaletteGameView: View {
         ZStack {
             VStack {
                 if showHintOverlay {
-                    HintOverlayView(isVisible: $isHintVisible, showOverlay: $showHintOverlay)
+                    HintOverlayView(showOverlay: $showHintOverlay)
                 }
             }
             .zIndex(1)
@@ -133,7 +132,7 @@ struct MemoryPaletteGameView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             withAnimation {
-                isHintVisible = true
+                showHintOverlay = true
             }
         }
     }
@@ -145,7 +144,7 @@ struct MemoryPaletteGameView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             withAnimation {
-                isHintVisible = true
+                showHintOverlay = true
             }
         }
     }

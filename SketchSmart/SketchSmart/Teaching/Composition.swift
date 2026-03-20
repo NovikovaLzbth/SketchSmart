@@ -1,10 +1,3 @@
-//
-//  ColorTeory.swift
-//  SketchSmart
-//
-//  Created by Елизавета on 23.05.2025.
-//
-
 import SwiftUI
 import CoreData
 import AVKit

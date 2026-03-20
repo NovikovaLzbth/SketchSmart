@@ -92,7 +92,7 @@ class ProfileViewModel: ObservableObject {
         var testsPassed = completedTests
         var testsForCurrentLevel = 2
         
-        for level in 1..<currentLevel {
+        for _ in 1..<currentLevel {
             testsPassed -= testsForCurrentLevel
             testsForCurrentLevel *= 2
         }

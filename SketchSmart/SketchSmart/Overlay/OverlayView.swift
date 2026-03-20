@@ -1,15 +1,7 @@
-//
-//  OverlayView.swift
-//  SketchSmart
-//
-//  Created by Елизавета on 03.02.2026.
-//
-
 import Foundation
 import SwiftUI
 
 struct OverlayView: View {
-    @Binding var isVisible: Bool
     @Binding var showOverlay: Bool
     @State private var showContent = false
     
@@ -24,7 +16,7 @@ struct OverlayView: View {
                     dismissHint()
                 }
             
-            if isVisible {
+            if showOverlay {
                 VStack {
                     Image("Image 34")
                         .resizable()
@@ -39,16 +31,17 @@ struct OverlayView: View {
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .foregroundColor(.darkBlue)
                     .background(Color.background)
-                    .cornerRadius(15)
+                    .cornerRadius(20)
                 }
+                .transition(.scale.combined(with: .opacity))
             }
         }
         .onAppear {
-            viewModel.pauseTimer()
-            
             // Анимация появления контента
             withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
                 showContent = true
+                
+                viewModel.pauseTimer()
             }
         }
     }
@@ -63,7 +56,6 @@ struct OverlayView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             withAnimation {
-                self.isVisible = false
                 self.showOverlay = false
             }
         }

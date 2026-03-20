@@ -171,7 +171,6 @@ struct AuthView: View {
                 ContentView(viewModel: contentViewModel)
             }
             .zIndex(2)
-            .padding(.top, 100)
             .alert(alertMessage, isPresented: $isShowAlert) {
                 Button { } label: {
                     Text("ОК")
