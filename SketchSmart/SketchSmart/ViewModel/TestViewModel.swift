@@ -36,7 +36,8 @@ class TestViewModel: ObservableObject {
     }
     
     var isPassingScore: Bool {
-        score >= questions.count / 2
+//        score >= questions.count / 2
+        return score == questions.count
     }
     
     init(testId: String, questions: [Question]) {
@@ -55,17 +56,39 @@ class TestViewModel: ObservableObject {
         showFeedback = true
     }
     
+//    func nextQuestion() {
+//        if currentQuestion < questions.count - 1 {
+//            currentQuestion += 1
+//            selectedAnswer = nil
+//            showFeedback = false
+//        } else {
+//            showResults = true
+//            
+//            if isPerfectScore {
+//                updateCompletedTestsCount()
+//            }
+//        }
+//    }
+    
     func nextQuestion() {
         if currentQuestion < questions.count - 1 {
             currentQuestion += 1
             selectedAnswer = nil
             showFeedback = false
         } else {
-            showResults = true
+            print("РЕЗУЛЬТАТ ТЕСТА '\(testId)': \(score)/\(totalQuestions)")
             
-            if isPerfectScore {
+            // СОХРАНЯЕМ ПРИ ИДЕАЛЬНОМ ПРОХОЖДЕНИИ
+            if isPerfectScore && !hasPassedThisTest {
+                print("Идеально!")
                 updateCompletedTestsCount()
+            } else if isPerfectScore && hasPassedThisTest {
+                print("Тест уже был пройден ранее")
+            } else {
+                print("Нужно \(totalQuestions) правильных, получено \(score). Тема не откроется")
             }
+            
+            showResults = true
         }
     }
     
@@ -88,8 +111,38 @@ class TestViewModel: ObservableObject {
         }
     }
     
+    func getResultMessage() -> String {
+            if isPerfectScore {
+                return "Тема открыта! Можешь переходить к следующей теме в разделе «Обучение»."
+            } else if isPassingScore {
+                return "Хороший результат! Попробуй пройти тест идеально, чтобы открыть тему."
+            } else {
+                return "Перечитай тему и попробуй снова. Удачи!"
+            }
+        }
+    
+//    func loadUserData() {
+//        isLoading = true
+//        DatabaseService.shared.getProfile { [weak self] result in
+//            DispatchQueue.main.async {
+//                self?.isLoading = false
+//                switch result {
+//                case .success(let user):
+//                    self?.completedTestsCount = user.completedTests
+//                    self?.hasPassedThisTest = user.completedTestsIds.contains(self?.testId ?? "")
+//                case .failure(let error):
+//                    self?.errorMessage = error.localizedDescription
+//                    self?.showError = true
+//                }
+//            }
+//        }
+//    }
+    
     func loadUserData() {
         isLoading = true
+        errorMessage = ""
+        showError = false
+        
         DatabaseService.shared.getProfile { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
@@ -97,16 +150,42 @@ class TestViewModel: ObservableObject {
                 case .success(let user):
                     self?.completedTestsCount = user.completedTests
                     self?.hasPassedThisTest = user.completedTestsIds.contains(self?.testId ?? "")
+                    print("📊 Загружены данные пользователя: пройдено тестов - \(user.completedTests), текущий тест пройден: \(self?.hasPassedThisTest ?? false)")
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     self?.showError = true
+                    print("❌ Ошибка загрузки данных пользователя: \(error.localizedDescription)")
                 }
             }
         }
     }
     
+//    func updateCompletedTestsCount() {
+//        guard let userId = AuthService.shared.currentUser?.uid else { return }
+//        
+//        isLoading = true
+//        
+//        DatabaseService.shared.updateCompletedTests(userId: userId, testId: testId) { [weak self] result in
+//            DispatchQueue.main.async {
+//                self?.isLoading = false
+//                switch result {
+//                case .success(let newCount):
+//                    self?.completedTestsCount = newCount
+//                    self?.hasPassedThisTest = true
+//                case .failure(let error):
+//                    self?.errorMessage = error.localizedDescription
+//                    self?.showError = true
+//                }
+//            }
+//        }
+//    }
+    
     func updateCompletedTestsCount() {
-        guard let userId = AuthService.shared.currentUser?.uid else { return }
+        guard let userId = AuthService.shared.currentUser?.uid else {
+            errorMessage = "Пользователь не авторизован"
+            showError = true
+            return
+        }
         
         isLoading = true
         
@@ -117,9 +196,11 @@ class TestViewModel: ObservableObject {
                 case .success(let newCount):
                     self?.completedTestsCount = newCount
                     self?.hasPassedThisTest = true
+                    print("Тест сохранен! Всего пройдено тестов: \(newCount)")
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     self?.showError = true
+                    print("Ошибка сохранения теста: \(error.localizedDescription)")
                 }
             }
         }

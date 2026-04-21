@@ -41,7 +41,7 @@ struct ContentView: View {
             let appearance = UITabBarAppearance()
             
             // Цвет фона TabBar
-            appearance.backgroundColor = UIColor(Color.lightBlue)
+            appearance.backgroundColor = UIColor(Color.darkBlue)
             
             // Цвет неподсвеченных иконок и текста
             appearance.stackedLayoutAppearance.normal.iconColor = UIColor(Color.darkBlue.opacity(0.7))
