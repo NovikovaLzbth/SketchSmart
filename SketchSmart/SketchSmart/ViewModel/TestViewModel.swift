@@ -34,10 +34,11 @@ class TestViewModel: ObservableObject {
     var isPerfectScore: Bool {
         score == questions.count
     }
-    
+
     var isPassingScore: Bool {
-//        score >= questions.count / 2
-        return score == questions.count
+        // Проходной балл: 60% от общего количества вопросов
+        let passingThreshold = Int(Double(questions.count) * 0.6)
+        return score >= passingThreshold
     }
     
     init(testId: String, questions: [Question]) {
@@ -56,20 +57,6 @@ class TestViewModel: ObservableObject {
         showFeedback = true
     }
     
-//    func nextQuestion() {
-//        if currentQuestion < questions.count - 1 {
-//            currentQuestion += 1
-//            selectedAnswer = nil
-//            showFeedback = false
-//        } else {
-//            showResults = true
-//            
-//            if isPerfectScore {
-//                updateCompletedTestsCount()
-//            }
-//        }
-//    }
-    
     func nextQuestion() {
         if currentQuestion < questions.count - 1 {
             currentQuestion += 1
@@ -78,14 +65,13 @@ class TestViewModel: ObservableObject {
         } else {
             print("РЕЗУЛЬТАТ ТЕСТА '\(testId)': \(score)/\(totalQuestions)")
             
-            // СОХРАНЯЕМ ПРИ ИДЕАЛЬНОМ ПРОХОЖДЕНИИ
-            if isPerfectScore && !hasPassedThisTest {
-                print("Идеально!")
+            if isPassingScore && !hasPassedThisTest {
+                print("Проходной балл достигнут! Сохраняем результат...")
                 updateCompletedTestsCount()
-            } else if isPerfectScore && hasPassedThisTest {
+            } else if isPassingScore && hasPassedThisTest {
                 print("Тест уже был пройден ранее")
             } else {
-                print("Нужно \(totalQuestions) правильных, получено \(score). Тема не откроется")
+                print("Нужно минимум \(Int(Double(totalQuestions) * 0.6)) правильных, получено \(score). Тема не откроется")
             }
             
             showResults = true
@@ -159,26 +145,6 @@ class TestViewModel: ObservableObject {
             }
         }
     }
-    
-//    func updateCompletedTestsCount() {
-//        guard let userId = AuthService.shared.currentUser?.uid else { return }
-//        
-//        isLoading = true
-//        
-//        DatabaseService.shared.updateCompletedTests(userId: userId, testId: testId) { [weak self] result in
-//            DispatchQueue.main.async {
-//                self?.isLoading = false
-//                switch result {
-//                case .success(let newCount):
-//                    self?.completedTestsCount = newCount
-//                    self?.hasPassedThisTest = true
-//                case .failure(let error):
-//                    self?.errorMessage = error.localizedDescription
-//                    self?.showError = true
-//                }
-//            }
-//        }
-//    }
     
     func updateCompletedTestsCount() {
         guard let userId = AuthService.shared.currentUser?.uid else {

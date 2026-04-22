@@ -4,7 +4,6 @@ import CoreData
 struct TrainingView: View {
     @StateObject private var progressManager = ProgressManager.shared
     
-    // Порядок тем (должен совпадать с ProgressManager.orderedTopics)
     let topics: [String] = [
         "Введение",
         "Точка, линия, пятно",
@@ -81,17 +80,17 @@ struct TopicLockedButton: View {
                             .foregroundStyle(isUnlocked ? Color.background : Color.background.opacity(0.6))
                         
                         if !isUnlocked {
-                            Text("Требуется пройти предыдущий тест")
+                            Text("Пройди предыдущий тест")
                                 .font(.caption)
-                                .foregroundColor(.background.opacity(0.7))
+                                .foregroundColor(.background)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(30)
                     
                     if !isUnlocked {
-                        Image(systemName: "lock.fill")
-                            .foregroundColor(.background.opacity(0.6))
+                        Text("🔒")
+                            .font(.title3)
                             .padding(.trailing, 30)
                     }
                 }
@@ -99,7 +98,6 @@ struct TopicLockedButton: View {
             .disabled(!isUnlocked)
             .background(isUnlocked ? Color.lightBlue : Color.lightBlue.opacity(0.5))
             .cornerRadius(23)
-            .shadow(color: .darkBlue, radius: 5, x: 5, y: 4)
             
             // Кнопка перехода к нужному тесту (если заблокировано)
             if !isUnlocked, let testId = requiredTestId {
@@ -116,7 +114,7 @@ struct TopicLockedButton: View {
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
                         .background(Color.turquoise.opacity(0.3))
-                        .cornerRadius(12)
+                        .cornerRadius(100)
                     }
                     Spacer()
                 }
