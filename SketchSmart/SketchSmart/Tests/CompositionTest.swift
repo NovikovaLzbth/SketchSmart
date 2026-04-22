@@ -3,9 +3,12 @@ import CoreData
 import AVFoundation
 
 struct CompositionView: View {
-    let testId = "cmpstn_test"
+    let testId = "composition_test"
     
     @StateObject private var viewModel: TestViewModel
+    @Environment(\.dismiss) var dismiss
+    @StateObject private var progressManager = ProgressManager.shared
+    @State private var navigateToTraining = false
     
     static let questions = [
         Question(
@@ -77,14 +80,41 @@ struct CompositionView: View {
     ]
     
     init() {
-        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "cmpstn_test", questions: Self.questions))
+        _viewModel = StateObject(wrappedValue: TestViewModel(testId: "composition_test", questions: Self.questions))
     }
     
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
             
-            if !viewModel.showResults {
+            if viewModel.isLoading && !viewModel.showResults {
+                ProgressView("Загрузка...")
+                    .tint(.lightBlue)
+                    .scaleEffect(1.5)
+            } else if viewModel.showError {
+                VStack(spacing: 20) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.system(size: 60))
+                        .foregroundColor(.orange)
+                    
+                    Text(viewModel.errorMessage)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.darkBlue)
+                    
+                    Button("Попробовать снова") {
+                        viewModel.loadUserData()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.lightBlue)
+                    
+                    Button("Назад") {
+                        dismiss()
+                    }
+                    .foregroundColor(.darkBlue)
+                }
+                .padding()
+            } else if !viewModel.showResults {
+                // Экран вопросов
                 VStack(spacing: 20) {
                     // Прогресс
                     HStack {
@@ -94,9 +124,15 @@ struct CompositionView: View {
                         
                         Spacer()
                         
-                        Text("Очки: \(viewModel.score)")
-                            .font(.headline)
-                            .foregroundColor(.turquoise)
+                        if viewModel.hasPassedThisTest {
+                            Label("Пройден", systemImage: "checkmark.circle.fill")
+                                .font(.caption)
+                                .foregroundColor(.green)
+                        } else {
+                            Text("Очки: \(viewModel.score)")
+                                .font(.headline)
+                                .foregroundColor(.turquoise)
+                        }
                     }
                     .padding(.horizontal)
                     
@@ -160,7 +196,7 @@ struct CompositionView: View {
                                         )
                                 )
                             }
-                            .disabled(viewModel.showFeedback)
+                            .disabled(viewModel.showFeedback || viewModel.isLoading)
                         }
                     }
                     .padding(.horizontal)
@@ -170,30 +206,40 @@ struct CompositionView: View {
                     // Кнопка продолжения
                     if viewModel.showFeedback {
                         Button(action: viewModel.nextQuestion) {
-                            Text(viewModel.isLastQuestion ? "Узнать результат" : "Следующий вопрос")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color.darkBlue)
-                                .cornerRadius(20)
-                                .padding(.horizontal)
+                            if viewModel.isLoading {
+                                ProgressView()
+                                    .tint(.white)
+                            } else {
+                                Text(viewModel.isLastQuestion ? "Узнать результат" : "Следующий вопрос")
+                                    .font(.headline)
+                            }
                         }
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.darkBlue)
+                        .cornerRadius(20)
+                        .padding(.horizontal)
+                        .disabled(viewModel.isLoading)
                     }
                 }
                 .padding(.vertical)
             } else {
                 // Экран результатов
-                VStack(spacing: 30) {
+                VStack(spacing: 25) {
                     Image(systemName: viewModel.isPerfectScore ? "trophy.fill" :
                             (viewModel.isPassingScore ? "star.fill" : "lightbulb.fill"))
-                    .font(.system(size: 70))
-                    .foregroundColor(viewModel.isPassingScore ? .yellow : .orange)
+                        .font(.system(size: 70))
+                        .foregroundColor(viewModel.isPassingScore ? .yellow : .orange)
                     
-                    Text(viewModel.isPassingScore ? "Отлично!" : "Не время сдаваться!")
+                    Text(viewModel.getResultTitle())
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundStyle(Color.darkBlue)
+                    
+                    Text("\(viewModel.score) из \(viewModel.totalQuestions)")
+                        .font(.title2)
+                        .foregroundColor(.lightBlue)
                     
                     // Шкала результата
                     VStack(spacing: 10) {
@@ -201,7 +247,7 @@ struct CompositionView: View {
                             .font(.headline)
                             .foregroundStyle(Color.darkBlue)
                         
-                        HStack {
+                        HStack(spacing: 4) {
                             ForEach(0..<viewModel.totalQuestions, id: \.self) { index in
                                 Rectangle()
                                     .fill(index < viewModel.score ? Color.turquoise : Color.gray.opacity(0.3))
@@ -210,37 +256,45 @@ struct CompositionView: View {
                             }
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                     
-                    if viewModel.isPassingScore {
-                        Text("Ты отлично понял основы композиции!")
-                            .font(.headline)
-                            .foregroundStyle(Color.lightBlue)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                    } else {
-                        Text("Попробуй ещё раз! Помни: твоя задача — провести взгляд зрителя по твоей работе по нужному маршруту!")
-                            .font(.headline)
-                            .foregroundColor(.lightBlue)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                    }
-                    
-                    Button(action: {
-                        viewModel.resetTest()
-                    }) {
-                        HStack{
-                            Image(systemName: "arrow.clockwise")
-                            Text("Пройти ещё раз")
-                        }
+                    Text(viewModel.getResultMessage())
                         .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.darkBlue)
-                        .cornerRadius(20)
-                        .padding(.horizontal, 40)
+                        .foregroundColor(viewModel.isPerfectScore ? .green : (viewModel.isPassingScore ? .lightBlue : .orange))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                    
+                    VStack(spacing: 15) {
+                        Button(action: {
+                            viewModel.resetTest()
+                        }) {
+                            HStack {
+                                Image(systemName: "arrow.clockwise")
+                                Text("Пройти ещё раз")
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.darkBlue)
+                            .cornerRadius(20)
+                        }
+                        
+                        // Кнопка возврата к обучению
+                        NavigationLink(destination: TrainingView()) {
+                            HStack {
+                                Image(systemName: "book.fill")
+                                Text("К обучению")
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.lightBlue)
+                            .cornerRadius(20)
+                        }
                     }
+                    .padding(.horizontal, 40)
                 }
                 .padding()
             }
@@ -249,6 +303,11 @@ struct CompositionView: View {
         .animation(.spring(response: 0.2), value: viewModel.showResults)
         .onAppear {
             viewModel.loadUserData()
+        }
+        .onChange(of: viewModel.hasPassedThisTest) { hasPassed in
+            if hasPassed {
+                progressManager.refreshProgress()
+            }
         }
     }
 }

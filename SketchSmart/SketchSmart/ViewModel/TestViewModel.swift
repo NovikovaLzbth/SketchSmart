@@ -34,9 +34,11 @@ class TestViewModel: ObservableObject {
     var isPerfectScore: Bool {
         score == questions.count
     }
-    
+
     var isPassingScore: Bool {
-        score >= questions.count / 2
+        // Проходной балл: 60% от общего количества вопросов
+        let passingThreshold = Int(Double(questions.count) * 0.6)
+        return score >= passingThreshold
     }
     
     init(testId: String, questions: [Question]) {
@@ -61,11 +63,18 @@ class TestViewModel: ObservableObject {
             selectedAnswer = nil
             showFeedback = false
         } else {
-            showResults = true
+            print("РЕЗУЛЬТАТ ТЕСТА '\(testId)': \(score)/\(totalQuestions)")
             
-            if isPerfectScore {
+            if isPassingScore && !hasPassedThisTest {
+                print("Проходной балл достигнут! Сохраняем результат...")
                 updateCompletedTestsCount()
+            } else if isPassingScore && hasPassedThisTest {
+                print("Тест уже был пройден ранее")
+            } else {
+                print("Нужно минимум \(Int(Double(totalQuestions) * 0.6)) правильных, получено \(score). Тема не откроется")
             }
+            
+            showResults = true
         }
     }
     
@@ -88,8 +97,38 @@ class TestViewModel: ObservableObject {
         }
     }
     
+    func getResultMessage() -> String {
+            if isPerfectScore {
+                return "Тема открыта! Можешь переходить к следующей теме в разделе «Обучение»."
+            } else if isPassingScore {
+                return "Хороший результат! Попробуй пройти тест идеально, чтобы открыть тему."
+            } else {
+                return "Перечитай тему и попробуй снова. Удачи!"
+            }
+        }
+    
+//    func loadUserData() {
+//        isLoading = true
+//        DatabaseService.shared.getProfile { [weak self] result in
+//            DispatchQueue.main.async {
+//                self?.isLoading = false
+//                switch result {
+//                case .success(let user):
+//                    self?.completedTestsCount = user.completedTests
+//                    self?.hasPassedThisTest = user.completedTestsIds.contains(self?.testId ?? "")
+//                case .failure(let error):
+//                    self?.errorMessage = error.localizedDescription
+//                    self?.showError = true
+//                }
+//            }
+//        }
+//    }
+    
     func loadUserData() {
         isLoading = true
+        errorMessage = ""
+        showError = false
+        
         DatabaseService.shared.getProfile { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
@@ -97,16 +136,22 @@ class TestViewModel: ObservableObject {
                 case .success(let user):
                     self?.completedTestsCount = user.completedTests
                     self?.hasPassedThisTest = user.completedTestsIds.contains(self?.testId ?? "")
+                    print("📊 Загружены данные пользователя: пройдено тестов - \(user.completedTests), текущий тест пройден: \(self?.hasPassedThisTest ?? false)")
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     self?.showError = true
+                    print("❌ Ошибка загрузки данных пользователя: \(error.localizedDescription)")
                 }
             }
         }
     }
     
     func updateCompletedTestsCount() {
-        guard let userId = AuthService.shared.currentUser?.uid else { return }
+        guard let userId = AuthService.shared.currentUser?.uid else {
+            errorMessage = "Пользователь не авторизован"
+            showError = true
+            return
+        }
         
         isLoading = true
         
@@ -117,9 +162,11 @@ class TestViewModel: ObservableObject {
                 case .success(let newCount):
                     self?.completedTestsCount = newCount
                     self?.hasPassedThisTest = true
+                    print("Тест сохранен! Всего пройдено тестов: \(newCount)")
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     self?.showError = true
+                    print("Ошибка сохранения теста: \(error.localizedDescription)")
                 }
             }
         }
