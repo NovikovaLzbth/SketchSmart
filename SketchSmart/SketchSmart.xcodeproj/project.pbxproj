@@ -11,6 +11,7 @@
 		7A5782592F506AE8001E1C75 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7A5782582F506AE8001E1C75 /* FirebaseAuth */; };
 		7A57825B2F506AE8001E1C75 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7A57825A2F506AE8001E1C75 /* FirebaseFirestore */; };
 		7A57825D2F506AE8001E1C75 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7A57825C2F506AE8001E1C75 /* FirebaseStorage */; };
+		7A7517632FA4F2BC0030BC37 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7517622FA4F2BC0030BC37 /* XCTest.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		7A01E0AC2DF9733600631C90 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		7A7517622FA4F2BC0030BC37 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7A813DA72DDD0C790066C776 /* SketchSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A813DB92DDD0C7A0066C776 /* SketchSmartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SketchSmartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -62,12 +64,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A7517632FA4F2BC0030BC37 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A7517612FA4F2BC0030BC37 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A7517622FA4F2BC0030BC37 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7A813D9E2DDD0C790066C776 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +86,7 @@
 				7A813DA92DDD0C790066C776 /* SketchSmart */,
 				7A813DBC2DDD0C7A0066C776 /* SketchSmartTests */,
 				7A813DC62DDD0C7A0066C776 /* SketchSmartUITests */,
+				7A7517612FA4F2BC0030BC37 /* Frameworks */,
 				7A813DA82DDD0C790066C776 /* Products */,
 			);
 			sourceTree = "<group>";
