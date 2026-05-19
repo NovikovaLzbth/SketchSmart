@@ -7,6 +7,7 @@ struct Profile: View {
     @State private var isEditingPhone = false
     @State private var showHintOverlay = false
     @State private var chamOverlay = false
+    @State private var selectedOption = "Option 1"
     
     @StateObject var viewModel: ProfileViewModel
     
@@ -20,31 +21,6 @@ struct Profile: View {
                 
                 ScrollView {
                     VStack(spacing: 16) {
-                        // Добавить отступ для заголовка
-                        Spacer()
-                        
-                        HStack {
-                            Spacer()
-                            
-                            Button {
-                                isQuit.toggle()
-                            } label: {
-                                Image("Image 35")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: 50)
-                            }
-                            .confirmationDialog("Точно хочешь выйти?", isPresented: $isQuit, titleVisibility: .visible) {
-                                Button("Да") {
-                                    AuthService.shared.signOut()
-                                    iaAuthViewPresented.toggle()
-                                }
-                            }
-                            .fullScreenCover(isPresented: $iaAuthViewPresented, onDismiss: nil) {
-                                AuthView()
-                            }
-                        }
-                        
                         VStack {
                             HStack {
                                 // Уровень пользователя (счетчик в лампочке)
@@ -232,6 +208,27 @@ struct Profile: View {
                 .scrollDismissesKeyboard(.interactively)
             }
             .navigationTitle("Профиль")
+            .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            isQuit.toggle()
+                        } label: {
+                            Image("Image 35")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                        }
+                        .confirmationDialog("Точно хочешь выйти?", isPresented: $isQuit, titleVisibility: .visible) {
+                            Button("Да") {
+                                AuthService.shared.signOut()
+                                iaAuthViewPresented.toggle()
+                            }
+                        }
+                        .fullScreenCover(isPresented: $iaAuthViewPresented, onDismiss: nil) {
+                            AuthView()
+                        }
+                    }
+                }
             .onSubmit {
                 viewModel.setProfile()
             }
