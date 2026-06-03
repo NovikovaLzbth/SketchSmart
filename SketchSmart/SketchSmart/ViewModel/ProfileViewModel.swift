@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 class ProfileViewModel: ObservableObject {
     @Published var profile: UserModel
@@ -64,6 +65,9 @@ class ProfileViewModel: ObservableObject {
                 case .success(let user):
                     self.completedTests = user.completedTests
                     self.profile = user
+                    print("📊 Пройдено тестов: \(user.completedTests)")
+                    print("📍 Текущий уровень: \(self.currentLevel)")
+                    print("🎭 Текущий облик: \(self.currentCharacter)")
                 case .failure(let error):
                     print("Error loading completed tests: \(error.localizedDescription)")
                     self.errorMessage = error.localizedDescription
@@ -72,98 +76,119 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
+    // MARK: - Уровни
+    
     // Текущий уровень
     var currentLevel: Int {
-        var level = 1
-        var testsNeeded = 2
-        var remainingTests = completedTests
-        
-        while remainingTests >= testsNeeded {
-            remainingTests -= testsNeeded
-            level += 1
-            testsNeeded *= 2
+        switch completedTests {
+        case 0:
+            return 1
+        case 1:
+            return 2
+        case 2...4:
+            return 3
+        default: // 5-8 тестов
+            return 4
         }
-        
-        return level
     }
     
-    // Прогресс внутри текущего уровня
+    // Прогресс внутри текущего уровня (0.0 - 1.0)
     var levelProgress: Double {
-        var testsPassed = completedTests
-        var testsForCurrentLevel = 2
-        
-        for _ in 1..<currentLevel {
-            testsPassed -= testsForCurrentLevel
-            testsForCurrentLevel *= 2
+        switch currentLevel {
+        case 1:
+            // 0 тестов из 1 для перехода на 2 уровень
+            return Double(completedTests) / 1.0
+        case 2:
+            // На 2 уровне: пройден 1 тест, для перехода на 3 нужно еще 2 теста (всего 3)
+            let testsInThisLevel = completedTests - 1
+            return Double(testsInThisLevel) / 2.0
+        case 3:
+            // На 3 уровне: от 2 до 4 тестов, для перехода на 4 нужно 3 теста в этом уровне
+            let testsInThisLevel = completedTests - 2
+            return Double(testsInThisLevel) / 3.0
+        case 4:
+            // На 4 уровне: от 5 до 8 тестов
+            let testsInThisLevel = completedTests - 5
+            return Double(testsInThisLevel) / 4.0
+        default:
+            return 1.0
         }
-        
-        return Double(testsPassed)
     }
     
     // Общее количество тестов для текущего уровня
     var testsForCurrentLevel: Int {
-        if currentLevel == 1 {
+        switch currentLevel {
+        case 1:
+            return 1
+        case 2:
             return 2
+        case 3:
+            return 3
+        case 4:
+            return 4
+        default:
+            return 1
         }
-        
-        var testsForLevel = 2
-        for _ in 1..<currentLevel {
-            testsForLevel *= 2
-        }
-        return testsForLevel
     }
+    
+    // MARK: - Облики
     
     // Текущий облик
     var currentCharacter: Int {
-        var character = 1
-        var charactersNeeded = 2
-        var remainingCharacter = currentLevel
-        
-        while remainingCharacter >= charactersNeeded {
-            remainingCharacter -= charactersNeeded
-            character += 1
-            charactersNeeded *= 2
+        switch currentLevel {
+        case 1:
+            return 1 // 1-й облик
+        case 2...3:
+            return 2 // 2-й облик (с уровня 2)
+        default: // уровень 4
+            return 3 // 3-й облик (с уровня 4)
         }
-        
-        return character
     }
     
-    // Прогресс внутри текущего облика
+    // Прогресс внутри текущего облика (0.0 - 1.0)
     var characterProgress: Double {
-        var characterPassed = currentLevel
-        var levelsForCurrentCharacter = 2
-        
-        for level in 1..<currentCharacter {
-            characterPassed -= levelsForCurrentCharacter
-            levelsForCurrentCharacter *= 2
+        switch currentCharacter {
+        case 1:
+            // 1 облик: только уровень 1
+            return currentLevel == 1 ? 0.5 : 1.0
+        case 2:
+            // 2 облик: уровни 2 и 3
+            let levelsInThisCharacter = currentLevel - 1 // 1 для уровня 2, 2 для уровня 3
+            return Double(levelsInThisCharacter) / 2.0
+        case 3:
+            // 3 облик: с уровня 4
+            let levelsInThisCharacter = currentLevel - 3
+            return Double(min(levelsInThisCharacter, 2)) / 2.0
+        default:
+            return 1.0
         }
-        
-        return Double(characterPassed)
     }
     
     // Общее количество уровней для текущего облика
     var levelsForCurrentCharacter: Int {
-        if currentCharacter == 1 {
-            return 2
+        switch currentCharacter {
+        case 1:
+            return 1
+        case 2:
+            return 2 // 2 уровня (2 и 3)
+        case 3:
+            return 2 // 2 уровня (4 и дальше)
+        default:
+            return 1
         }
-        
-        var levelsForCharacter = 2
-        for _ in 1..<currentCharacter {
-            levelsForCharacter *= 2
-        }
-        return levelsForCharacter
     }
     
+    // Изображение облика
     var characterImageName: String {
-            switch currentCharacter {
-            case 1:
-                return "Image 39" // 1-й облик
-            case 2:
-                return "Image 40" // 2-й облик
-            case 3:
-                return "Image 41" // 3-й облик
-            default:
-                return "Image 41"
-            }
+        switch currentCharacter {
+        case 1:
+            return "Image 39" // 1-й облик
+        case 2:
+            return "Image 40" // 2-й облик
+        case 3:
+            return "Image 41" // 3-й облик
+        default:
+            return "Image 41"
         }
+    }
 }

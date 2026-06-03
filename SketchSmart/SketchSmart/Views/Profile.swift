@@ -163,27 +163,43 @@ struct Profile: View {
                         }
                         .padding(.bottom, 30)
                         
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Уровень \(viewModel.currentLevel)")
-                                    .foregroundStyle(.darkBlue)
+                        HStack(alignment: .center, spacing: 20) {
+                            VStack(alignment: .leading, spacing: 12) {
+                                // Прогресс уровня
+                                VStack(alignment: .leading) {
+                                    Text("Уровень \(viewModel.currentLevel)")
+                                        .foregroundStyle(.darkBlue)
+                                        .font(.headline)
+                                    
+                                    ProgressView(value: viewModel.levelProgress, total: 1.0)
+                                        .progressViewStyle(LinearProgressViewStyle(tint: .turquoise))
+                                        .frame(width: 120)
+                                        .scaleEffect(y: 2.0, anchor: .center)
+                                    
+                                    // Отображаем сколько тестов пройдено в текущем уровне
+                                    let testsInLevel = Int(viewModel.levelProgress * Double(viewModel.testsForCurrentLevel))
+                                    Text("\(testsInLevel)/\(viewModel.testsForCurrentLevel) тестов")
+                                        .font(.caption2)
+                                        .foregroundColor(.gray)
+                                }
                                 
-                                ProgressView(value: Double(viewModel.levelProgress), total: Double(viewModel.testsForCurrentLevel))
-                                    .progressViewStyle(LinearProgressViewStyle(tint: .turquoise))
-                                    .frame(width: 100)
-                                    .scaleEffect(y: 2.0, anchor: .center)
-                                
-                                Text("\(Int(viewModel.levelProgress))/\(viewModel.testsForCurrentLevel)")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                
-                                Text("Новый облик")
-                                    .foregroundStyle(.darkBlue)
-                                
-                                ProgressView(value: Double(viewModel.characterProgress), total: Double(viewModel.levelsForCurrentCharacter))
-                                    .progressViewStyle(LinearProgressViewStyle(tint: .turquoise))
-                                    .frame(width: 100)
-                                    .scaleEffect(y: 2.0, anchor: .center)
+                                // Прогресс облика
+                                VStack(alignment: .leading) {
+                                    Text("Новый облик")
+                                        .foregroundStyle(.darkBlue)
+                                        .font(.headline)
+                                    
+                                    ProgressView(value: viewModel.characterProgress, total: 1.0)
+                                        .progressViewStyle(LinearProgressViewStyle(tint: .turquoise))
+                                        .frame(width: 120)
+                                        .scaleEffect(y: 2.0, anchor: .center)
+                                    
+                                    // Отображаем сколько уровней пройдено в текущем облике
+                                    let levelsInCharacter = Int(viewModel.characterProgress * Double(viewModel.levelsForCurrentCharacter))
+                                    Text("\(levelsInCharacter)/\(viewModel.levelsForCurrentCharacter) уровней")
+                                        .font(.caption2)
+                                        .foregroundColor(.gray)
+                                }
                             }
                             
                             Spacer()
@@ -199,6 +215,7 @@ struct Profile: View {
                             
                             Spacer()
                         }
+                        .padding(.horizontal, 8)
                         
                         Spacer(minLength: 30)
                     }
@@ -209,26 +226,26 @@ struct Profile: View {
             }
             .navigationTitle("Профиль")
             .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            isQuit.toggle()
-                        } label: {
-                            Image("Image 35")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30, height: 30)
-                        }
-                        .confirmationDialog("Точно хочешь выйти?", isPresented: $isQuit, titleVisibility: .visible) {
-                            Button("Да") {
-                                AuthService.shared.signOut()
-                                iaAuthViewPresented.toggle()
-                            }
-                        }
-                        .fullScreenCover(isPresented: $iaAuthViewPresented, onDismiss: nil) {
-                            AuthView()
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        isQuit.toggle()
+                    } label: {
+                        Image("Image 35")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30, height: 30)
+                    }
+                    .confirmationDialog("Точно хочешь выйти?", isPresented: $isQuit, titleVisibility: .visible) {
+                        Button("Да") {
+                            AuthService.shared.signOut()
+                            iaAuthViewPresented.toggle()
                         }
                     }
+                    .fullScreenCover(isPresented: $iaAuthViewPresented, onDismiss: nil) {
+                        AuthView()
+                    }
                 }
+            }
             .onSubmit {
                 viewModel.setProfile()
             }
@@ -260,7 +277,7 @@ struct Profile: View {
     }
 }
 
-// только для превью тестовый вариант
+// MARK: - Preview
 extension UserModel {
     static var preview: UserModel {
         UserModel(id: "id",
